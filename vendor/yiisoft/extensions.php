@@ -102,4 +102,13 @@ return array (
       '@fedemotta/datatables' => $vendorDir . '/fedemotta/yii2-widget-datatables',
     ),
   ),
+  'yii-dream-team/yii2-upload-behavior' => 
+  array (
+    'name' => 'yii-dream-team/yii2-upload-behavior',
+    'version' => '1.1.1.0',
+    'alias' => 
+    array (
+      '@yiidreamteam/upload' => $vendorDir . '/yii-dream-team/yii2-upload-behavior/src',
+    ),
+  ),
 );

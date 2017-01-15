@@ -21,13 +21,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'barcode') ?>
 
+    <?= $form->field($model, 'product_name') ?>
+
     <?= $form->field($model, 'description') ?>
 
-    <?= $form->field($model, 'buying_price') ?>
-
-    <?php // echo $form->field($model, 'selling_price') ?>
-
     <?php // echo $form->field($model, 'category') ?>
+
+    <?php // echo $form->field($model, 'image') ?>
 
     <?php // echo $form->field($model, 'status') ?>
 

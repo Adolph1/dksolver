@@ -67,6 +67,9 @@ class CategoryController extends Controller
         $model->maker_id=Yii::$app->user->identity->username;
         $model->maker_time=date('Y-m-d:H:i:s');
 
+        //sets auditing details
+        Audit::setActivity('New Category is created','Category Details','create');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -85,6 +88,8 @@ class CategoryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->maker_id=Yii::$app->user->identity->username;
+        $model->maker_time=date('Y-m-d:H:i:s');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

@@ -19,6 +19,7 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
         array (
             'yiister\\gentelella\\' => 19,
             'yiister\\adminlte\\' => 17,
+            'yiidreamteam\\upload\\' => 20,
             'yii\\swiftmailer\\' => 16,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
@@ -91,6 +92,10 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
         'yiister\\adminlte\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiister/yii2-adminlte',
+        ),
+        'yiidreamteam\\upload\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yii-dream-team/yii2-upload-behavior/src',
         ),
         'yii\\swiftmailer\\' => 
         array (
@@ -214,6 +219,14 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
+            ),
+            'PHPThumb\\Tests' => 
+            array (
+                0 => __DIR__ . '/..' . '/masterexploder/phpthumb/tests',
+            ),
+            'PHPThumb' => 
+            array (
+                0 => __DIR__ . '/..' . '/masterexploder/phpthumb/src',
             ),
         ),
         'H' => 

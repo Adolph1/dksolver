@@ -10,10 +10,10 @@ use Yii;
  * @property integer $id
  * @property string $product_code
  * @property string $barcode
+ * @property string $product_name
  * @property string $description
- * @property string $buying_price
- * @property string $selling_price
  * @property integer $category
+ * @property string $image
  * @property integer $status
  * @property string $maker_id
  * @property string $maker_time
@@ -45,12 +45,12 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_code', 'barcode', 'description', 'buying_price', 'selling_price', 'category', 'status', 'maker_id', 'maker_time', 'checker_id', 'checker_time'], 'required'],
-            [['buying_price', 'selling_price'], 'number'],
+            [['product_name', 'category', 'status'], 'required'],
+            [['description'], 'string'],
             [['category', 'status'], 'integer'],
             [['maker_time', 'checker_time'], 'safe'],
             [['product_code', 'barcode'], 'string', 'max' => 50],
-            [['description', 'maker_id', 'checker_id'], 'string', 'max' => 200],
+            [['product_name', 'image', 'maker_id', 'checker_id'], 'string', 'max' => 200],
             [['auth_status'], 'string', 'max' => 1],
             [['product_code'], 'unique'],
             [['barcode'], 'unique'],
@@ -65,12 +65,12 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'product_code' => Yii::t('app', 'Product Code'),
+            'product_code' => Yii::t('app', 'UPC/EAN/ISBN'),
             'barcode' => Yii::t('app', 'Barcode'),
+            'product_name' => Yii::t('app', 'Product Name'),
             'description' => Yii::t('app', 'Description'),
-            'buying_price' => Yii::t('app', 'Buying Price'),
-            'selling_price' => Yii::t('app', 'Selling Price'),
             'category' => Yii::t('app', 'Category'),
+            'image' => Yii::t('app', 'Image'),
             'status' => Yii::t('app', 'Status'),
             'maker_id' => Yii::t('app', 'Maker ID'),
             'maker_time' => Yii::t('app', 'Maker Time'),
@@ -85,7 +85,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getTblInventories()
     {
-        return $this->hasMany(Inventory::className(), ['product_id' => 'id']);
+        return $this->hasMany(TblInventory::className(), ['product_id' => 'id']);
     }
 
     /**
@@ -93,7 +93,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getTblPriceMaintanances()
     {
-        return $this->hasMany(PriceMaintanance::className(), ['product_id' => 'id']);
+        return $this->hasMany(TblPriceMaintanance::className(), ['product_id' => 'id']);
     }
 
     /**
@@ -101,7 +101,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getCategory0()
     {
-        return $this->hasOne(Category::className(), ['id' => 'category']);
+        return $this->hasOne(TblCategory::className(), ['id' => 'category']);
     }
 
     /**
@@ -109,7 +109,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getTblProductAttributes()
     {
-        return $this->hasMany(ProductAttribute::className(), ['product_id' => 'id']);
+        return $this->hasMany(TblProductAttribute::className(), ['product_id' => 'id']);
     }
 
     /**
@@ -117,7 +117,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getTblPurchases()
     {
-        return $this->hasMany(Purchase::className(), ['product_id' => 'id']);
+        return $this->hasMany(TblPurchase::className(), ['product_id' => 'id']);
     }
 
     /**
@@ -125,7 +125,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getTblSales()
     {
-        return $this->hasMany(Sales::className(), ['product_id' => 'id']);
+        return $this->hasMany(TblSales::className(), ['product_id' => 'id']);
     }
 
     /**
@@ -133,6 +133,6 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getTblStockAdjustments()
     {
-        return $this->hasMany(StockAdjustment::className(), ['product_id' => 'id']);
+        return $this->hasMany(TblStockAdjustment::className(), ['product_id' => 'id']);
     }
 }

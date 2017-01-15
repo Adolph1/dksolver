@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "yiister/yii2-adminlte": "~1.0",
         "yiister/yii2-gentelella": "~1.0",
-        "fedemotta/yii2-widget-datatables": "*"
+        "fedemotta/yii2-widget-datatables": "*",
+        "yii-dream-team/yii2-upload-behavior": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -19,8 +19,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'category', 'status'], 'integer'],
-            [['product_code', 'barcode', 'description', 'maker_id', 'maker_time', 'auth_status', 'checker_id', 'checker_time'], 'safe'],
-            [['buying_price', 'selling_price'], 'number'],
+            [['product_code', 'barcode', 'product_name', 'description', 'image', 'maker_id', 'maker_time', 'auth_status', 'checker_id', 'checker_time'], 'safe'],
         ];
     }
 
@@ -61,8 +60,6 @@ class ProductSearch extends Product
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'buying_price' => $this->buying_price,
-            'selling_price' => $this->selling_price,
             'category' => $this->category,
             'status' => $this->status,
             'maker_time' => $this->maker_time,
@@ -71,7 +68,9 @@ class ProductSearch extends Product
 
         $query->andFilterWhere(['like', 'product_code', $this->product_code])
             ->andFilterWhere(['like', 'barcode', $this->barcode])
+            ->andFilterWhere(['like', 'product_name', $this->product_name])
             ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'maker_id', $this->maker_id])
             ->andFilterWhere(['like', 'auth_status', $this->auth_status])
             ->andFilterWhere(['like', 'checker_id', $this->checker_id]);
