@@ -8,6 +8,7 @@ use backend\models\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\Audit;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -67,10 +68,11 @@ class CategoryController extends Controller
         $model->maker_id=Yii::$app->user->identity->username;
         $model->maker_time=date('Y-m-d:H:i:s');
 
-        //sets auditing details
-        Audit::setActivity('New Category is created','Category Details','create');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            //sets auditing details
+            Audit::setActivity('New Category is created ('.$model->title.')','Category Details','create');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

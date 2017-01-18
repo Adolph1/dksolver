@@ -21,8 +21,7 @@ class m170113_155948_create_tbl_purchase_table extends Migration
             'qty'=>$this->decimal()->notNull(),
             'total'=>$this->decimal()->notNull(),
             'supplier_id'=>$this->integer()->notNull(),
-            'period'=>$this->string(3)->notNull(),
-            'financial_year'=>$this->string(10),
+            'purchase_master_id'=>$this->integer()->notNull(),
             'maker_id'=>$this->string(200)->notNull(),
             'maker_time'=>$this->dateTime()->notNull(),
             'auth_status'=>$this->char(1),
@@ -46,6 +45,12 @@ class m170113_155948_create_tbl_purchase_table extends Migration
             'tbl_purchase',
             'supplier_id'
         );
+        // creates index for column `purchase_master_id`
+        $this->createIndex(
+            'idx-tbl_purchase-master_id',
+            'tbl_purchase',
+            'purchase_master_id'
+        );
 
         // add foreign key for table `tbl_product`
         $this->addForeignKey(
@@ -57,6 +62,16 @@ class m170113_155948_create_tbl_purchase_table extends Migration
             'CASCADE'
         );
 
+
+        // add foreign key for table `tbl_product`
+        $this->addForeignKey(
+            'fk-tbl_purchase-purchase_master_id',
+            'tbl_purchase',
+            'purchase_master_id',
+            'tbl_purchase_master',
+            'id',
+            'CASCADE'
+        );
 
 
         // add foreign key for table `tbl_supplier`

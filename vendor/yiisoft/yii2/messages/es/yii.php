@@ -20,6 +20,7 @@ return [
     'Powered by {yii}' => 'Desarrollado con {yii}',
     'The requested view "{name}" was not found.' => 'La vista solicitada "{name}" no fue encontrada',
     'Yii Framework' => 'Yii Framework',
+    '(Add Category)' => '(Ongeza aina)',
     'just now' => 'justo ahora',
     '{attribute} contains wrong subnet mask.' => '{attribute} contiene la máscara de subred incorrecta',
     '{attribute} is not in the allowed range.' => '{attribute} no está en el rango permitido.',

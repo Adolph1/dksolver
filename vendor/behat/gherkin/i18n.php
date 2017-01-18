@@ -1030,7 +1030,7 @@ return array (
     'then' => 'Thì|*',
     'when' => 'Khi|*',
   ),
-  'zh-CN' => 
+  'sw' =>
   array (
     'and' => '并且<|而且<|同时<|*',
     'background' => '背景',

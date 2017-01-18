@@ -51,7 +51,7 @@ class MessageController extends Controller
     public $messagePath = '@yii/messages';
     /**
      * @var array required, list of language codes that the extracted messages
-     * should be translated to. For example, ['zh-CN', 'de'].
+     * should be translated to. For example, ['sw', 'de'].
      */
     public $languages = [];
     /**

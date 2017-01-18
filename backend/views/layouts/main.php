@@ -7,6 +7,7 @@
 use yii\helpers\Html;
 
 yiister\adminlte\assets\Asset::register($this);
+Yii::$app->language=\backend\models\Language::getDefaultLang();
 
 ?>
 <?php $this->beginPage() ?>
@@ -15,7 +16,7 @@ yiister\adminlte\assets\Asset::register($this);
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= Yii::$app->language?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +30,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <script>
+        $("#language").click(function(){
+            alert("clicked");
+        });
+
+    </script>
     <![endif]-->
     <?php $this->head() ?>
 </head>
@@ -64,7 +72,7 @@ desired effect
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>Tango</b>POS</span>
         </a>
 
         <!-- Header Navbar -->
@@ -76,6 +84,34 @@ desired effect
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <!-- Languages: style can be found in dropdown.less-->
+                    <li class="dropdown messages-menu">
+                        <!-- Menu toggle button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-flag"></i>
+                            <?=\backend\models\Language::getDefaultLang();?>
+                        </a>
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <!-- inner menu: contains the messages -->
+                                <ul class="menu">
+                                    <?php
+                                    /*$languages=\backend\models\Language::getAll();
+                                    foreach ($languages as $language)
+                                    {
+                                        echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" ><li style="padding: 10px" id="language">
+                                                <i class="fa fa-angle-double-right"></i>
+                                            '.$language->title.'
+                                            </li></a>';
+                                    }*/
+                                    ?>
+                                </ul><!-- /.menu -->
+                            </li>
+
+                        </ul>
+                    </li><!-- /.Languages-menu -->
+
                     <!-- Messages: style can be found in dropdown.less-->
                     <li class="dropdown messages-menu">
                         <!-- Menu toggle button -->
@@ -173,14 +209,14 @@ desired effect
                             <!-- The user image in the navbar-->
                             <img src="http://placehold.it/160x160" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs"><?= Yii::$app->user->identity->username;?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
                                 <img src="http://placehold.it/160x160" class="img-circle" alt="User Image">
                                 <p>
-                                    Alexander Pierce - Web Developer
+                                    <?= Yii::$app->user->identity->username;?>
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
@@ -227,7 +263,7 @@ desired effect
                     <img src="http://placehold.it/45x45" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p><?= Yii::$app->user->identity->username;?></p>
                     <!-- Status -->
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
@@ -249,20 +285,20 @@ desired effect
             \yiister\adminlte\widgets\Menu::widget(
                 [
                     "items" => [
-                        ["label" => "Home", "url" =>  Yii::$app->homeUrl, "icon" => "home"],
+                        ["label" =>Yii::t('app','Home'), "url" =>  Yii::$app->homeUrl, "icon" => "home"],
                         [
-                            "label" => " Catalog",
+                            "label" => Yii::t('app','Catalog'),
                             "url" => "#",
                             "icon" => "fa fa-tags fa-fw",
                             "items" => [
                                 [
-                                    "label" => "Categories",
+                                    "label" => Yii::t('app','Categories'),
                                     "url" => ["/category/index"],
                                     "icon" => "fa fa-angle-double-right",
                                    // "badge" => "123",
                                 ],
                                 [
-                                    "label" => "Products",
+                                    "label" => Yii::t('app','Products'),
                                     "url" => ["/product/index"],
                                     "icon" => "fa fa-angle-double-right",
                                    // "badge" => "123",
@@ -273,9 +309,9 @@ desired effect
                             ],
                         ],
                         [
-                            "label" => "Sales",
+                            "label" => Yii::t('app','Sales'),
                             "url" => "#",
-                            "icon" => "fa fa-cart-plus",
+                            "icon" => "fa fa-cart-arrow-down",
                             "items" => [
                                 [
                                     "label" => "POS",
@@ -295,6 +331,61 @@ desired effect
                                 [
                                     "label" => "Customers",
                                     "url" => "#",
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                            ],
+                        ],
+                        [
+                            "label" =>Yii::t('app','Purchases'),
+                            "url" => "#",
+                            "icon" => "fa fa-cart-plus",
+                            "items" => [
+                                [
+                                    "label" => "Purchase Periods",
+                                    "url" => ["/purchase-master/index"],
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                                [
+                                    "label" => "Invoices",
+                                    "url" => ["/purchase/index"],
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                                [
+                                    "label" => "Returns",
+                                    "url" => "#",
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                                [
+                                    "label" => "Suppliers",
+                                    "url" => ["/supplier/index"],
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                            ],
+                        ],
+
+                        [
+                            "label" =>Yii::t('app','Settings'),
+                            "url" => "#",
+                            "icon" => "fa fa-gears",
+                            "items" => [
+                                [
+                                    "label" => Yii::t('app','Language'),
+                                    "url" => ["/language/index"],
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                                [
+                                    "label" => "Invoices",
+                                    "url" => "#",
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                                [
+                                    "label" => "Returns",
+                                    "url" => "#",
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                                [
+                                    "label" => "Suppliers",
+                                    "url" => ['supplier/index'],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                             ],
@@ -320,8 +411,8 @@ desired effect
                     [
                         'encodeLabels' => false,
                         'homeLink' => [
-                            'label' => new \rmrevin\yii\fontawesome\component\Icon('home') . ' Home',
-                            'url' => '/',
+                            'label' => new \rmrevin\yii\fontawesome\component\Icon('home') .Yii::t('app','Home'),
+                            "url" =>  Yii::$app->homeUrl,
                         ],
                         'links' => $this->params['breadcrumbs'],
                     ]
@@ -414,6 +505,8 @@ desired effect
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
+
+
 <?php $this->endBody() ?>
 </body>
 </html>

@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'checker_id',
             'checker_time',
 
-            ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
+            ['class' => 'yii\grid\ActionColumn','header'=>Yii::t('app',"Actions")],
         ],
         'clientOptions' => [
             "lengthMenu"=> [[20,-1], [20,Yii::t('app',"All")]],

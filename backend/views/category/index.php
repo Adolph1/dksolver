@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p style="padding-bottom: 50px">
-        <?= Html::a(Yii::t('app', '<i class="fa fa-plus"></i> Add Category'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Add Category'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php /* GridView::widget([
         'dataProvider' => $dataProvider,

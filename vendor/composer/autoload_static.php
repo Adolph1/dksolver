@@ -21,12 +21,17 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
             'yiister\\adminlte\\' => 17,
             'yiidreamteam\\upload\\' => 20,
             'yii\\swiftmailer\\' => 16,
+            'yii\\jui\\' => 8,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
             'yii\\composer\\' => 13,
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
+        ),
+        'w' => 
+        array (
+            'wbraganca\\dynamicform\\' => 22,
         ),
         'r' => 
         array (
@@ -36,9 +41,19 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'k' => 
+        array (
+            'kartik\\grid\\' => 12,
+            'kartik\\dialog\\' => 14,
+            'kartik\\base\\' => 12,
+        ),
         'f' => 
         array (
             'fedemotta\\datatables\\' => 21,
+        ),
+        'd' => 
+        array (
+            'dosamigos\\datepicker\\' => 21,
         ),
         'c' => 
         array (
@@ -101,6 +116,10 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer',
         ),
+        'yii\\jui\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-jui',
+        ),
         'yii\\gii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-gii',
@@ -125,6 +144,10 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
+        'wbraganca\\dynamicform\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wbraganca/yii2-dynamicform',
+        ),
         'rmrevin\\yii\\fontawesome\\' => 
         array (
             0 => __DIR__ . '/..' . '/rmrevin/yii2-fontawesome',
@@ -135,9 +158,25 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
+        'kartik\\grid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-grid',
+        ),
+        'kartik\\dialog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-dialog',
+        ),
+        'kartik\\base\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base',
+        ),
         'fedemotta\\datatables\\' => 
         array (
             0 => __DIR__ . '/..' . '/fedemotta/yii2-widget-datatables',
+        ),
+        'dosamigos\\datepicker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/yii2-date-picker-widget/src',
         ),
         'cebe\\markdown\\' => 
         array (

@@ -29,7 +29,7 @@ use backend\models\Category;
             <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '<i class="fa fa-save"></i> ') : Yii::t('app', 'Update'), ['data-toggle'=>'tooltip','data-original-title'=>'Save','class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>  <?= Html::a(Yii::t('app', '<i class="fa fa-reply"></i> '), ['index'], ['class' => 'btn btn-default','data-toggle'=>'tooltip','data-original-title'=>'Back']) ?>
         </div>
         <div class="panel panel-success">
-            <div class="panel-heading">Product Form</div>
+            <div class="panel-heading"><?= Yii::t('app','Product Form');?></div>
             <div class="panel-body">
 
 
@@ -42,11 +42,11 @@ use backend\models\Category;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'category')->dropDownList(Category::getAll(),['prompt'=>'--Select--']) ?>
+    <?= $form->field($model, 'category')->dropDownList(Category::getAll(),['prompt'=>Yii::t('app','--Select--')]) ?>
 
     <?= $form->field($model, 'image')->fileInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList(['-1'=>'--Select--','0'=>'Active','1'=>'Disable']) ?>
+    <?= $form->field($model, 'status')->dropDownList(['-1'=>Yii::t('app','--Select--'),'0'=>'Active','1'=>'Disable']) ?>
 
     <?= $form->field($model, 'auth_status')->textInput(['maxlength' => true,'visible'=>!$model->isNewRecord]) ?>
 

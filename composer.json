@@ -21,7 +21,11 @@
         "yiister/yii2-adminlte": "~1.0",
         "yiister/yii2-gentelella": "~1.0",
         "fedemotta/yii2-widget-datatables": "*",
-        "yii-dream-team/yii2-upload-behavior": "*"
+        "yii-dream-team/yii2-upload-behavior": "*",
+        "kartik-v/yii2-grid": "@dev",
+        "wbraganca/yii2-dynamicform": "*",
+        "2amigos/yii2-date-picker-widget": "~1.0",
+        "yiisoft/yii2-jui": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%tbl_product}}".
@@ -61,6 +62,14 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    //gets all categories
+
+    public static function getAll()
+    {
+        return ArrayHelper::map(Product::find()->all(),'id','product_name');
+    }
+
     public function attributeLabels()
     {
         return [
