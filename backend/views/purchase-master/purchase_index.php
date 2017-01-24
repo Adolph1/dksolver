@@ -8,7 +8,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use backend\models\PurchaseSearch;
+use backend\models\PurchaseInvoiceSearch;
 use fedemotta\datatables\DataTables;
 
 /* @var $this yii\web\View */
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php // Html::a(Yii::t('app', 'Create Purchase'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php
-    $searchModel = new PurchaseSearch();
+    $searchModel = new PurchaseInvoiceSearch();
     $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
     ?>
     <?= DataTables::widget([
@@ -36,18 +36,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'invoice_number',
+           /* [
+                'attribute'=>'invoice_number',
+                'format' => 'raw',
+                'value'=>function ($data) {
+                    return Html::a(Html::encode($data->invoice_number),'site/index');
+                },
+            ],*/
+
             'purchase_date',
-            'product_id',
-            'price',
-            'qty',
-            'total',
             'supplier_id',
             'purchase_master_id',
             'maker_id',
             'maker_time',
-            'auth_status',
             'checker_id',
             'checker_time',
 

@@ -19,7 +19,7 @@ class PurchaseSearch extends Purchase
     {
         return [
             [['id', 'product_id', 'purchase_invoice_id'], 'integer'],
-            [['price', 'qty', 'total'], 'number'],
+            [['price', 'qty', 'total','selling_price'], 'number'],
             [['maker_id', 'maker_time', 'auth_status', 'checker_id', 'checker_time'], 'safe'],
         ];
     }
@@ -64,6 +64,7 @@ class PurchaseSearch extends Purchase
             'product_id' => $this->product_id,
             'price' => $this->price,
             'qty' => $this->qty,
+            'selling_price'=>$this->selling_price,
             'total' => $this->total,
             'purchase_invoice_id' => $this->purchase_invoice_id,
             'maker_time' => $this->maker_time,

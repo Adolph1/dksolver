@@ -27,6 +27,7 @@ class Purchase extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
     public static function tableName()
     {
         return 'tbl_purchase';
@@ -38,9 +39,9 @@ class Purchase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'price', 'qty', 'total',], 'required'],
+            [['product_id', 'price', 'qty'], 'required'],
             [['product_id', 'purchase_invoice_id'], 'integer'],
-            [['price', 'qty', 'total'], 'number'],
+            [['price', 'qty', 'total','selling_price'], 'number'],
             [['maker_time', 'checker_time'], 'safe'],
             [['maker_id', 'checker_id'], 'string', 'max' => 200],
             [['auth_status'], 'string', 'max' => 1],
@@ -59,6 +60,7 @@ class Purchase extends \yii\db\ActiveRecord
             'product_id' => Yii::t('app', 'Product ID'),
             'price' => Yii::t('app', 'Price'),
             'qty' => Yii::t('app', 'Qty'),
+            'selling_price'=>Yii::t('app', 'Selling Price'),
             'total' => Yii::t('app', 'Total'),
             'purchase_invoice_id' => Yii::t('app', 'Purchase Invoice ID'),
             'maker_id' => Yii::t('app', 'Maker ID'),
@@ -74,7 +76,7 @@ class Purchase extends \yii\db\ActiveRecord
      */
     public function getProduct()
     {
-        return $this->hasOne(TblProduct::className(), ['id' => 'product_id']);
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 
     /**
@@ -82,6 +84,15 @@ class Purchase extends \yii\db\ActiveRecord
      */
     public function getPurchaseInvoice()
     {
-        return $this->hasOne(TblPurchaseInvoice::className(), ['id' => 'purchase_invoice_id']);
+        return $this->hasOne(PurchaseInvoice::className(), ['id' => 'purchase_invoice_id']);
+    }
+
+    /**
+     * gets total amount of the invoice
+     */
+
+    public static function getInvoiceTotal($id)
+    {
+        return Purchase::find()->where(['purchase_invoice_id'=>$id])->sum('total');
     }
 }

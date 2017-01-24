@@ -25,6 +25,7 @@ class PurchaseInvoice extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
     public static function tableName()
     {
         return 'tbl_purchase_invoice';
@@ -40,6 +41,7 @@ class PurchaseInvoice extends \yii\db\ActiveRecord
             [['supplier_id', 'purchase_master_id'], 'required'],
             [['supplier_id', 'purchase_master_id'], 'integer'],
             [['invoice_number'], 'string', 'max' => 20],
+            [['total_purchase'], 'number'],
             [['maker_id', 'checker_id'], 'string', 'max' => 200],
             [['purchase_master_id'], 'exist', 'skipOnError' => true, 'targetClass' => PurchaseMaster::className(), 'targetAttribute' => ['purchase_master_id' => 'id']],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Supplier::className(), 'targetAttribute' => ['supplier_id' => 'id']],
@@ -55,8 +57,9 @@ class PurchaseInvoice extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'invoice_number' => Yii::t('app', 'Invoice Number'),
             'purchase_date' => Yii::t('app', 'Purchase Date'),
-            'supplier_id' => Yii::t('app', 'Supplier ID'),
-            'purchase_master_id' => Yii::t('app', 'Purchase Master ID'),
+            'supplier_id' => Yii::t('app', 'Supplier'),
+            'purchase_master_id' => Yii::t('app', 'Description'),
+            'total_purchase'=>'Total Purchase',
             'maker_id' => Yii::t('app', 'Maker ID'),
             'maker_time' => Yii::t('app', 'Maker Time'),
             'checker_id' => Yii::t('app', 'Checker ID'),

@@ -1,7 +1,7 @@
 <?php
 //$lang=\backend\models\Language::getDefaultLang();
 return [
-    'language' => 'sw',
+    'language' => 'en',
     'timeZone' => 'Africa/Dar_eS_Salaam',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [

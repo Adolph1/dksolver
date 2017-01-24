@@ -18,10 +18,13 @@ class m170113_155845_create_tbl_purchase_invoice_table extends Migration
             'purchase_date'=>$this->date(),
             'supplier_id'=>$this->integer()->notNull(),
             'purchase_master_id'=>$this->integer()->notNull(),
+            'total_purchase'=>$this->decimal(),
             'maker_id'=>$this->string(200)->notNull(),
             'maker_time'=>$this->dateTime()->notNull(),
             'checker_id'=>$this->string(200)->notNull(),
             'checker_time'=>$this->dateTime()->notNull(),
+            'status'=>$this->integer(),
+            'delete_stat'=>$this->char(1),
         ]);
 
         // creates index for column `supplier_id`

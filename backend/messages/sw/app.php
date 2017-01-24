@@ -77,6 +77,7 @@ return [
     'still used' => '还在使用',
 
     'Username' => '账户',
+    'Supplier' => 'Muuzaji',
     'Password' => '密码',
     'Repassword' => '确认密码',
     'Remember Me' => '自动登录',

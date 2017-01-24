@@ -24,6 +24,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'qty') ?>
 
     <?= $form->field($model, 'total') ?>
+    <?= $form->field($model, 'selling_price') ?>
+
 
     <?php // echo $form->field($model, 'purchase_invoice_id') ?>
 
