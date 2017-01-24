@@ -351,6 +351,11 @@ desired effect
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
+                                    "label" => "Purchase Entries",
+                                    "url" => ["/purchase/index"],
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                                [
                                     "label" => "Returns",
                                     "url" => "#",
                                     "icon" => "fa fa-angle-double-right",

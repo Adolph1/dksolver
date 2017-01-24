@@ -76,6 +76,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Purchase::getInvoiceTotal($searchModel->id);
                 }
             ],
+            [
+                'attribute'=>'Stock Status',
+                'value'=>function ($searchModel)
+                {
+                    if($searchModel->status==Purchase::PENDING) {
+
+                        return 'Pending';
+                    }
+                    elseif($searchModel->status==Purchase::UPDATED){
+                        return 'Stock Updated';
+                    }
+                }
+            ],
             'maker_id',
             'maker_time',
             'checker_id',

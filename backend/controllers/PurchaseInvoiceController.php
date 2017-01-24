@@ -82,6 +82,8 @@ class PurchaseInvoiceController extends Controller
     {
         $model = new PurchaseInvoice();
         $purchases = [new Purchase()];
+        $model->maker_id=Yii::$app->user->identity->username;
+        $model->maker_time=date('Y-m-d:H:i:s');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $purchases = Model::createMultiple(Purchase::classname());
@@ -106,9 +108,15 @@ class PurchaseInvoiceController extends Controller
                 foreach ($purchases as $purchase) {
 
                     $purchase->purchase_invoice_id=$model->id;
+                    $purchase->maker_id=Yii::$app->user->identity->username;
+                    $purchase->maker_time=date('Y-m-d:H:i:s');
+                    $purchase->auth_status='U';
                     if (!($flag = $purchase->save(false))) {
                         $transaction->rollBack();
                         break;
+                    }
+                    else{
+                        $this->updateTotal($purchase->id,$purchase->qty,$purchase->price);
                     }
                 }
 
@@ -152,7 +160,8 @@ class PurchaseInvoiceController extends Controller
     {
         $model = $this->findModel($id);
         $purchases = $model->purchases;
-
+        $model->maker_id=Yii::$app->user->identity->username;
+        $model->maker_time=date('Y-m-d:H:i:s');
         if ($model->load(Yii::$app->request->post())) {
 
             //$oldIDs = ArrayHelper::map($modelsAddress, 'id', 'id');
@@ -171,9 +180,15 @@ class PurchaseInvoiceController extends Controller
 
                         foreach ($purchases as $purchase) {
                             $purchase->purchase_invoice_id = $model->id;
+                            $purchase->maker_id=Yii::$app->user->identity->username;
+                            $purchase->maker_time=date('Y-m-d:H:i:s');
+                            $purchase->auth_status='U';
                             if (! ($flag = $purchase->save(false))) {
                                 $transaction->rollBack();
                                 break;
+                            }
+                            else{
+                                $this->updateTotal($purchase->id,$purchase->qty,$purchase->price);
                             }
                         }
                     }
@@ -221,5 +236,23 @@ class PurchaseInvoiceController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    protected function findPurchase($id)
+    {
+        if (($model = Purchase::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    //updates Total amount
+
+    protected function updateTotal($id,$qty,$price)
+    {
+        $model=$this->findPurchase($id);
+        $model->total=$qty*$price;
+        $model->save();
     }
 }

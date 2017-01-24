@@ -62,6 +62,7 @@ use backend\models\Product;
                             'price',
                             'qty',
                             'selling_price',
+
                         ],
                     ]); ?>
 
@@ -84,9 +85,6 @@ use backend\models\Product;
                                     <div class="col-md-4"><?= $form->field($purchase, "[{$i}]product_id")->dropDownList(Product::getAll(),['prompt'=>Yii::t('app','--Select--')]) ?></div>
                                     <div class="col-md-1"><?= $form->field($purchase, "[{$i}]price")->textInput(['maxlength' => true]) ?></div>
                                     <div class="col-md-1"><?= $form->field($purchase, "[{$i}]qty")->textInput(['maxlength' => true]) ?></div>
-                                   <? if (! $purchase->isNewRecord) {?>
-                                    <div class="col-md-1"><?= $form->field($purchase, "[{$i}]total")->textInput(['maxlength' => true,'readonly'=>'readonly']) ?></div>
-                                    <?}?>
                                     <div class="col-md-1"><?= $form->field($purchase, "[{$i}]selling_price")->textInput(['maxlength' => true]) ?></div>
                                 </div>
 

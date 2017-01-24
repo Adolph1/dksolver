@@ -92,17 +92,17 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTblInventories()
+    public function getInventories()
     {
-        return $this->hasMany(TblInventory::className(), ['product_id' => 'id']);
+        return $this->hasMany(Inventory::className(), ['product_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTblPriceMaintanances()
+    public function getPriceMaintanances()
     {
-        return $this->hasMany(TblPriceMaintanance::className(), ['product_id' => 'id']);
+        return $this->hasMany(PriceMaintanance::className(), ['product_id' => 'id']);
     }
 
     /**
@@ -110,38 +110,38 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getCategory0()
     {
-        return $this->hasOne(TblCategory::className(), ['id' => 'category']);
+        return $this->hasOne(Category::className(), ['id' => 'category']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTblProductAttributes()
+    public function getProductAttributes()
     {
-        return $this->hasMany(TblProductAttribute::className(), ['product_id' => 'id']);
+        return $this->hasMany(ProductAttribute::className(), ['product_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTblPurchases()
+    public function getPurchases()
     {
-        return $this->hasMany(TblPurchase::className(), ['product_id' => 'id']);
+        return $this->hasMany(Purchase::className(), ['product_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTblSales()
+    public function getSales()
     {
-        return $this->hasMany(TblSales::className(), ['product_id' => 'id']);
+        return $this->hasMany(Sales::className(), ['product_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTblStockAdjustments()
+    public function getStockAdjustments()
     {
-        return $this->hasMany(TblStockAdjustment::className(), ['product_id' => 'id']);
+        return $this->hasMany(StockAdjustment::className(), ['product_id' => 'id']);
     }
 }

@@ -28,6 +28,9 @@ class Purchase extends \yii\db\ActiveRecord
      * @inheritdoc
      */
 
+    const UPDATED=1;
+    const PENDING=0;
+
     public static function tableName()
     {
         return 'tbl_purchase';
@@ -62,7 +65,7 @@ class Purchase extends \yii\db\ActiveRecord
             'qty' => Yii::t('app', 'Qty'),
             'selling_price'=>Yii::t('app', 'Selling Price'),
             'total' => Yii::t('app', 'Total'),
-            'purchase_invoice_id' => Yii::t('app', 'Purchase Invoice ID'),
+            'purchase_invoice_id' => Yii::t('app', 'Invoice Number'),
             'maker_id' => Yii::t('app', 'Maker ID'),
             'maker_time' => Yii::t('app', 'Maker Time'),
             'auth_status' => Yii::t('app', 'Auth Status'),
