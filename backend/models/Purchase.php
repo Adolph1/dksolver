@@ -8,14 +8,11 @@ use Yii;
  * This is the model class for table "tbl_purchase".
  *
  * @property integer $id
- * @property string $invoice_number
- * @property string $purchase_date
  * @property integer $product_id
  * @property string $price
  * @property string $qty
  * @property string $total
- * @property integer $supplier_id
- * @property integer $purchase_master_id
+ * @property integer $purchase_invoice_id
  * @property string $maker_id
  * @property string $maker_time
  * @property string $auth_status
@@ -23,7 +20,7 @@ use Yii;
  * @property string $checker_time
  *
  * @property TblProduct $product
- * @property TblSupplier $supplier
+ * @property TblPurchaseInvoice $purchaseInvoice
  */
 class Purchase extends \yii\db\ActiveRecord
 {
@@ -41,15 +38,14 @@ class Purchase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['purchase_date', 'maker_time', 'checker_time'], 'safe'],
-            [['product_id', 'price', 'qty', 'total', 'supplier_id'], 'required'],
-            [['product_id', 'supplier_id', 'purchase_master_id'], 'integer'],
+            [['product_id', 'price', 'qty', 'total',], 'required'],
+            [['product_id', 'purchase_invoice_id'], 'integer'],
             [['price', 'qty', 'total'], 'number'],
-            [['invoice_number'], 'string', 'max' => 20],
+            [['maker_time', 'checker_time'], 'safe'],
             [['maker_id', 'checker_id'], 'string', 'max' => 200],
             [['auth_status'], 'string', 'max' => 1],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
-            [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Supplier::className(), 'targetAttribute' => ['supplier_id' => 'id']],
+            [['purchase_invoice_id'], 'exist', 'skipOnError' => true, 'targetClass' => PurchaseInvoice::className(), 'targetAttribute' => ['purchase_invoice_id' => 'id']],
         ];
     }
 
@@ -60,14 +56,11 @@ class Purchase extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'invoice_number' => Yii::t('app', 'Invoice Number'),
-            'purchase_date' => Yii::t('app', 'Purchase Date'),
-            'product_id' => Yii::t('app', 'Product Name'),
+            'product_id' => Yii::t('app', 'Product ID'),
             'price' => Yii::t('app', 'Price'),
             'qty' => Yii::t('app', 'Qty'),
             'total' => Yii::t('app', 'Total'),
-            'supplier_id' => Yii::t('app', 'Supplier'),
-            'purchase_master_id' => Yii::t('app', 'Purchase Batch'),
+            'purchase_invoice_id' => Yii::t('app', 'Purchase Invoice ID'),
             'maker_id' => Yii::t('app', 'Maker ID'),
             'maker_time' => Yii::t('app', 'Maker Time'),
             'auth_status' => Yii::t('app', 'Auth Status'),
@@ -81,14 +74,14 @@ class Purchase extends \yii\db\ActiveRecord
      */
     public function getProduct()
     {
-        return $this->hasOne(Product::className(), ['id' => 'product_id']);
+        return $this->hasOne(TblProduct::className(), ['id' => 'product_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSupplier()
+    public function getPurchaseInvoice()
     {
-        return $this->hasOne(Supplier::className(), ['id' => 'supplier_id']);
+        return $this->hasOne(TblPurchaseInvoice::className(), ['id' => 'purchase_invoice_id']);
     }
 }

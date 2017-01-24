@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Purchase;
+use backend\models\PurchaseInvoice;
 
 /**
- * PurchaseSearch represents the model behind the search form about `backend\models\Purchase`.
+ * PurchaseInvoiceSearch represents the model behind the search form about `backend\models\PurchaseInvoice`.
  */
-class PurchaseSearch extends Purchase
+class PurchaseInvoiceSearch extends PurchaseInvoice
 {
     /**
      * @inheritdoc
@@ -18,9 +18,8 @@ class PurchaseSearch extends Purchase
     public function rules()
     {
         return [
-            [['id', 'product_id', 'purchase_invoice_id'], 'integer'],
-            [['price', 'qty', 'total'], 'number'],
-            [['maker_id', 'maker_time', 'auth_status', 'checker_id', 'checker_time'], 'safe'],
+            [['id', 'supplier_id', 'purchase_master_id'], 'integer'],
+            [['invoice_number', 'purchase_date', 'maker_id', 'maker_time', 'checker_id', 'checker_time'], 'safe'],
         ];
     }
 
@@ -42,7 +41,7 @@ class PurchaseSearch extends Purchase
      */
     public function search($params)
     {
-        $query = Purchase::find();
+        $query = PurchaseInvoice::find();
 
         // add conditions that should always apply here
 
@@ -61,17 +60,15 @@ class PurchaseSearch extends Purchase
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'product_id' => $this->product_id,
-            'price' => $this->price,
-            'qty' => $this->qty,
-            'total' => $this->total,
-            'purchase_invoice_id' => $this->purchase_invoice_id,
+            'purchase_date' => $this->purchase_date,
+            'supplier_id' => $this->supplier_id,
+            'purchase_master_id' => $this->purchase_master_id,
             'maker_time' => $this->maker_time,
             'checker_time' => $this->checker_time,
         ]);
 
-        $query->andFilterWhere(['like', 'maker_id', $this->maker_id])
-            ->andFilterWhere(['like', 'auth_status', $this->auth_status])
+        $query->andFilterWhere(['like', 'invoice_number', $this->invoice_number])
+            ->andFilterWhere(['like', 'maker_id', $this->maker_id])
             ->andFilterWhere(['like', 'checker_id', $this->checker_id]);
 
         return $dataProvider;

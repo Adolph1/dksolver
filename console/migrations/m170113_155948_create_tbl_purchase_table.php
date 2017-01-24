@@ -14,14 +14,11 @@ class m170113_155948_create_tbl_purchase_table extends Migration
     {
         $this->createTable('tbl_purchase', [
             'id' => $this->primaryKey(),
-            'invoice_number'=>$this->string(20)->null(),
-            'purchase_date'=>$this->date(),
             'product_id'=>$this->integer()->notNull(),
             'price'=>$this->decimal()->notNull(),
             'qty'=>$this->decimal()->notNull(),
             'total'=>$this->decimal()->notNull(),
-            'supplier_id'=>$this->integer()->notNull(),
-            'purchase_master_id'=>$this->integer()->notNull(),
+            'purchase_invoice_id'=>$this->integer()->notNull(),
             'maker_id'=>$this->string(200)->notNull(),
             'maker_time'=>$this->dateTime()->notNull(),
             'auth_status'=>$this->char(1),
@@ -38,21 +35,15 @@ class m170113_155948_create_tbl_purchase_table extends Migration
             'product_id'
         );
 
-
-        // creates index for column `supplier_id`
         $this->createIndex(
-            'idx-tbl_purchase-supplier_id',
+            'idx-tbl_purchase-purchase_invoice_id',
             'tbl_purchase',
-            'supplier_id'
-        );
-        // creates index for column `purchase_master_id`
-        $this->createIndex(
-            'idx-tbl_purchase-master_id',
-            'tbl_purchase',
-            'purchase_master_id'
+            'purchase_invoice_id'
         );
 
-        // add foreign key for table `tbl_product`
+
+
+        // add foreign key for table `tbl_product` and tbl_purchase_invoice_id
         $this->addForeignKey(
             'fk-tbl_purchase-product_id',
             'tbl_purchase',
@@ -62,27 +53,16 @@ class m170113_155948_create_tbl_purchase_table extends Migration
             'CASCADE'
         );
 
-
-        // add foreign key for table `tbl_product`
         $this->addForeignKey(
-            'fk-tbl_purchase-purchase_master_id',
+            'fk-tbl_purchase-purchase_invoice_id',
             'tbl_purchase',
-            'purchase_master_id',
-            'tbl_purchase_master',
+            'purchase_invoice_id',
+            'tbl_purchase_invoice',
             'id',
             'CASCADE'
         );
 
 
-        // add foreign key for table `tbl_supplier`
-        $this->addForeignKey(
-            'fk-tbl_purchase-supplier_id',
-            'tbl_purchase',
-            'supplier_id',
-            'tbl_supplier',
-            'id',
-            'CASCADE'
-        );
     }
 
     /**
@@ -102,17 +82,18 @@ class m170113_155948_create_tbl_purchase_table extends Migration
             'tbl_purchase'
         );
 
-        // drops foreign key for table `tbl_supplier`
         $this->dropForeignKey(
-            'fk-tbl_purchase-supplier_id',
+            'fk-tbl_purchase-purchase_invoice_id',
             'tbl_purchase'
         );
 
-        // drops index for column `supplier_id`
+        // drops index for column `product_id`
         $this->dropIndex(
-            'idx-tbl_purchase-supplier_id',
+            'idx-tbl_purchase-purchase_invoice_id',
             'tbl_purchase'
         );
+
+
 
         $this->dropTable('tbl_purchase');
     }

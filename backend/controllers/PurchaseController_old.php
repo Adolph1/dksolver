@@ -2,12 +2,16 @@
 
 namespace backend\controllers;
 
+use backend\models\Model;
 use Yii;
 use backend\models\Purchase;
 use backend\models\PurchaseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use yii\widgets\ActiveForm;
+use yii\web\Response;
 
 /**
  * PurchaseController implements the CRUD actions for Purchase model.
@@ -63,13 +67,64 @@ class PurchaseController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Purchase();
+        $newpurchase = new Purchase();
+        $models = [new Purchase()];
+        if ($newpurchase->load(Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+            $models = Model::createMultiple(Purchase::classname());
+            Model::loadMultiple($models, Yii::$app->request->post());
+            //  print_r($models);
+            // exit;
+
+            // validate all models
+            $valid = $newpurchase->validate();
+            $valid = Model::validateMultiple($models) && $valid;
+
+
+           // if ($valid) {
+
+
+                $transaction = \Yii::$app->db->beginTransaction();
+                //print_r($transaction);
+                //exit;
+                try {
+
+
+                    foreach ($models as $model) {
+
+                       /* $newpurchase->purchase_master_id = $_POST['Purchase']['purchase_master_id'];
+                        $newpurchase->supplier_id = $_POST['Purchase']['supplier_id'];
+                        $newpurchase->purchase_date = $_POST['Purchase']['purchase_date'];
+                        $newpurchase->invoice_number = $_POST['Purchase']['invoice_number'];
+                        $request = Yii::$app->request;
+                        $model = $request->post('Purchase');
+                       */
+
+                        /*$model->product_id = $model['product_id'];
+                        $model->price = $model['price'];
+                        $model->qty = $model['qty'];
+                        $model->total = $model['total'];
+                        */
+
+                        if (!($flag = $model->save(false))) {
+                            $transaction->rollBack();
+                            break;
+                        }
+                    }
+
+                    $transaction->commit();
+                    return $this->redirect(['purchase/index']);
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+
+            }
+        //}
+        else {
+
+
             return $this->render('create', [
-                'model' => $model,
+                'models' => (empty($models)) ? [new Purchase] : $models, 'newpurchase' => $newpurchase
             ]);
         }
     }

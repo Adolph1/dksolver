@@ -347,7 +347,7 @@ desired effect
                                 ],
                                 [
                                     "label" => "Invoices",
-                                    "url" => ["/purchase/index"],
+                                    "url" => ["/purchase-invoice/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [

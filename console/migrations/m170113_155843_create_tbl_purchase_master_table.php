@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `tbl_purchase_master`.
  */
-class m170116_071924_create_tbl_purchase_master_table extends Migration
+class m170113_155843_create_tbl_purchase_master_table extends Migration
 {
     /**
      * @inheritdoc

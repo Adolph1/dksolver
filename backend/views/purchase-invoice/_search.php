@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\PurchaseSearch */
+/* @var $model backend\models\PurchaseInvoiceSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="purchase-search">
+<div class="purchase-invoice-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,21 +17,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'product_id') ?>
+    <?= $form->field($model, 'invoice_number') ?>
 
-    <?= $form->field($model, 'price') ?>
+    <?= $form->field($model, 'purchase_date') ?>
 
-    <?= $form->field($model, 'qty') ?>
+    <?= $form->field($model, 'supplier_id') ?>
 
-    <?= $form->field($model, 'total') ?>
-
-    <?php // echo $form->field($model, 'purchase_invoice_id') ?>
+    <?= $form->field($model, 'purchase_master_id') ?>
 
     <?php // echo $form->field($model, 'maker_id') ?>
 
     <?php // echo $form->field($model, 'maker_time') ?>
-
-    <?php // echo $form->field($model, 'auth_status') ?>
 
     <?php // echo $form->field($model, 'checker_id') ?>
 
