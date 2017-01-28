@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
     $searchModel = new PurchaseInvoiceSearch();
-    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+   $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
     ?>
     <?= DataTables::widget([
         'dataProvider' => $dataProvider,
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'invoice_number',
                 'format' => 'raw',
                 'value'=>function ($data) {
-                    return Html::a(Html::encode($data->invoice_number),['purchase-invoice/view','id'=> $data->id]);
+                    return Html::a(Html::encode($data->invoice_number),['viewentries','id'=> $data->id]);
                 },
             ],
 

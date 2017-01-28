@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\Inventory;
 use backend\models\PurchaseInvoice;
+use backend\models\PurchaseInvoiceSearch;
 use backend\models\SystemSetup;
 use Yii;
 use backend\models\Purchase;
@@ -180,6 +181,8 @@ class PurchaseController extends Controller
 
         return $this->redirect(['index']);
     }
+
+
 
     /**
      * Finds the Purchase model based on its primary key value.

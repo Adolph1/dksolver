@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Purchase;
+use backend\models\SalesItem;
 
 /**
- * PurchaseSearch represents the model behind the search form about `backend\models\Purchase`.
+ * SalesItemSearch represents the model behind the search form about `backend\models\SalesItem`.
  */
-class PurchaseSearch extends Purchase
+class SalesItemSearch extends SalesItem
 {
     /**
      * @inheritdoc
@@ -18,9 +18,9 @@ class PurchaseSearch extends Purchase
     public function rules()
     {
         return [
-            [['id', 'product_id', 'purchase_invoice_id'], 'integer'],
-            [['price', 'qty', 'total','selling_price'], 'number'],
-            [['maker_id', 'maker_time', 'auth_status', 'checker_id', 'checker_time'], 'safe'],
+            [['id', 'sales_id', 'product_id'], 'integer'],
+            [['selling_price', 'qty', 'total'], 'number'],
+            [['maker_id', 'maker_time', 'delete_stat'], 'safe'],
         ];
     }
 
@@ -42,7 +42,7 @@ class PurchaseSearch extends Purchase
      */
     public function search($params)
     {
-        $query = Purchase::find();
+        $query = SalesItem::find();
 
         // add conditions that should always apply here
 
@@ -61,35 +61,16 @@ class PurchaseSearch extends Purchase
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'sales_id' => $this->sales_id,
             'product_id' => $this->product_id,
-            'price' => $this->price,
+            'selling_price' => $this->selling_price,
             'qty' => $this->qty,
-            'selling_price'=>$this->selling_price,
             'total' => $this->total,
-            'purchase_invoice_id' => $this->purchase_invoice_id,
             'maker_time' => $this->maker_time,
-            'checker_time' => $this->checker_time,
         ]);
 
         $query->andFilterWhere(['like', 'maker_id', $this->maker_id])
-            ->andFilterWhere(['like', 'auth_status', $this->auth_status])
-            ->andFilterWhere(['like', 'checker_id', $this->checker_id]);
-
-        return $dataProvider;
-    }
-
-    public function searchentry($params)
-    {
-        $query = Purchase::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        $query->andFilterWhere([
-            'purchase_invoice_id' => $params,
-
-        ]);
+            ->andFilterWhere(['like', 'delete_stat', $this->delete_stat]);
 
         return $dataProvider;
     }

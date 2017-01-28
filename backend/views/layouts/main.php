@@ -315,7 +315,7 @@ desired effect
                             "items" => [
                                 [
                                     "label" => "POS",
-                                    "url" => "#",
+                                    "url" =>  ["/sales/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
@@ -367,6 +367,24 @@ desired effect
                                 ],
                             ],
                         ],
+                        [
+                            "label" =>Yii::t('app','Inventory'),
+                            "url" => "#",
+                            "icon" => "fa fa-cart-plus",
+                            "items" => [
+                                [
+                                    "label" => "Current Stock",
+                                    "url" => ["/inventory/index"],
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                                [
+                                    "label" => "Price Maintenance",
+                                    "url" => ["/price-maintenance/index"],
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                            ],
+                        ],
+
 
                         [
                             "label" =>Yii::t('app','Settings'),
@@ -388,11 +406,7 @@ desired effect
                                     "url" => "#",
                                     "icon" => "fa fa-angle-double-right",
                                 ],
-                                [
-                                    "label" => "Suppliers",
-                                    "url" => ['supplier/index'],
-                                    "icon" => "fa fa-angle-double-right",
-                                ],
+
                             ],
                         ],
                     ],

@@ -1,51 +1,69 @@
 <?php
 
 use yii\helpers\Html;
+use yii\grid\GridView;
+use backend\models\PurchaseSearch;
 use fedemotta\datatables\DataTables;
-use backend\models\InventorySearch;
+use backend\models\Purchase;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\InventorySearch */
+/* @var $searchModel backend\models\PurchaseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Inventories');
+$this->title = Yii::t('app', 'Purchases');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="inventory-index">
+<div class="purchase-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php // Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php // Html::a(Yii::t('app', 'Create Inventory'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?php // Html::a(Yii::t('app', 'Create Purchase'), ['create'], ['class' => 'btn btn-success']) ?>
+        <span style="float: right;padding-bottom: 10px"><?= Html::a(Yii::t('app', '<i class="fa fa-check"></i>  Update Stock'), ['updatestock'], ['class' => 'btn btn-warning']) ?></span>
     </p>
     <?php
-    $searchModel = new InventorySearch();
-    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+   $searchModel = new PurchaseSearch();
+    $dataProvider = $searchModel->searchentry($invoice_number);
+    //print($invoice_number);
     ?>
     <?= DataTables::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-           // 'id',
             [
-                    'attribute'=>'product_id',
-                    'value'=>'product.product_name'
+                'attribute'=>'product_id',
+                'value'=>'product.product_name',
             ],
-            'buying_price',
-            'selling_price',
+            'price',
             'qty',
-            'min_level',
-            'last_updated',
+            'total',
+            [
+                'attribute'=>'purchase_invoice_id',
+                'value'=>'purchaseInvoice.invoice_number',
+            ],
+            [
+                'attribute'=>'Stock Status',
+                'value'=>function ($searchModel)
+                {
+                    if($searchModel->status==Purchase::PENDING) {
+
+                        return 'Pending';
+                    }
+                    elseif($searchModel->status==Purchase::UPDATED){
+                        return 'Updated';
+                    }
+                }
+            ],
             'maker_id',
             'maker_time',
             'auth_status',
             'checker_id',
             'checker_time',
 
-            ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
+
+           // ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
         ],
         'clientOptions' => [
             "lengthMenu"=> [[20,-1], [20,Yii::t('app',"All")]],
@@ -73,5 +91,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ]
         ],
-    ]); ?>
+    ]);?>
+
 </div>

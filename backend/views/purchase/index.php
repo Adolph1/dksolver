@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Purchase'), ['create'], ['class' => 'btn btn-success']) ?>
-        <span style="float: right"><?= Html::a(Yii::t('app', '<i class="fa fa-check"></i>  Update Stock'), ['updatestock'], ['class' => 'btn btn-warning']) ?></span>
+        <?php // Html::a(Yii::t('app', 'Create Purchase'), ['create'], ['class' => 'btn btn-success']) ?>
+        <span style="float: right;padding-bottom: 10px"><?= Html::a(Yii::t('app', '<i class="fa fa-check"></i>  Update Stock'), ['updatestock'], ['class' => 'btn btn-warning']) ?></span>
     </p>
     <?php
     $searchModel = new PurchaseSearch();

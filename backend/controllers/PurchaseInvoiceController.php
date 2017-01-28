@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\PurchaseSearch;
 use Yii;
 use backend\models\PurchaseInvoice;
 use backend\models\PurchaseInvoiceSearch;
@@ -254,5 +255,18 @@ class PurchaseInvoiceController extends Controller
         $model=$this->findPurchase($id);
         $model->total=$qty*$price;
         $model->save();
+    }
+
+    /**
+     * Get all invoice entries
+     */
+
+    public function actionViewentries($id)
+    {
+
+        return $this->render('entry', [
+            'invoice_number' => $id,
+
+        ]);
     }
 }
