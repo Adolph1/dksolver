@@ -511,8 +511,51 @@ desired effect
      user experience. Slimscroll is required when using the
      fixed layout. -->
 
-
 <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>
+
+<script>
+    $("#purchasemaster-country").change(function(){
+        var id =document.getElementById("purchasemaster-country").value
+        if(id==1){
+            $( "#rates" ).hide( "slow", function() {
+                //alert( "Animation complete." );
+            });
+        }
+        else if(id==2){
+            $( "#rates" ).show( "slow", function() {
+            });
+        }
+        else if(id==0){
+            $( "#rates" ).show( "slow", function() {
+            });
+        }
+
+
+    });
+
+</script>
+
+<script>
+    $(document).ready(function(){
+        var id =document.getElementById("purchasemaster-country").value
+        if(id==1){
+            $( "#rates" ).hide( "slow", function() {
+                //alert( "Animation complete." );
+            });
+        }
+        else if(id==2){
+            $( "#rates" ).show( "slow", function() {
+            });
+        }
+        else if(id==0){
+            $( "#rates" ).show( "slow", function() {
+            });
+        }
+
+
+    });
+
+</script>

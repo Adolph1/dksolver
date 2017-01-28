@@ -23,6 +23,8 @@ class PurchaseMaster extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    const LOCAL=1;
+    const ABROAD=2;
     public static function tableName()
     {
         return '{{%tbl_purchase_master}}';
@@ -57,7 +59,7 @@ class PurchaseMaster extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'description' => Yii::t('app', 'Description'),
-            'country' => Yii::t('app', 'Country'),
+            'country' => Yii::t('app', 'Purchase Place'),
             'period' => Yii::t('app', 'Period'),
             'financial_year' => Yii::t('app', 'Financial Year'),
             'fcy_rate' => Yii::t('app', 'Fcy Rate'),

@@ -18,16 +18,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'country')->textInput(['maxlength' => true]) ?>
+    <div id="country"><?= $form->field($model, 'country')->dropDownList(['1'=>'Local','2'=>'Abroad'],['prompt'=>'--Select--']) ?></div>
 
-    <?= $form->field($model, 'period')->dropDownList(['0'=>'--Select--','M01'=>'M01','M02'=>'M02','M03'=>'M03','M04'=>'M04','M05'=>'M05','M06'=>'M06','M07'=>'M07','M08'=>'M08','M09'=>'M09','M10'=>'M10','M11'=>'M11','M12'=>'M12']) ?>
+    <?= $form->field($model, 'period')->dropDownList(['M01'=>'M01','M02'=>'M02','M03'=>'M03','M04'=>'M04','M05'=>'M05','M06'=>'M06','M07'=>'M07','M08'=>'M08','M09'=>'M09','M10'=>'M10','M11'=>'M11','M12'=>'M12'],['prompt'=>'--Select--']) ?>
 
     <?= $form->field($model, 'financial_year')->textInput(['maxlength' => true,'value'=>'FY'.date('Y'),'readonly'=>'readonly']) ?>
-
+<div id="rates">
     <?= $form->field($model, 'fcy_rate')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'lcy_rate')->textInput(['maxlength' => true]) ?>
-
+</div>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -39,3 +39,8 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 </div>
+
+
+
+
+

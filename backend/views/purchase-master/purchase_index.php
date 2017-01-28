@@ -8,50 +8,95 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use backend\models\PurchaseInvoiceSearch;
+use backend\models\PurchaseInvoice;
 use fedemotta\datatables\DataTables;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PurchaseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = Yii::t('app', 'Purchases');
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="purchase-index">
+<div class="col-md-3">
 
-    <h1><?php // Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <table class="table table-bordered table-condensed table-hover small kv-table">
+        <tbody><tr class="success">
+            <th colspan="3" class="text-center text-success">Purchases summary</th>
+        </tr>
+        <tr class="active">
+            <th class="text-center">#</th>
+            <th>Description</th>
+            <th class="text-right">Amount</th>
+        </tr>
+        <tr>
+            <td class="text-center">1</td><td>Total Purchases</td><td class="text-right"><?= PurchaseInvoice::getTotal($model->id);?></td>
+        </tr>
+        <tr>
+            <td class="text-center">2</td><td>Total Costs</td><td class="text-right">2.04</td>
+        </tr>
+        <tr>
+            <td class="text-center">3</td><td>Total expected sales</td><td class="text-right">1.36</td>
+        </tr>
+        <tr>
+            <td class="text-center">3</td><td>Total expected Profits</td><td class="text-right">1.36</td>
+        </tr>
+        <tr class="warning">
+            <th></th><th>Total</th><th class="text-right">34.00</th>
+        </tr>
+        </tbody></table>
+</div>
+<div class="col-md-3">
 
-    <p>
-        <?php // Html::a(Yii::t('app', 'Create Purchase'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?php
-    $searchModel = new PurchaseInvoiceSearch();
-    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-    ?>
-    <?= DataTables::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <table class="table table-bordered table-condensed table-hover small kv-table">
+        <tbody><tr class="danger">
+            <th colspan="3" class="text-center text-danger">Costs summary</th>
+        </tr>
+        <tr class="active">
+            <th class="text-center">#</th>
+            <th>Description</th>
+            <th class="text-right">Amount</th>
+        </tr>
+        <tr>
+            <td class="text-center">1</td><td>Transport</td><td class="text-right">30.60 </td>
+        </tr>
+        <tr>
+            <td class="text-center">2</td><td>Couriers</td><td class="text-right">2.04</td>
+        </tr>
+        <tr>
+            <td class="text-center">3</td><td>Storage</td><td class="text-right">1.36</td>
+        </tr>
+        <tr>
+            <td class="text-center">3</td><td>TRA</td><td class="text-right">1.36</td>
+        </tr>
+        <tr class="warning">
+            <th></th><th>Total</th><th class="text-right">34.00</th>
+        </tr>
+        </tbody></table>
+</div>
 
-           /* [
-                'attribute'=>'invoice_number',
-                'format' => 'raw',
-                'value'=>function ($data) {
-                    return Html::a(Html::encode($data->invoice_number),'site/index');
-                },
-            ],*/
+<div class="col-md-6">
 
-            'purchase_date',
-            'supplier_id',
-            'purchase_master_id',
-            'maker_id',
-            'maker_time',
-            'checker_id',
-            'checker_time',
-
-        ],
-    ]); ?>
+    <table class="table table-bordered table-condensed table-hover small kv-table">
+        <tbody><tr class="danger">
+            <th colspan="3" class="text-center text-danger">Returns summary</th>
+        </tr>
+        <tr class="active">
+            <th class="text-center">#</th>
+            <th>Description</th>
+            <th class="text-right">Amount</th>
+        </tr>
+        <tr>
+            <td class="text-center">1</td><td>Total Purchases</td><td class="text-right">30.60 </td>
+        </tr>
+        <tr>
+            <td class="text-center">2</td><td>Total Costs</td><td class="text-right">2.04</td>
+        </tr>
+        <tr>
+            <td class="text-center">3</td><td>Total expected sales</td><td class="text-right">1.36</td>
+        </tr>
+        <tr>
+            <td class="text-center">3</td><td>Total expected Profits</td><td class="text-right">1.36</td>
+        </tr>
+        <tr class="warning">
+            <th></th><th>Total</th><th class="text-right">34.00</th>
+        </tr>
+        </tbody></table>
 </div>

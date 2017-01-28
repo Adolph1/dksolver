@@ -87,4 +87,28 @@ class PurchaseInvoice extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Purchase::className(), ['purchase_invoice_id' => 'id']);
     }
+
+    /**
+     * @param $id
+     * @return int|string
+     */
+
+    public static function getTotal($id)
+    {
+
+        $countinvoices = PurchaseInvoice::find()->where(['purchase_master_id' => $id])->count();
+        if ($countinvoices > 0) {
+            $invoices = PurchaseInvoice::find()->where(['purchase_master_id' => $id])->all();
+            $total = 0;
+            foreach ($invoices as $invoice) {
+                $sum = Purchase::find()->where(['purchase_invoice_id' => $invoice->id])->sum('total');
+                $total = $total + $sum;
+            }
+            return $total;
+        }
+        else{
+            return '-';
+        }
+    }
+
 }

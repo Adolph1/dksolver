@@ -60,7 +60,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'barcode',
             'product_name',
             'description:ntext',
-            'category',
+            [
+              'attribute'=>'category',
+                'value'=>'category0.title'
+            ],
             // 'image',
             'status',
             'maker_id',

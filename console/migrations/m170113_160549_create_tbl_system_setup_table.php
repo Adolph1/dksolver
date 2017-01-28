@@ -19,6 +19,7 @@ class m170113_160549_create_tbl_system_setup_table extends Migration
             'currency'=>$this->string(20),
             'shop_name'=>$this->string(200),
             'shop_category'=>$this->string(200),
+            'maker_checker'=>$this->char(1),
 
         ]);
     }

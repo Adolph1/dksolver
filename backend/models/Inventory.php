@@ -5,14 +5,15 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "tbl_purchase".
+ * This is the model class for table "tbl_inventory".
  *
  * @property integer $id
  * @property integer $product_id
- * @property string $price
+ * @property string $buying_price
+ * @property string $selling_price
  * @property string $qty
- * @property string $total
- * @property integer $purchase_invoice_id
+ * @property integer $min_level
+ * @property string $last_updated
  * @property string $maker_id
  * @property string $maker_time
  * @property string $auth_status
@@ -20,20 +21,15 @@ use Yii;
  * @property string $checker_time
  *
  * @property TblProduct $product
- * @property TblPurchaseInvoice $purchaseInvoice
  */
-class Purchase extends \yii\db\ActiveRecord
+class Inventory extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
-
-    const UPDATED=1;
-    const PENDING=0;
-
     public static function tableName()
     {
-        return 'tbl_purchase';
+        return 'tbl_inventory';
     }
 
     /**
@@ -42,14 +38,13 @@ class Purchase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'price', 'qty'], 'required'],
-            [['product_id', 'purchase_invoice_id'], 'integer'],
-            [['price', 'qty', 'total','selling_price'], 'number'],
-            [['maker_time', 'checker_time'], 'safe'],
+            [['product_id', 'min_level'], 'integer'],
+            [['buying_price', 'selling_price', 'qty'], 'number'],
+            [['last_updated', 'maker_time', 'checker_time'], 'safe'],
             [['maker_id', 'checker_id'], 'string', 'max' => 200],
             [['auth_status'], 'string', 'max' => 1],
+            [['product_id'], 'unique'],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
-            [['purchase_invoice_id'], 'exist', 'skipOnError' => true, 'targetClass' => PurchaseInvoice::className(), 'targetAttribute' => ['purchase_invoice_id' => 'id']],
         ];
     }
 
@@ -60,12 +55,12 @@ class Purchase extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'product_id' => Yii::t('app', 'Product Name'),
-            'price' => Yii::t('app', 'Price'),
+            'product_id' => Yii::t('app', 'Product ID'),
+            'buying_price' => Yii::t('app', 'Buying Price'),
+            'selling_price' => Yii::t('app', 'Selling Price'),
             'qty' => Yii::t('app', 'Qty'),
-            'selling_price'=>Yii::t('app', 'Selling Price'),
-            'total' => Yii::t('app', 'Total'),
-            'purchase_invoice_id' => Yii::t('app', 'Invoice Number'),
+            'min_level' => Yii::t('app', 'Min Level'),
+            'last_updated' => Yii::t('app', 'Last Updated'),
             'maker_id' => Yii::t('app', 'Maker ID'),
             'maker_time' => Yii::t('app', 'Maker Time'),
             'auth_status' => Yii::t('app', 'Auth Status'),
@@ -80,22 +75,5 @@ class Purchase extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPurchaseInvoice()
-    {
-        return $this->hasOne(PurchaseInvoice::className(), ['id' => 'purchase_invoice_id']);
-    }
-
-    /**
-     * gets total amount of the invoice
-     */
-
-    public static function getInvoiceTotal($id)
-    {
-        return Purchase::find()->where(['purchase_invoice_id'=>$id])->sum('total');
     }
 }

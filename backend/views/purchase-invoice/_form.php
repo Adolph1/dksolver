@@ -96,7 +96,16 @@ use backend\models\Product;
             </div>
 
             <div class="form-group">
-                <?= Html::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Update'), ['class' => 'btn btn-primary']) ?>
+                <?php
+                if($model->isNewRecord){
+                    echo Html::submitButton(Yii::t('app','Create'),['create'], ['class' => 'btn btn-success']);
+                }
+                if(!$model->isNewRecord && $model->status=\backend\models\Purchase::PENDING){
+                    echo Html::submitButton(Yii::t('app','Update'),['update'], ['class' => 'btn btn-primary']);
+                }
+
+                ?>
+
             </div>
             <?php ActiveForm::end(); ?>
         </div>

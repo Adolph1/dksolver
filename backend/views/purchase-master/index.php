@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 //use yii\grid\GridView;
 use kartik\grid\GridView;
+use backend\models\PurchaseMaster;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PurchaseMasterSearch */
@@ -43,11 +44,44 @@ $this->params['breadcrumbs'][] = $this->title;
 
         //'id',
         'description',
-        'country',
+        [
+                'attribute'=>'country',
+                'value'=>function($model){
+                    if($model->country==PurchaseMaster::LOCAL){
+                        return "Local";
+                    }
+                    elseif ($model->country==PurchaseMaster::ABROAD){
+                        return "Abroad";
+                    }
+
+                }
+        ],
         'period',
         'financial_year',
-        'fcy_rate',
-        'lcy_rate',
+        [
+            'attribute'=>'fcy_rate',
+            'value'=>function($model){
+                if($model->country==PurchaseMaster::LOCAL){
+                    return "-";
+                }
+                elseif ($model->country==PurchaseMaster::ABROAD){
+                    return $model->fcy_rate;
+                }
+
+            }
+        ],
+        [
+            'attribute'=>'lcy_rate',
+            'value'=>function($model){
+                if($model->country==PurchaseMaster::LOCAL){
+                    return "-";
+                }
+                elseif ($model->country==PurchaseMaster::ABROAD){
+                    return $model->lcy_rate;
+                }
+
+            }
+        ],
         'maker_id',
         'maker_time',
 
