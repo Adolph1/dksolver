@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\SalesSearch */
+/* @var $searchModel backend\models\CartSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Sales');
+$this->title = Yii::t('app', 'Carts');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sales-index">
+<div class="cart-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Sales'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Cart'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,17 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'trn_dt',
-            'total_qty',
-            'total_amount',
-            'paid_amount',
-            // 'payment_method',
-            // 'source_ref_number',
-            // 'notes',
-            // 'customer_name',
+            'product_id',
+            'price',
+            'qty',
+            'total',
             // 'maker_id',
             // 'maker_time',
-            // 'status',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

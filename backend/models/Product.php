@@ -144,4 +144,13 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasMany(StockAdjustment::className(), ['product_id' => 'id']);
     }
+
+    /**
+     * gets product name
+     */
+    public static function getProductName($id){
+
+        $product=Product::findOne($id);
+       return $product->product_name;
+    }
 }

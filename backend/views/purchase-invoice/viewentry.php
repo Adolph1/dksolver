@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php // Html::a(Yii::t('app', 'Create Purchase'), ['create'], ['class' => 'btn btn-success']) ?>
-        <span style="float: right;padding-bottom: 10px"><?= Html::a(Yii::t('app', '<i class="fa fa-check"></i>  Update Stock'), ['updatestock'], ['class' => 'btn btn-warning']) ?></span>
+        <span style="float: right;padding-bottom: 10px"><?= Html::a(Yii::t('app', '<i class="fa fa-check"></i>  Update Stock'), ['purchase/updatestock'], ['class' => 'btn btn-warning']) ?></span>
     </p>
     <?php
    $searchModel = new PurchaseSearch();

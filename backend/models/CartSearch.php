@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Sales;
+use backend\models\Cart;
 
 /**
- * SalesSearch represents the model behind the search form about `backend\models\Sales`.
+ * CartSearch represents the model behind the search form about `backend\models\Cart`.
  */
-class SalesSearch extends Sales
+class CartSearch extends Cart
 {
     /**
      * @inheritdoc
@@ -18,9 +18,9 @@ class SalesSearch extends Sales
     public function rules()
     {
         return [
-            [['id', 'payment_method'], 'integer'],
-            [['trn_dt', 'source_ref_number', 'notes', 'customer_name', 'maker_id', 'maker_time', 'status'], 'safe'],
-            [['total_qty', 'total_amount', 'paid_amount'], 'number'],
+            [['id', 'product_id'], 'integer'],
+            [['price', 'qty', 'total'], 'number'],
+            [['maker_id', 'maker_time'], 'safe'],
         ];
     }
 
@@ -42,7 +42,7 @@ class SalesSearch extends Sales
      */
     public function search($params)
     {
-        $query = Sales::find();
+        $query = Cart::find();
 
         // add conditions that should always apply here
 
@@ -61,19 +61,14 @@ class SalesSearch extends Sales
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'trn_dt' => $this->trn_dt,
-            'total_qty' => $this->total_qty,
-            'total_amount' => $this->total_amount,
-            'paid_amount' => $this->paid_amount,
-            'payment_method' => $this->payment_method,
+            'product_id' => $this->product_id,
+            'price' => $this->price,
+            'qty' => $this->qty,
+            'total' => $this->total,
             'maker_time' => $this->maker_time,
         ]);
 
-        $query->andFilterWhere(['like', 'source_ref_number', $this->source_ref_number])
-            ->andFilterWhere(['like', 'notes', $this->notes])
-            ->andFilterWhere(['like', 'customer_name', $this->customer_name])
-            ->andFilterWhere(['like', 'maker_id', $this->maker_id])
-            ->andFilterWhere(['like', 'status', $this->status]);
+        $query->andFilterWhere(['like', 'maker_id', $this->maker_id]);
 
         return $dataProvider;
     }

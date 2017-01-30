@@ -2,18 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\models\Cart;
 use Yii;
-use backend\models\Sales;
-use backend\models\SalesSearch;
+use backend\models\Cart;
+use backend\models\CartSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SalesController implements the CRUD actions for Sales model.
+ * CartController implements the CRUD actions for Cart model.
  */
-class SalesController extends Controller
+class CartController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,12 +30,12 @@ class SalesController extends Controller
     }
 
     /**
-     * Lists all Sales models.
+     * Lists all Cart models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SalesSearch();
+        $searchModel = new CartSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class SalesController extends Controller
     }
 
     /**
-     * Displays a single Sales model.
+     * Displays a single Cart model.
      * @param integer $id
      * @return mixed
      */
@@ -58,32 +57,25 @@ class SalesController extends Controller
     }
 
     /**
-     * Creates a new Sales model.
+     * Creates a new Cart model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Sales();
-        $cartcounts=Cart::find()->count();
-
-        if($cartcounts>0) {
-            $carts = Cart::find()->all();
-
-        }
+        $model = new Cart();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,'carts'=>$carts
+                'model' => $model,
             ]);
         }
-
     }
 
     /**
-     * Updates an existing Sales model.
+     * Updates an existing Cart model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -102,7 +94,7 @@ class SalesController extends Controller
     }
 
     /**
-     * Deletes an existing Sales model.
+     * Deletes an existing Cart model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -115,15 +107,15 @@ class SalesController extends Controller
     }
 
     /**
-     * Finds the Sales model based on its primary key value.
+     * Finds the Cart model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Sales the loaded model
+     * @return Cart the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Sales::findOne($id)) !== null) {
+        if (($model = Cart::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

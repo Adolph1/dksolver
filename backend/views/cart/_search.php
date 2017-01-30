@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\SalesSearch */
+/* @var $model backend\models\CartSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="sales-search">
+<div class="cart-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,27 +17,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'trn_dt') ?>
+    <?= $form->field($model, 'product_id') ?>
 
-    <?= $form->field($model, 'total_qty') ?>
+    <?= $form->field($model, 'price') ?>
 
-    <?= $form->field($model, 'total_amount') ?>
+    <?= $form->field($model, 'qty') ?>
 
-    <?= $form->field($model, 'paid_amount') ?>
-
-    <?php // echo $form->field($model, 'payment_method') ?>
-
-    <?php // echo $form->field($model, 'source_ref_number') ?>
-
-    <?php // echo $form->field($model, 'notes') ?>
-
-    <?php // echo $form->field($model, 'customer_name') ?>
+    <?= $form->field($model, 'total') ?>
 
     <?php // echo $form->field($model, 'maker_id') ?>
 
     <?php // echo $form->field($model, 'maker_time') ?>
-
-    <?php // echo $form->field($model, 'status') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
