@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\Cart;
+use backend\models\CartSearch;
 use Yii;
 use backend\models\Sales;
 use backend\models\SalesSearch;
@@ -65,7 +66,12 @@ class SalesController extends Controller
     public function actionCreate()
     {
         $model = new Sales();
+        $searchModel = new CartSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+
         $cartcounts=Cart::find()->count();
+
 
         if($cartcounts>0) {
             $carts = Cart::find()->all();
@@ -76,7 +82,7 @@ class SalesController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,'carts'=>$carts
+                'model' => $model,'carts'=>$carts,'searchModel'=>$searchModel,'dataProvider'=>$dataProvider
             ]);
         }
 
@@ -129,4 +135,9 @@ class SalesController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+
+
+
+
 }

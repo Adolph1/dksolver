@@ -49,7 +49,7 @@ class Cart extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'product_id' => Yii::t('app', 'Product Name'),
             'price' => Yii::t('app', 'Price'),
             'qty' => Yii::t('app', 'Qty'),
             'total' => Yii::t('app', 'Total'),

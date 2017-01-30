@@ -6,6 +6,9 @@ use yii\jui\AutoComplete;
 use yii\web\JsExpression;
 use backend\models\Product;
 
+use yii\helpers\Url;
+use kartik\grid\GridView;
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\Sales */
 /* @var $form yii\widgets\ActiveForm */
@@ -15,7 +18,7 @@ use backend\models\Product;
     <div class="panel panel-default">
         <div class="panel-heading"><h4><i class="fa fa-bars bg-success"></i> Sales Form</h4></div>
         <div class="panel-body">
-    <?php $form = ActiveForm::begin(); ?>
+
     <div class="row">
         <div class="col-md-9">
             <?php
@@ -47,30 +50,44 @@ use backend\models\Product;
             ?><span style="padding: 10px"><?= Html::button(Yii::t('app', '<i class="fa fa-search"></i>'), ['class' => 'btn btn-warning','id'=>'product_id']) ?></span>
             <?= Html::activeHiddenInput($model, 'product_name')?>
             <div id="prod-id" style="visibility:hidden">test</div>
-            <div id="data-found">
-                <table id="register" class="table table-hover">
-                    <thead>
-                    <tr class="register-items-header">
-                        <th class="item_name_heading">Product Name</th>
-                        <th class="sales_price">Price</th>
-                        <th class="sales_quantity">Qty.</th>
-                        <th>Total</th>
-                    </tr>
-                    </thead>
-                    <tbody class="register-item-content">
-                    <?php
-                    foreach ($carts as $cart){
-                        echo '<tr>
-                                <td>'.Product::getProductName($cart->product_id).'</td><td>'.$cart->price.'</td><td>'.$cart->qty.'</td><td>'.$cart->total.'</td>
-                                </tr>';
+            <div>
 
-                    }
-                    ?>
-                    </tbody>
-                </table>
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                   // 'filterModel' => $searchModel,
+                    'columns' => [
+                        ['class'=>'kartik\grid\SerialColumn'],
+
+                        [
+                                'attribute'=>'product_id',
+                                'value'=>'product.product_name',
+                        ],
+                        [
+                            'class'=>'kartik\grid\EditableColumn',
+                            'attribute'=>'price',
+
+                            'editableOptions'=> [
+
+                                'formOptions' => ['action' => ['cart/editcart']],
+                                'asPopover' => false,
+                                //'inputType'=>\kartik\editable\Editable::INPUT_SPIN,
+                                'options'=>[
+                                    'pluginOptions'=>['min'=>0, 'max'=>5000]
+                                ]
+                            ],
+
+                        ],
+                        'qty',
+                        'total',
+
+
+                        ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
+                    ],
+                ]); ?>
             </div>
         </div>
         <div class="col-md-3">
+            <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'trn_dt')->textInput() ?>
 
     <?= $form->field($model, 'total_qty')->textInput(['maxlength' => true]) ?>
@@ -81,11 +98,12 @@ use backend\models\Product;
             <div class="form-group">
                 <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Complete Sale') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
             </div>
+            <?php ActiveForm::end(); ?>
         </div>
 
     </div>
 
-    <?php ActiveForm::end(); ?>
+
         </div>
     </div>
 

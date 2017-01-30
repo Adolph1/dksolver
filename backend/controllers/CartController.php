@@ -8,6 +8,8 @@ use backend\models\CartSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
 
 /**
  * CartController implements the CRUD actions for Cart model.
@@ -120,5 +122,37 @@ class CartController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    public function actions()
+    {
+        return ArrayHelper::merge(parent::actions(), [
+            'editcart' => [                                       // identifier for your editable action
+                'class' => EditableColumnAction::className(),     // action class name
+                'modelClass' => Cart::className(),                // the update model class
+                'outputValue' => function ($model, $attribute, $key, $index) {
+                    $fmt = Yii::$app->formatter;
+                    $value = $model->$attribute;                 // your attribute value
+                    if ($attribute === 'price') {
+                        // selective validation by attribute
+                        $updateTotal=$this->findModel($model->id);
+                        $updateTotal->total=$updateTotal->qty*$updateTotal->price;
+                        $updateTotal->save();
+                        return $fmt->asDecimal($updateTotal->total, 2);       // return formatted value if desired
+                    } elseif ($attribute === 'qty') {   // selective validation by attribute
+                        return $fmt->asDecimal($value, 2); // return formatted value if desired
+                    }
+                    return '';                                   // empty is same as $value
+                },
+                'outputMessage' => function($model, $attribute, $key, $index) {
+                    return '';                                  // any custom error after model save
+                },
+                // 'showModelErrors' => true,                     // show model errors after save
+                // 'errorOptions' => ['header' => '']             // error summary HTML options
+                // 'postOnly' => true,
+                // 'ajaxOnly' => true,
+                // 'findModel' => function($id, $action) {},
+                // 'checkAccess' => function($action, $model) {}
+            ]
+        ]);
     }
 }

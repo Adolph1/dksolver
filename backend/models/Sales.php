@@ -74,6 +74,6 @@ class Sales extends \yii\db\ActiveRecord
      */
     public function getTblSalesItems()
     {
-        return $this->hasMany(TblSalesItem::className(), ['sales_id' => 'id']);
+        return $this->hasMany(SalesItem::className(), ['sales_id' => 'id']);
     }
 }

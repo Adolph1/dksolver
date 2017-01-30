@@ -578,7 +578,7 @@ desired effect
     $("#product_id").click(function(){
         var id =$("#prod-id").html();
         $.get("<?php echo Yii::$app->urlManager->createUrl(['inventory/search','id'=>'']);?>"+id,function(data){
-            window.location.reload(true);
+            window.location.reload();
         });
     });
 
