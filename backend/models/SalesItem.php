@@ -36,7 +36,6 @@ class SalesItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sales_id', 'product_id', 'maker_id', 'maker_time'], 'required'],
             [['sales_id', 'product_id'], 'integer'],
             [['selling_price', 'qty', 'total'], 'number'],
             [['maker_time'], 'safe'],
@@ -79,5 +78,10 @@ class SalesItem extends \yii\db\ActiveRecord
     public function getSales()
     {
         return $this->hasOne(Sales::className(), ['id' => 'sales_id']);
+    }
+
+    public static function getAll($id)
+    {
+       return SalesItem::find()->where(['sales_id'=>$id])->all();
     }
 }

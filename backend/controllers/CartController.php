@@ -105,7 +105,7 @@ class CartController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['sales/create']);
     }
 
     /**
@@ -132,14 +132,20 @@ class CartController extends Controller
                 'outputValue' => function ($model, $attribute, $key, $index) {
                     $fmt = Yii::$app->formatter;
                     $value = $model->$attribute;                 // your attribute value
-                    if ($attribute === 'price') {
-                        // selective validation by attribute
+                    if ($attribute === 'price') // selective validation by attribute
+                    { $updateTotal=$this->findModel($model->id);
+                        $updateTotal->total=$updateTotal->qty*$updateTotal->price;
+                        $updateTotal->save();
+                        $this->redirect(['sales/create']);
+                       return $fmt->asDecimal($value, 2);       // return formatted value if desired
+
+                    } elseif ($attribute === 'qty') {   // selective validation by attribute
                         $updateTotal=$this->findModel($model->id);
                         $updateTotal->total=$updateTotal->qty*$updateTotal->price;
                         $updateTotal->save();
-                        return $fmt->asDecimal($updateTotal->total, 2);       // return formatted value if desired
-                    } elseif ($attribute === 'qty') {   // selective validation by attribute
+                        $this->redirect(['sales/create']);
                         return $fmt->asDecimal($value, 2); // return formatted value if desired
+
                     }
                     return '';                                   // empty is same as $value
                 },
@@ -154,5 +160,6 @@ class CartController extends Controller
                 // 'checkAccess' => function($action, $model) {}
             ]
         ]);
+
     }
 }

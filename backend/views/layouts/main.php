@@ -315,12 +315,12 @@ desired effect
                             "items" => [
                                 [
                                     "label" => "POS",
-                                    "url" =>  ["/sales/index"],
+                                    "url" =>  ["/sales/create"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
                                     "label" => "Receipts",
-                                    "url" => "#",
+                                    "url" =>  ["/sales/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
@@ -397,8 +397,8 @@ desired effect
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
-                                    "label" => "Invoices",
-                                    "url" => "#",
+                                    "label" => "Payment Method",
+                                    "url" =>["/payment-method/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
@@ -578,8 +578,14 @@ desired effect
     $("#product_id").click(function(){
         var id =$("#prod-id").html();
         $.get("<?php echo Yii::$app->urlManager->createUrl(['inventory/search','id'=>'']);?>"+id,function(data){
-            window.location.reload();
+            window.location.reload(true);
         });
+    });
+
+
+    $("#refresh-form").click(function(){
+
+            window.location.reload(true);
     });
 
 </script>

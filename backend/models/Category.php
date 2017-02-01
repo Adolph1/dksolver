@@ -81,4 +81,14 @@ class Category extends \yii\db\ActiveRecord
             return $parent->title;
         }
     }
+
+
+    /**
+     * gets Category name
+     */
+    public static function getName($id){
+
+        $cate=Category::findOne($id);
+        return $cate->title;
+    }
 }

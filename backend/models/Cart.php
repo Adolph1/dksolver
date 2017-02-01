@@ -65,4 +65,23 @@ class Cart extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
+
+    /**
+     * gets total amount of the user cart
+     */
+
+    public static function getCartTotal()
+    {
+       // $fmt = Yii::$app->formatter;
+       return $sum=Cart::find()->where(['maker_id'=>Yii::$app->user->identity->username])->sum('total');
+       // return $fmt->asDecimal($sum,0);
+    }
+
+    public static function getCartTotalQty()
+    {
+        // $fmt = Yii::$app->formatter;
+        return $sum=Cart::find()->where(['maker_id'=>Yii::$app->user->identity->username])->sum('qty');
+        // return $fmt->asDecimal($sum,0);
+    }
+
 }

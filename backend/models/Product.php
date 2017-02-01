@@ -153,4 +153,13 @@ class Product extends \yii\db\ActiveRecord
         $product=Product::findOne($id);
        return $product->product_name;
     }
+
+    /**
+     * gets Category name
+     */
+    public static function getCategoryID($id){
+
+        $product=Product::findOne($id);
+        return $product->category;
+    }
 }

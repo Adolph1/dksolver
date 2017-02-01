@@ -39,7 +39,6 @@ class Sales extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['trn_dt', 'total_qty', 'total_amount', 'paid_amount', 'payment_method', 'maker_id', 'maker_time'], 'required'],
             [['trn_dt', 'maker_time'], 'safe'],
             [['total_qty', 'total_amount', 'paid_amount'], 'number'],
             [['payment_method'], 'integer'],
@@ -54,7 +53,7 @@ class Sales extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Sales No'),
             'trn_dt' => Yii::t('app', 'Trn Dt'),
             'total_qty' => Yii::t('app', 'Total Qty'),
             'total_amount' => Yii::t('app', 'Total Amount'),
@@ -72,7 +71,7 @@ class Sales extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTblSalesItems()
+    public function getSalesItems()
     {
         return $this->hasMany(SalesItem::className(), ['sales_id' => 'id']);
     }

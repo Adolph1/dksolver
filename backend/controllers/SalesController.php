@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\Cart;
 use backend\models\CartSearch;
+use backend\models\SalesItem;
 use Yii;
 use backend\models\Sales;
 use backend\models\SalesSearch;
@@ -67,22 +68,51 @@ class SalesController extends Controller
     {
         $model = new Sales();
         $searchModel = new CartSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->searchbyuser();
 
-
-        $cartcounts=Cart::find()->count();
-
+        $cartcounts=Cart::find()->where(['maker_id'=>Yii::$app->user->identity->username])->count();
 
         if($cartcounts>0) {
-            $carts = Cart::find()->all();
+            $carts = Cart::find()->where(['maker_id' => Yii::$app->user->identity->username])->all();
 
+
+            if ($model->load(Yii::$app->request->post())) {
+                $model->trn_dt = date('Y-m-d');
+                $model->maker_id = Yii::$app->user->identity->username;
+                $model->maker_time = date('Y-m-d:H:i:s');
+                $model->total_amount = Cart::getCartTotal();
+                $model->total_qty = Cart::getCartTotalQty();
+                if ($model->save()) {
+                        foreach ($carts as $cart) {
+                            $entries = new SalesItem();
+                            $entries->product_id = $cart->product_id;
+                            $entries->sales_id = $model->id;
+                            $entries->selling_price = $cart->price;
+                            $entries->qty = $cart->qty;
+                            $entries->total = $cart->total;
+                            $entries->maker_id = $model->maker_id;
+                            $entries->maker_time = $model->maker_time;
+                            if ($entries->save()) {
+                                Cart::deleteAll(['id' => $cart->id]);
+                            } else {
+
+                            }
+                        }
+
+                    return $this->render('create', [
+                        'model' => $model, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider
+                    ]);
+                }
+
+            } else {
+                return $this->render('create', [
+                    'model' => $model, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider
+                ]);
+            }
         }
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        else{
             return $this->render('create', [
-                'model' => $model,'carts'=>$carts,'searchModel'=>$searchModel,'dataProvider'=>$dataProvider
+                'model' => $model, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider
             ]);
         }
 

@@ -43,6 +43,7 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
         ),
         'k' => 
         array (
+            'kartik\\spinner\\' => 15,
             'kartik\\popover\\' => 15,
             'kartik\\plugins\\popover\\' => 23,
             'kartik\\grid\\' => 12,
@@ -160,6 +161,10 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'kartik\\spinner\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-spinner',
         ),
         'kartik\\popover\\' => 
         array (
