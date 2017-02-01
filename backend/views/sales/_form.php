@@ -127,6 +127,7 @@ use kartik\grid\GridView;
                     ],
                 ]); ?>
             </div>
+
         </div>
         <div class="col-md-4">
 
@@ -175,7 +176,7 @@ use kartik\grid\GridView;
                 <?= $form->field($model, 'paid_amount')->textInput(['maxlength' => true,'value'=>Cart::getCartTotal()])->label(false) ?>
                     </div>
                     <div class="col-md-3">
-                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Complete Sale') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
+                <?= Html::submitButton(Yii::t('app', 'Complete Sale'), ['class' => 'btn btn-primary']) ?>
                     </div>
                     </div>
                     <div class="row">
@@ -186,6 +187,7 @@ use kartik\grid\GridView;
             <?php ActiveForm::end(); ?>
                     </div>
                 </div>
+
             </div>
         </div>
 

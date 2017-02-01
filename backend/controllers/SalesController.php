@@ -82,7 +82,25 @@ class SalesController extends Controller
                 $model->maker_time = date('Y-m-d:H:i:s');
                 $model->total_amount = Cart::getCartTotal();
                 $model->total_qty = Cart::getCartTotalQty();
-                if ($model->save()) {
+                if($model->total_amount==$_POST['Sales']['paid_amount']){
+                    $model->status=Sales::PAID;
+                    $model->due_amount=0;
+                }
+                elseif($model->total_amount>$_POST['Sales']['paid_amount']){
+                    $model->status=Sales::CREDIT;
+                    $model->due_amount=$model->total_amount-($_POST['Sales']['paid_amount']);
+                }
+                elseif($model->total_amount<$_POST['Sales']['paid_amount']){
+
+                    Yii::$app->session->setFlash('danger', 'Payment can not be greater than total amount.');
+
+                    return $this->render('create', [
+                        'model' => $model, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider
+                    ]);
+
+                }
+
+                    if ($model->save()) {
                         foreach ($carts as $cart) {
                             $entries = new SalesItem();
                             $entries->product_id = $cart->product_id;
@@ -99,9 +117,9 @@ class SalesController extends Controller
                             }
                         }
 
-                    return $this->render('create', [
-                        'model' => $model, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider
-                    ]);
+                        Yii::$app->session->setFlash('success', 'Successfully saved.');
+
+                        return $this->redirect(['view', 'id' => $model->id]);
                 }
 
             } else {

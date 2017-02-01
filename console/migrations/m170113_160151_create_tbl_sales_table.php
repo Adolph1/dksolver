@@ -18,6 +18,7 @@ class m170113_160151_create_tbl_sales_table extends Migration
             'total_qty'=>$this->decimal()->notNull(),
             'total_amount'=>$this->decimal()->notNull(),
             'paid_amount'=>$this->decimal()->notNull(),
+            'due_amount'=>$this->decimal()->notNull(),
             'payment_method'=>$this->integer()->notNull(),
             'source_ref_number'=>$this->string(200),
             'notes'=>$this->string(200),

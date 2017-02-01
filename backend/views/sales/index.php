@@ -48,7 +48,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'total_qty',
         'total_amount',
         'paid_amount',
-        'payment_method',
+        [
+                'attribute'=>'payment_method',
+                'value'=>'payMethod.method_name',
+        ],
+        'due_amount',
         // 'source_ref_number',
         // 'notes',
         'customer_name',

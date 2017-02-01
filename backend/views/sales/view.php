@@ -12,35 +12,32 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sales-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div style="background: #fff">
+        <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="row" style="padding: 10px;">
+                <div class="col-md-6" style="border: dashed 1px #ccc;background: #eee">
+                    <div class="side-heading">
+                        Adotech Co Limited<br/>P.O.Box 79863,<br/>Dar es Salaam. </div>
+                    <div class="text text-center">
+                        </div>
+                </div>
+                <div class="col-md-6" style="border: dashed 1px #ccc;background: #eee">
+                    <div class="side-heading">
+                        Customer Name</div>
+                    <div class="text text-center">
+                        <span class="text-warning"><b><?= $model->customer_name;?><br/><br/></b></span>  </div>
+                </div>
+            </div>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+        </div>
+        </div>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'trn_dt',
-            'total_qty',
-            'total_amount',
-            'paid_amount',
-            'payment_method',
-            'source_ref_number',
-            'notes',
-            'customer_name',
-            'maker_id',
-            'maker_time',
-            'status',
-        ],
-    ]) ?>
+        <?= Yii::$app->controller->renderPartial('receipt_view', ['model'=>$model]);?>
+
+
+
+    </div>
 
 </div>

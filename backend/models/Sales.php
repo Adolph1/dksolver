@@ -27,6 +27,10 @@ class Sales extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    const PAID='P';
+    const CREDIT='C';
+    const DELETED='D';
+
     public $product_name;
     public static function tableName()
     {
@@ -40,7 +44,7 @@ class Sales extends \yii\db\ActiveRecord
     {
         return [
             [['trn_dt', 'maker_time'], 'safe'],
-            [['total_qty', 'total_amount', 'paid_amount'], 'number'],
+            [['total_qty', 'total_amount', 'paid_amount','due_amount'], 'number'],
             [['payment_method'], 'integer'],
             [['source_ref_number', 'notes', 'customer_name', 'maker_id'], 'string', 'max' => 200],
             [['status'], 'string', 'max' => 1],
@@ -58,6 +62,7 @@ class Sales extends \yii\db\ActiveRecord
             'total_qty' => Yii::t('app', 'Total Qty'),
             'total_amount' => Yii::t('app', 'Total Amount'),
             'paid_amount' => Yii::t('app', 'Paid Amount'),
+            'due_amount' => Yii::t('app', 'Due Amount'),
             'payment_method' => Yii::t('app', 'Payment Method'),
             'source_ref_number' => Yii::t('app', 'Source Ref Number'),
             'notes' => Yii::t('app', 'Notes'),
@@ -74,5 +79,13 @@ class Sales extends \yii\db\ActiveRecord
     public function getSalesItems()
     {
         return $this->hasMany(SalesItem::className(), ['sales_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPayMethod()
+    {
+        return $this->hasOne(PaymentMethod::className(), ['id' => 'payment_method']);
     }
 }

@@ -129,26 +129,34 @@ class InventoryController extends Controller
 
     public function actionSearch($id)
     {
-        $product=Inventory::find()->where(['product_id'=>trim($id)])->one();
-        $count=Cart::find()->where(['product_id'=>$id])->count();
-        if($count>0){
-            $cart=Cart::find()->where(['product_id'=>$id])->one();
-            $cart->qty=$cart->qty+1;
-            $cart->total=$cart->price*$cart->qty;
-            $cart->maker_id=Yii::$app->user->identity->username;
-            $cart->maker_time=date('Y-m-d:H:i:s');
-            $cart->save();
+        $productcount=Inventory::find()->where(['product_id'=>trim($id)])->count();
+        if($productcount>0) {
+
+
+            $product = Inventory::find()->where(['product_id' => trim($id)])->one();
+
+            $count = Cart::find()->where(['product_id' => $id])->count();
+            if ($count > 0) {
+                $cart = Cart::find()->where(['product_id' => $id])->one();
+                $cart->qty = $cart->qty + 1;
+                $cart->total = $cart->price * $cart->qty;
+                $cart->maker_id = Yii::$app->user->identity->username;
+                $cart->maker_time = date('Y-m-d:H:i:s');
+                $cart->save();
+            } else {
+                $cart = new Cart();
+                $cart->product_id = $id;
+                $cart->qty = 1;
+                $cart->price = $product->selling_price;
+                $cart->total = $cart->price * $cart->qty;
+                $cart->maker_id = Yii::$app->user->identity->username;
+                $cart->maker_time = date('Y-m-d:H:i:s');
+                $cart->save();
+            }
         }
         else{
-            $cart=new Cart();
-            $cart->product_id=$id;
-            $cart->qty=1;
-            $cart->price=$product->selling_price;
-            $cart->total=$cart->price*$cart->qty;
-            $cart->maker_id=Yii::$app->user->identity->username;
-            $cart->maker_time=date('Y-m-d:H:i:s');
-            $cart->save();
+            return " ";
         }
-        return;
+
     }
 }

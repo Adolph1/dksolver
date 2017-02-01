@@ -85,6 +85,7 @@ class PurchaseInvoiceController extends Controller
         $purchases = [new Purchase()];
         $model->maker_id=Yii::$app->user->identity->username;
         $model->maker_time=date('Y-m-d:H:i:s');
+        $model->status=0;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $purchases = Model::createMultiple(Purchase::classname());
@@ -112,6 +113,7 @@ class PurchaseInvoiceController extends Controller
                     $purchase->maker_id=Yii::$app->user->identity->username;
                     $purchase->maker_time=date('Y-m-d:H:i:s');
                     $purchase->auth_status='U';
+                    $purchase->status=0;
                     if (!($flag = $purchase->save(false))) {
                         $transaction->rollBack();
                         break;

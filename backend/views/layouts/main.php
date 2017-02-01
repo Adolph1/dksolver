@@ -5,6 +5,7 @@
  */
 
 use yii\helpers\Html;
+use common\widgets\Alert;
 
 yiister\adminlte\assets\Asset::register($this);
 Yii::$app->language=\backend\models\Language::getDefaultLang();
@@ -442,6 +443,7 @@ desired effect
 
         <!-- Main content -->
         <section class="content">
+            <div style="padding-top: 10px"><?= Alert::widget() ?></div>
             <?= $content ?>
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
@@ -578,7 +580,14 @@ desired effect
     $("#product_id").click(function(){
         var id =$("#prod-id").html();
         $.get("<?php echo Yii::$app->urlManager->createUrl(['inventory/search','id'=>'']);?>"+id,function(data){
-            window.location.reload(true);
+            if(data==" ")
+            {
+                alert("No yet purchased");
+            }
+            else{
+                window.location.reload(true);
+            }
+
         });
     });
 
