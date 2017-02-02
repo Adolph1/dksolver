@@ -134,24 +134,34 @@ class InventoryController extends Controller
 
 
             $product = Inventory::find()->where(['product_id' => trim($id)])->one();
-
-            $count = Cart::find()->where(['product_id' => $id])->count();
-            if ($count > 0) {
-                $cart = Cart::find()->where(['product_id' => $id])->one();
-                $cart->qty = $cart->qty + 1;
-                $cart->total = $cart->price * $cart->qty;
-                $cart->maker_id = Yii::$app->user->identity->username;
-                $cart->maker_time = date('Y-m-d:H:i:s');
-                $cart->save();
-            } else {
-                $cart = new Cart();
-                $cart->product_id = $id;
-                $cart->qty = 1;
-                $cart->price = $product->selling_price;
-                $cart->total = $cart->price * $cart->qty;
-                $cart->maker_id = Yii::$app->user->identity->username;
-                $cart->maker_time = date('Y-m-d:H:i:s');
-                $cart->save();
+            if($product->qty>=1) {
+                $count = Cart::find()->where(['product_id' => $id])->count();
+                if ($count > 0) {
+                    $cart = Cart::find()->where(['product_id' => $id])->one();
+                    if($cart->qty<$product->qty) {
+                        $cart->qty = $cart->qty + 1;
+                        $cart->total = $cart->price * $cart->qty;
+                        $cart->maker_id = Yii::$app->user->identity->username;
+                        $cart->maker_time = date('Y-m-d:H:i:s');
+                        $cart->save();
+                    }
+                    else
+                    {
+                        return "outOfStock";
+                    }
+                } else {
+                    $cart = new Cart();
+                    $cart->product_id = $id;
+                    $cart->qty = 1;
+                    $cart->price = $product->selling_price;
+                    $cart->total = $cart->price * $cart->qty;
+                    $cart->maker_id = Yii::$app->user->identity->username;
+                    $cart->maker_time = date('Y-m-d:H:i:s');
+                    $cart->save();
+                }
+            }
+            else{
+                return "outOfStock";
             }
         }
         else{

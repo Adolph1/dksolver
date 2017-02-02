@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\Inventory;
 use Yii;
 use backend\models\Cart;
 use backend\models\CartSearch;
@@ -128,7 +129,7 @@ class CartController extends Controller
         return ArrayHelper::merge(parent::actions(), [
             'editcart' => [                                       // identifier for your editable action
                 'class' => EditableColumnAction::className(),     // action class name
-                'modelClass' => Cart::className(),                // the update model class
+                'modelClass' => Cart::className(),             // the update model class
                 'outputValue' => function ($model, $attribute, $key, $index) {
                     $fmt = Yii::$app->formatter;
                     $value = $model->$attribute;                 // your attribute value
@@ -140,11 +141,24 @@ class CartController extends Controller
                        return $fmt->asDecimal($value, 2);       // return formatted value if desired
 
                     } elseif ($attribute === 'qty') {   // selective validation by attribute
-                        $updateTotal=$this->findModel($model->id);
-                        $updateTotal->total=$updateTotal->qty*$updateTotal->price;
-                        $updateTotal->save();
-                        $this->redirect(['sales/create']);
-                        return $fmt->asDecimal($value, 2); // return formatted value if desired
+                        $inventory=Inventory::find()->where(['id'=>$model->product_id])->one();
+                        if($inventory->qty<$model->qty)
+                        {
+                            $updateQty=$this->findModel($model->id);
+                            $updateQty->qty=$inventory->qty;
+                            $updateQty->total=$updateQty->qty*$updateQty->price;
+                            $updateQty->save();
+                        }
+                        else{
+                            $updateTotal=$this->findModel($model->id);
+                            $updateTotal->total=$updateTotal->qty*$updateTotal->price;
+                            $updateTotal->save();
+                            $this->redirect(['sales/create']);
+                            return $fmt->asDecimal($value, 2); // return formatted value if desired
+
+                        }
+
+
 
                     }
                     return '';                                   // empty is same as $value

@@ -55,7 +55,7 @@ class Inventory extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'product_id' => Yii::t('app', 'Product Name'),
             'buying_price' => Yii::t('app', 'Buying Price'),
             'selling_price' => Yii::t('app', 'Selling Price'),
             'qty' => Yii::t('app', 'Qty'),
@@ -75,5 +75,14 @@ class Inventory extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
+    /**
+     * gets inventory quantity
+     */
+    public static function getQty($pid)
+    {
+        $product=Inventory::find()->where(['product_id'=>$pid])->one();
+        return $product->qty;
     }
 }

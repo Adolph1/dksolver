@@ -58,7 +58,7 @@ class Sales extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'Sales No'),
-            'trn_dt' => Yii::t('app', 'Trn Dt'),
+            'trn_dt' => Yii::t('app', 'Date'),
             'total_qty' => Yii::t('app', 'Total Qty'),
             'total_amount' => Yii::t('app', 'Total Amount'),
             'paid_amount' => Yii::t('app', 'Paid Amount'),
@@ -87,5 +87,11 @@ class Sales extends \yii\db\ActiveRecord
     public function getPayMethod()
     {
         return $this->hasOne(PaymentMethod::className(), ['id' => 'payment_method']);
+    }
+
+    //gets one record of sales with respect to sales items
+    public static function getSale($id)
+    {
+        return Sales::findOne($id);
     }
 }

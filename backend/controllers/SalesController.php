@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\Cart;
 use backend\models\CartSearch;
+use backend\models\Inventory;
 use backend\models\SalesItem;
 use Yii;
 use backend\models\Sales;
@@ -111,6 +112,9 @@ class SalesController extends Controller
                             $entries->maker_id = $model->maker_id;
                             $entries->maker_time = $model->maker_time;
                             if ($entries->save()) {
+                                $inqty=Inventory::getQty($cart->product_id);
+                                $inqty=$inqty-$cart->qty;
+                                Inventory::updateAll(['qty'=>$inqty],['product_id'=>$cart->product_id]);
                                 Cart::deleteAll(['id' => $cart->id]);
                             } else {
 
@@ -163,9 +167,28 @@ class SalesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model=$this->findModel($id);
+        if($model->status!=Sales::DELETED) {
+            $model->status = Sales::DELETED;
+            $salesItems = SalesItem::getAllActive($id);
+            if ($salesItems != null) {
+                foreach ($salesItems as $salesItem) {
+                    $inventory = Inventory::getQty($salesItem->product_id);
+                    $inventory = $inventory + $salesItem->qty;
+                    Inventory::updateAll(['qty' => $inventory], ['product_id' => $salesItem->product_id]);
+                    SalesItem::updateAll(['delete_stat' => Sales::DELETED], ['sales_id' => $salesItem->sales_id]);
+                }
+            }
+            $model->save();
+            Yii::$app->session->setFlash('danger','Successfully deleted');
+            return $this->redirect(['index']);
+        }
+        else
+        {
+            Yii::$app->session->setFlash('warning','Nothing to delete');
+            return $this->redirect(['index']);
+        }
 
-        return $this->redirect(['index']);
     }
 
     /**

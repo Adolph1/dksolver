@@ -84,4 +84,9 @@ class SalesItem extends \yii\db\ActiveRecord
     {
        return SalesItem::find()->where(['sales_id'=>$id])->all();
     }
+
+    public static function getAllActive($id)
+    {
+        return SalesItem::find()->where(['sales_id'=>$id,'delete_stat'=>null])->all();
+    }
 }

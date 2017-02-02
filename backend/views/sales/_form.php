@@ -10,6 +10,7 @@ use backend\models\Product;
 use kartik\spinner\Spinner;
 use yii\helpers\Url;
 use kartik\grid\GridView;
+use kartik\editable\Editable;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Sales */
@@ -34,7 +35,7 @@ use kartik\grid\GridView;
             echo AutoComplete::widget([
                     'options'=>[
                         'placeholder'=>'Enter product name or barcode',
-                        'style'=>'width:900px;padding:8px'
+                        'style'=>'width:300px;padding:8px'
                     ],
                 'clientOptions' => [
                     'source' => $data,
@@ -86,14 +87,17 @@ use kartik\grid\GridView;
                             'class'=>'kartik\grid\EditableColumn',
                             'attribute'=>'qty',
 
+
                             'editableOptions'=> [
                                 'header'=>'Name',
+                                'id'=>'qty',
                                 'size'=>'md',
                                 'formOptions' => ['action' => ['cart/editcart']],
                                 'asPopover' => false,
-                                //'inputType'=>\kartik\editable\Editable::INPUT_SPIN,
+                                //'inputType'=>Editable::INPUT_SPIN,
                                 'options'=>[
-                                    'pluginOptions'=>['min'=>0, 'max'=>5000]
+                                    'pluginOptions'=>['min'=>0, 'max'=>5000],
+
                                 ]
                             ],
 

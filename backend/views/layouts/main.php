@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use common\widgets\Alert;
+use backend\models\Cart;
 
 yiister\adminlte\assets\Asset::register($this);
 Yii::$app->language=\backend\models\Language::getDefaultLang();
@@ -117,33 +118,23 @@ desired effect
                     <li class="dropdown messages-menu">
                         <!-- Menu toggle button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
+                            <i class="fa fa-shopping-cart"></i>
+                            <?php
+                            $incart=Cart::find()->count();
+                            ?>
+                            <span class="label label-success"><?= $incart;?></span>
                         </a>
+
                         <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
-                            <li>
-                                <!-- inner menu: contains the messages -->
-                                <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <!-- User Image -->
-                                                <img src="http://placehold.it/160x160" class="img-circle" alt="User Image">
-                                            </div>
-                                            <!-- Message title and timestamp -->
-                                            <h4>
-                                                Support Team
-                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                            </h4>
-                                            <!-- The message -->
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li><!-- end message -->
-                                </ul><!-- /.menu -->
-                            </li>
-                            <li class="footer"><a href="#">See All Messages</a></li>
+                            <li class="header"><i class="fa fa-th text-aqua"></i> You have <?= $incart;?> products in cart</li>
+                            <?php
+                            if($incart>0){
+                               echo  '<li><div class="col-sm-12 text-center" style="padding: 10px">'.Html::a(Yii::t('app', 'View'), ['sales/create'], ['class' => 'btn btn-primary']).'</div></li>';
+                            }
+                            ?>
+
                         </ul>
+
                     </li><!-- /.messages-menu -->
 
                     <!-- Notifications Menu -->
@@ -534,7 +525,7 @@ desired effect
 
 <script>
     $("#purchasemaster-country").change(function(){
-        var id =document.getElementById("purchasemaster-country").value
+        var id =document.getElementById("purchasemaster-country").value;
         if(id==1){
             $( "#rates" ).hide( "slow", function() {
                 //alert( "Animation complete." );
@@ -556,7 +547,7 @@ desired effect
 
 <script>
     $(document).ready(function(){
-        var id =document.getElementById("purchasemaster-country").value
+        var id =document.getElementById("purchasemaster-country").value;
         if(id==1){
             $( "#rates" ).hide( "slow", function() {
                 //alert( "Animation complete." );
@@ -584,6 +575,9 @@ desired effect
             {
                 alert("No yet purchased");
             }
+            else if(data=="outOfStock"){
+                alert("Out of stock");
+            }
             else{
                 window.location.reload(true);
             }
@@ -595,6 +589,11 @@ desired effect
     $("#refresh-form").click(function(){
 
             window.location.reload(true);
+    });
+
+    $(".kv-editable-submit").click(function(){
+
+        //(true);
     });
 
 </script>

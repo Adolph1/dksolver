@@ -4098,5 +4098,55 @@
             "widget",
             "yii2"
         ]
+    },
+    {
+        "name": "microinginer/yii2-dropdown-action-column",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/microinginer/yii2-dropdown-action-column.git",
+            "reference": "34db50f1dda5268be7d8f4fa6d4f97ceac8c803a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/microinginer/yii2-dropdown-action-column/zipball/34db50f1dda5268be7d8f4fa6d4f97ceac8c803a",
+            "reference": "34db50f1dda5268be7d8f4fa6d4f97ceac8c803a",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2016-11-11T16:37:32+00:00",
+        "type": "yii2-extensions",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "microinginer\\dropDownActionColumn\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "inginer",
+                "email": "inginer.r@gmail.com"
+            },
+            {
+                "name": "gir3li",
+                "email": "uzep@mail.ru"
+            }
+        ],
+        "homepage": "https://github.com/microinginer/yii2-dropdown-action-column",
+        "keywords": [
+            "actioncolumn",
+            "buttons",
+            "dropDownButtons",
+            "dropdown",
+            "gridview",
+            "yii2"
+        ]
     }
 ]

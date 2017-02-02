@@ -41,6 +41,10 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'm' => 
+        array (
+            'microinginer\\dropDownActionColumn\\' => 34,
+        ),
         'k' => 
         array (
             'kartik\\spinner\\' => 15,
@@ -161,6 +165,10 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'microinginer\\dropDownActionColumn\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/microinginer/yii2-dropdown-action-column/src',
         ),
         'kartik\\spinner\\' => 
         array (

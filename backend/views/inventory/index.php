@@ -8,7 +8,7 @@ use backend\models\InventorySearch;
 /* @var $searchModel backend\models\InventorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Inventories');
+$this->title = Yii::t('app', 'Products in Stock');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="inventory-index">

@@ -4,10 +4,12 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\SalesItem;
+use backend\models\Inventory;
 use backend\models\SalesItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\Sales;
 
 /**
  * SalesItemController implements the CRUD actions for SalesItem model.
@@ -101,9 +103,31 @@ class SalesItemController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model=$this->findModel($id);
+        if($model->delete_stat!=Sales::DELETED) {
 
-        return $this->redirect(['index']);
+            $model->delete_stat = Sales::DELETED;
+            $model->save();
+
+            //updates inventory
+            $currentsctock = Inventory::getQty($model->product_id);
+            $currentsctock = $currentsctock + $model->qty;
+
+            //updates Sales
+            $sales = Sales::getSale($model->sales_id);
+            $sales->total_qty = $sales->total_qty - $model->qty;
+            $sales->total_amount = $sales->total_amount - ($model->qty * $model->selling_price);
+            $sales->paid_amount = $sales->paid_amount - ($model->qty * $model->selling_price);
+            $sales->save();
+
+            Inventory::updateAll(['qty' => $currentsctock], ['product_id' => $model->product_id]);
+            Yii::$app->session->setFlash('danger', 'Successfully deleted');
+            return $this->redirect(['sales/view', 'id' => $model->sales_id]);
+        }
+        else{
+            Yii::$app->session->setFlash('warning', 'Nothing to delete');
+            return $this->redirect(['sales/view', 'id' => $model->sales_id]);
+        }
     }
 
     /**

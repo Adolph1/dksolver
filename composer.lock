@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b540cf9cc9d014f6af82346068d54b8c",
+    "content-hash": "1ca527772ebaa70e79f11f046f10f225",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -1178,6 +1178,54 @@
                 "rotate"
             ],
             "time": "2015-09-08T22:55:44+00:00"
+        },
+        {
+            "name": "microinginer/yii2-dropdown-action-column",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/microinginer/yii2-dropdown-action-column.git",
+                "reference": "34db50f1dda5268be7d8f4fa6d4f97ceac8c803a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/microinginer/yii2-dropdown-action-column/zipball/34db50f1dda5268be7d8f4fa6d4f97ceac8c803a",
+                "reference": "34db50f1dda5268be7d8f4fa6d4f97ceac8c803a",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extensions",
+            "autoload": {
+                "psr-4": {
+                    "microinginer\\dropDownActionColumn\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "inginer",
+                    "email": "inginer.r@gmail.com"
+                },
+                {
+                    "name": "gir3li",
+                    "email": "uzep@mail.ru"
+                }
+            ],
+            "homepage": "https://github.com/microinginer/yii2-dropdown-action-column",
+            "keywords": [
+                "actioncolumn",
+                "buttons",
+                "dropDownButtons",
+                "dropdown",
+                "gridview",
+                "yii2"
+            ],
+            "time": "2016-11-11T16:37:32+00:00"
         },
         {
             "name": "rmrevin/yii2-fontawesome",
@@ -3957,7 +4005,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "kartik-v/yii2-grid": 20,
-        "kartik-v/yii2-widget-spinner": 20
+        "kartik-v/yii2-widget-spinner": 20,
+        "microinginer/yii2-dropdown-action-column": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
