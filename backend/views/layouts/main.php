@@ -371,7 +371,12 @@ desired effect
                                 ],
                                 [
                                     "label" => "Price Maintenance",
-                                    "url" => ["/price-maintenance/index"],
+                                    "url" => ["/price-maintanance/create"],
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
+                                [
+                                    "label" => "Stock Adjustment",
+                                    "url" => ["/stock-adjustment/create"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                             ],
@@ -595,5 +600,34 @@ desired effect
 
         //(true);
     });
+
+
+
+    $("#pricemaintanance-product_id").change(function(){
+        var id =document.getElementById("pricemaintanance-product_id").value;
+        //alert(id);
+        $.get("<?php echo Yii::$app->urlManager->createUrl(['inventory/price','id'=>'']);?>"+id,function(data) {
+
+            //alert(data);
+            document.getElementById("pricemaintanance-old_price").value = data;
+
+        });
+
+
+    });
+    $("#stockadjustment-product_id").change(function(){
+        var id =document.getElementById("stockadjustment-product_id").value;
+        //alert(id);
+        $.get("<?php echo Yii::$app->urlManager->createUrl(['inventory/qty','id'=>'']);?>"+id,function(data) {
+
+            //alert(data);
+            document.getElementById("stockadjustment-qty").value = data;
+
+        });
+
+
+    });
+
+
 
 </script>

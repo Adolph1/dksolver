@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="table-responsive">
         <table class="table">
             <thead>
-            <tr>
+            <tr style="font-weight: 800">
                 <td class="text-center">Product Name</td>
                 <td>Price</td>
                 <td>Quantity</td>

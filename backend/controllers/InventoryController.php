@@ -169,4 +169,23 @@ class InventoryController extends Controller
         }
 
     }
+
+
+    public function actionPrice($id)
+    {
+        if (($model = Inventory::find()->where(['product_id'=>$id])->one()) !== null) {
+            return $model->selling_price;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionQty($id)
+    {
+        if (($model = Inventory::find()->where(['product_id'=>$id])->one()) !== null) {
+            return $model->qty;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }

@@ -17,6 +17,7 @@ class m170113_160359_create_tbl_stock_adjustment_table extends Migration
             'product_id'=>$this->integer()->notNull(),
             'adjust_type'=>$this->integer()->notNull(),
             'qty'=>$this->decimal()->notNull(),
+            'stock_change'=>$this->decimal()->notNull(),
             'amount'=>$this->decimal()->notNull(),
             'total_amount'=>$this->integer()->notNull(),
             'description'=>$this->string(200)->notNull(),
