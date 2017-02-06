@@ -26,6 +26,11 @@ class ProductReturn extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    const SALES_RETURN=1;
+    const PURCHASE_RETURN=0;
+    public $product_name;
+
     public static function tableName()
     {
         return 'tbl_product_return';
@@ -37,7 +42,7 @@ class ProductReturn extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['trn_dt', 'return_type', 'product_id', 'maker_id', 'maker_time'], 'required'],
+            [['return_type', 'product_id','qty'], 'required'],
             [['trn_dt', 'maker_time'], 'safe'],
             [['return_type', 'product_id'], 'integer'],
             [['price', 'qty', 'total'], 'number'],
@@ -53,14 +58,15 @@ class ProductReturn extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'trn_dt' => Yii::t('app', 'Trn Dt'),
+            'trn_dt' => Yii::t('app', 'Date'),
             'return_type' => Yii::t('app', 'Return Type'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'product_id' => Yii::t('app', 'Product Name'),
             'price' => Yii::t('app', 'Price'),
             'qty' => Yii::t('app', 'Qty'),
             'total' => Yii::t('app', 'Total'),
             'source_ref_no' => Yii::t('app', 'Source Ref No'),
             'description' => Yii::t('app', 'Description'),
+            'status' => Yii::t('app', 'Status'),
             'maker_id' => Yii::t('app', 'Maker ID'),
             'maker_time' => Yii::t('app', 'Maker Time'),
         ];

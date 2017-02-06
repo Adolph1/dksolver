@@ -316,11 +316,6 @@ desired effect
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
-                                    "label" => "Returns",
-                                    "url" => "#",
-                                    "icon" => "fa fa-angle-double-right",
-                                ],
-                                [
                                     "label" => "Customers",
                                     "url" => "#",
                                     "icon" => "fa fa-angle-double-right",
@@ -348,17 +343,13 @@ desired effect
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
-                                    "label" => "Returns",
-                                    "url" => "#",
-                                    "icon" => "fa fa-angle-double-right",
-                                ],
-                                [
                                     "label" => "Suppliers",
                                     "url" => ["/supplier/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                             ],
                         ],
+                        ["label" =>Yii::t('app','Returns'), "url" =>  ["/product-return/index"], "icon" => "fa fa-refresh",],
                         [
                             "label" =>Yii::t('app','Inventory'),
                             "url" => "#",
@@ -573,6 +564,10 @@ desired effect
 </script>
 
 <script>
+    $(".ui-autocomplete-input").change(function(){
+        alert("yes");
+        //window.location.reload(true);
+    });
     $("#product_id").click(function(){
         var id =$("#prod-id").html();
         $.get("<?php echo Yii::$app->urlManager->createUrl(['inventory/search','id'=>'']);?>"+id,function(data){
@@ -596,6 +591,10 @@ desired effect
             window.location.reload(true);
     });
 
+
+
+
+
     $(".kv-editable-submit").click(function(){
 
         //(true);
@@ -615,6 +614,20 @@ desired effect
 
 
     });
+
+    $("#productreturn-product_id").change(function(){
+        var id =document.getElementById("productreturn-product_id").value;
+        //alert(id);
+        $.get("<?php echo Yii::$app->urlManager->createUrl(['inventory/price','id'=>'']);?>"+id,function(data) {
+
+            //alert(data);
+            document.getElementById("productreturn-price").value = data;
+
+        });
+
+
+    });
+
     $("#stockadjustment-product_id").change(function(){
         var id =document.getElementById("stockadjustment-product_id").value;
         //alert(id);

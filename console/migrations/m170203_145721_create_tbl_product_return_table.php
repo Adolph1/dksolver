@@ -22,6 +22,7 @@ class m170203_145721_create_tbl_product_return_table extends Migration
             'total'=>$this->decimal(),
             'source_ref_no'=>$this->string(200),
             'description'=>$this->string(200),
+            'status'=>$this->char(1),
             'maker_id'=>$this->string(200)->notNull(),
             'maker_time'=>$this->dateTime()->notNull(),
         ]);

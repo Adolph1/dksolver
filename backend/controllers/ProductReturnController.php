@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\ProductReturn;
+use backend\models\Inventory;
 use backend\models\ProductReturnSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -64,8 +65,30 @@ class ProductReturnController extends Controller
     public function actionCreate()
     {
         $model = new ProductReturn();
+        $model->maker_id=Yii::$app->user->identity->username;
+        $model->maker_time=date('Y-m-d:H:i:s');
+        $model->trn_dt=date('Y-m-d');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $qty=Inventory::getQty($_POST['ProductReturn']['product_id']);
+            if($_POST['ProductReturn']['return_type']==$model::PURCHASE_RETURN) {
+                if ($qty > $_POST['ProductReturn']['qty']) {
+                    $qty = $qty - $_POST['ProductReturn']['qty'];
+                    Inventory::updateAll(['qty' => $qty], ['product_id' => $_POST['ProductReturn']['product_id']]);
+                    $model->save();
+                } else {
+
+                    Yii::$app->session->setFlash('warning', 'Stock available is less than quantity');
+                }
+            }
+            elseif($_POST['ProductReturn']['return_type']==$model::SALES_RETURN)
+            {
+                $qty = $qty + $_POST['ProductReturn']['qty'];
+                Inventory::updateAll(['qty' => $qty], ['product_id' => $_POST['ProductReturn']['product_id']]);
+                $model->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -101,7 +124,22 @@ class ProductReturnController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model=$this->findModel($id);
+        if($model->return_type==$model::PURCHASE_RETURN){
+            $qty=Inventory::getQty($model->product_id);
+            $qty=$qty+$model->qty;
+            Inventory::updateAll(['qty'=>$qty],['product_id'=>$model->product_id]);
+            $model->status='D';
+            $model->save();
+        }elseif ($model->return_type==$model::SALES_RETURN){
+            $qty=Inventory::getQty($model->product_id);
+            $qty=$qty-$model->qty;
+            Inventory::updateAll(['qty'=>$qty],['product_id'=>$model->product_id]);
+            $model->status='D';
+            $model->save();
+
+        }
+        //$this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

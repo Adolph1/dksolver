@@ -12,31 +12,46 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-return-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php // Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Product Return'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Add Return'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+           // 'id',
             'trn_dt',
-            'return_type',
-            'product_id',
-            'price',
-            // 'qty',
-            // 'total',
-            // 'source_ref_no',
-            // 'description',
-            // 'maker_id',
-            // 'maker_time',
+            [
+                    'attribute'=>'return_type',
+                    'value'=>function ($model){
 
-            ['class' => 'yii\grid\ActionColumn'],
+                        if($model->return_type==\backend\models\ProductReturn::PURCHASE_RETURN){
+                            return "Purchase Return";
+                        }
+                        elseif ($model->return_type==\backend\models\ProductReturn::SALES_RETURN){
+                            return "Sales Return";
+                        }
+                    }
+            ],
+            [
+                    'attribute'=>'product_id',
+                    'value'=>'product.product_name',
+            ],
+            'price',
+            'qty',
+            'total',
+            'source_ref_no',
+            'description',
+            'status',
+            'maker_id',
+            'maker_time',
+
+            ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

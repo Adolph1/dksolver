@@ -51,7 +51,7 @@ use kartik\editable\Editable;
                  }")],
             ]);
             ?><span style="padding: 10px"><?= Html::button(Yii::t('app', '<i class="fa fa-search"></i>'), ['class' => 'btn btn-warning','id'=>'product_id']) ?></span>
-            <?= Html::activeHiddenInput($model, 'product_name')?>
+            <?= Html::activeHiddenInput($model, 'product_name',['id'=>'prd-id'])?>
             <div style="float: right" id="refresh-form"><?= Html::button(Yii::t('app', '<i class="fa fa-refresh"></i>'), ['class' => 'btn btn-primary','data-toggle'=>'tooltip','data-original-title'=>'Refresh Form']) ?></div>
             <div id="prod-id" style="visibility:hidden"></div>
 
