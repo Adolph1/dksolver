@@ -12,6 +12,7 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+
         'i18n' => [
             'translations' => [
                 '*' => [
@@ -34,6 +35,11 @@ return [
 
 
 
+    ],
+    'modules'    => [
+        'backup' => [
+            'class' => 'spanjeta\modules\backup\Module',
+        ],
     ],
 
 ];

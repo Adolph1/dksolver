@@ -15,6 +15,9 @@ return [
         'gridview' =>  [
             'class' => '\kartik\grid\Module',
         ],
+        'backup' => [
+            'class' => 'spanjeta\modules\backup\Module',
+        ],
     ],
     'components' => [
         'request' => [

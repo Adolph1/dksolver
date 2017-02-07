@@ -24,6 +24,17 @@ class m130524_201442_init extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
+
+        $this->insert('user',array(
+            'username'=>'admin',
+            'auth_key' => Yii::$app->security->generatePasswordHash('Ado123'),
+            'password_hash' => Yii::$app->security->generatePasswordHash('Ado123'),
+            'password_reset_token' => '',
+            'email' => 'adolph.cm@gmail.com',
+            'status' => '10',
+            'created_at'=>date('Y').date('m').date('d'),
+            'updated_at' =>date('Y').date('m').date('d'),
+        ));
     }
 
     public function down()

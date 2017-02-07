@@ -18,6 +18,16 @@ class m170117_073342_create_tbl_language_table extends Migration
             'langugae_code'=>$this->char(5),
             'status'=>$this->string(20)->notNull(),
         ]);
+        $this->insert('tbl_language',array(
+            'title'=>'English',
+            'langugae_code' =>'en',
+            'status' => 'default',
+        ));
+        $this->insert('tbl_language',array(
+            'title'=>'Swahili',
+            'langugae_code' =>'sw',
+            'status' => 'active',
+        ));
     }
 
     /**

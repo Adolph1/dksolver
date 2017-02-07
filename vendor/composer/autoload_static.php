@@ -33,6 +33,10 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
         array (
             'wbraganca\\dynamicform\\' => 22,
         ),
+        's' => 
+        array (
+            'spanjeta\\modules\\backup\\' => 24,
+        ),
         'r' => 
         array (
             'rmrevin\\yii\\fontawesome\\' => 24,
@@ -155,6 +159,10 @@ class ComposerStaticInita76639f345e92c90ef793ee2927cfb33
         'wbraganca\\dynamicform\\' => 
         array (
             0 => __DIR__ . '/..' . '/wbraganca/yii2-dynamicform',
+        ),
+        'spanjeta\\modules\\backup\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spanjeta/yii2-backup',
         ),
         'rmrevin\\yii\\fontawesome\\' => 
         array (

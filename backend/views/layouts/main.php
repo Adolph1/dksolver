@@ -201,14 +201,25 @@ desired effect
                             <!-- The user image in the navbar-->
                             <img src="http://placehold.it/160x160" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs"><?= Yii::$app->user->identity->username;?></span>
+                            <span class="hidden-xs">
+                                <?php
+                                if (!Yii::$app->user->isGuest) {
+                                   echo Yii::$app->user->identity->username;
+                                }
+                                ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
                                 <img src="http://placehold.it/160x160" class="img-circle" alt="User Image">
                                 <p>
-                                    <?= Yii::$app->user->identity->username;?>
+                                    <?php
+                                   if (!Yii::$app->user->isGuest) {
+
+                                       echo Yii::$app->user->identity->username;
+                                   }
+
+                                    ?>
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
@@ -230,7 +241,16 @@ desired effect
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <?php
+                                    if(!Yii::$app->user->isGuest) {
+                                        echo Html::beginForm(['/site/logout'], 'post');
+                                        echo Html::submitButton(
+                                            'Logout (' . Yii::$app->user->identity->username . ')',
+                                            ['class' => 'btn btn-link logout']
+                                        );
+                                        echo Html::endForm();
+                                    }
+                                    ?>
                                 </div>
                             </li>
                         </ul>
@@ -255,7 +275,10 @@ desired effect
                     <img src="http://placehold.it/45x45" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p><?= Yii::$app->user->identity->username;?></p>
+                    <p><?php
+                        if (!Yii::$app->user->isGuest) {
+                            echo Yii::$app->user->identity->username;
+                        }?></p>
                     <!-- Status -->
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
@@ -273,7 +296,9 @@ desired effect
             <!-- /.search form -->
 
             <!-- Sidebar Menu -->
+            <?php if (!Yii::$app->user->isGuest) {?>
             <?=
+
             \yiister\adminlte\widgets\Menu::widget(
                 [
                     "items" => [
@@ -400,6 +425,11 @@ desired effect
                                     "url" => ["/system-module/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
+                                [
+                                    "label" => "Backup",
+                                    "url" => ["/backup"],
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
 
                             ],
                         ],
@@ -407,6 +437,7 @@ desired effect
                 ]
             )
             ?>
+            <?php }?>
         </section>
         <!-- /.sidebar -->
     </aside>

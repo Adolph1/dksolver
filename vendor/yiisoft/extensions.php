@@ -192,4 +192,13 @@ return array (
       '@kartik/spinner' => $vendorDir . '/kartik-v/yii2-widget-spinner',
     ),
   ),
+  'spanjeta/yii2-backup' => 
+  array (
+    'name' => 'spanjeta/yii2-backup',
+    'version' => '2.1.0.0',
+    'alias' => 
+    array (
+      '@spanjeta/modules/backup' => $vendorDir . '/spanjeta/yii2-backup',
+    ),
+  ),
 );

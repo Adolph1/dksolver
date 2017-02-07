@@ -28,7 +28,8 @@
         "yiisoft/yii2-jui": "^2.0",
         "kartik-v/yii2-editable": "*",
         "kartik-v/yii2-widget-spinner": "@dev",
-        "microinginer/yii2-dropdown-action-column": "dev-master"
+        "microinginer/yii2-dropdown-action-column": "dev-master",
+        "spanjeta/yii2-backup": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
