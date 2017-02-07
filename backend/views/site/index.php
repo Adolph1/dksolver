@@ -2,50 +2,65 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'TangoPos';
+use yii\bootstrap\Html;
 ?>
-<div class="site-index">
+<div class="site-index" align="center">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6" style="border-bottom: orange 2px solid;margin-left: 100px">
+            <div class="row">
+                <div class="col-md-12 text-center" style="background: orange;margin-left: 0px;color: white"><h3>Total Sales</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center"><h3 style="color: orange"><i class="fa fa-credit-card"></i> 455</h3></div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6" style="border-bottom: cornflowerblue 2px solid;margin-left: 5px">
+            <div class="row">
+                <div class="col-md-12 text-center" style="background: cornflowerblue;margin-left: 0px;color: white"><h3>Total Purchases</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center"><h3 style="color: cornflowerblue"><i class="fa fa-shopping-cart"></i> 455</h3></div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6" style="border-bottom: seagreen 2px solid;margin-left: 5px">
+            <div class="row">
+                <div class="col-md-12 text-center" style="background: seagreen;margin-left: 0px;color: white"><h3>Total Products</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center"><h3 style="color: seagreen"><i class="fa fa-th-large"></i> 455</h3></div>
+            </div>
+        </div>
     </div>
 
-    <div class="body-content">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+    <p style="padding: 10px" class="text-primary">Welcome to TangoPos, choose a common task below to get started!</p>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6" style="margin-left: 100px">
+            <div class="row">
+                <div class="col-md-12" style="background: white;color: skyblue;border-left: solid 2px skyblue"><h3> <?= Html::a(Yii::t('app', '<i class="fa fa-shopping-cart"></i> New Sale'), ['sales/create']) ?> </h3></div>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6" style="margin-left: 5px">
+            <div class="row">
+                <div class="col-md-12" style="background: white;color: skyblue;border-left: solid 2px skyblue"><h3><?= Html::a(Yii::t('app', '<i class="fa fa-th-large"></i> New Product'), ['product/create']) ?> </h3></div>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6" style="margin-left: 5px">
+            <div class="row">
+                <div class="col-md-12" style="background: white;color: skyblue;border-left: solid 2px skyblue"><h3><?= Html::a(Yii::t('app', '<i class="fa fa-th-large"></i> New Category'), ['category/create']) ?> </h3></div>
+            </div>
+        </div>
+    </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+    <p style="padding: 10px" class="text-primary">Get quick reports!</p>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6" style="margin-left: 100px">
+            <div class="row">
+                <div class="col-md-12" style="background: white;color: #5555;border-left: solid 2px skyblue;padding: 10px"><?= Html::a(Yii::t('app', '<i class="fa fa-bar-chart"></i> Today\'s sales report'), ['sales/index']) ?>  </div>
             </div>
         </div>
 

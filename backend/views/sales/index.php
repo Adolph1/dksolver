@@ -8,7 +8,7 @@ use kartik\grid\GridView;
 /* @var $searchModel backend\models\SalesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Sales');
+$this->title = Yii::t('app', 'Today\'s Sales');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sales-index">

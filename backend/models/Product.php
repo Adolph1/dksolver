@@ -63,7 +63,7 @@ class Product extends \yii\db\ActiveRecord
      * @inheritdoc
      */
 
-    //gets all categories
+    //gets all products
 
     public static function getAll()
     {

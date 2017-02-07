@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Supplier */
+/* @var $model backend\models\SystemModule */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Suppliers'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'System Modules'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="supplier-view">
+<div class="system-module-view">
 
     <h1><?php // Html::encode($this->title) ?></h1>
 
@@ -29,10 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'supplier_name',
-            'email:email',
-            'phone_number',
-            'location',
+            'module_name',
+            'description',
+            'status',
+            'maker_id',
+            'maker_time',
+            'auth_status',
+            'checker_id',
+            'checker_time',
         ],
     ]) ?>
 

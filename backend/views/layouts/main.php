@@ -347,9 +347,15 @@ desired effect
                                     "url" => ["/supplier/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
+                                [
+                                    "label" => "Costs",
+                                    "url" => ["/purchase-cost/index"],
+                                    "icon" => "fa fa-angle-double-right",
+                                ],
                             ],
                         ],
                         ["label" =>Yii::t('app','Returns'), "url" =>  ["/product-return/index"], "icon" => "fa fa-refresh",],
+
                         [
                             "label" =>Yii::t('app','Inventory'),
                             "url" => "#",
@@ -372,7 +378,7 @@ desired effect
                                 ],
                             ],
                         ],
-
+                        ["label" =>Yii::t('app','Reports'), "url" =>  ["/report/index"], "icon" => "fa fa-bar-chart",],
 
                         [
                             "label" =>Yii::t('app','Settings'),
@@ -390,8 +396,8 @@ desired effect
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
-                                    "label" => "Returns",
-                                    "url" => "#",
+                                    "label" => "Modules",
+                                    "url" => ["/system-module/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
 
@@ -439,10 +445,10 @@ desired effect
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-            Anything you want
+            Powered by Adotech
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; <a href="http://yiister.ru">Yiister</a> <?= date("Y") ?>
+        <strong>Copyright &copy; TangoPos <?= date("Y") ?>
     </footer>
 
     <!-- Control Sidebar -->

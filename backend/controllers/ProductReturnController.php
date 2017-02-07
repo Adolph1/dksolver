@@ -73,23 +73,31 @@ class ProductReturnController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 
             $qty=Inventory::getQty($_POST['ProductReturn']['product_id']);
-            if($_POST['ProductReturn']['return_type']==$model::PURCHASE_RETURN) {
-                if ($qty > $_POST['ProductReturn']['qty']) {
-                    $qty = $qty - $_POST['ProductReturn']['qty'];
+            if($qty!=null) {
+
+
+                if ($_POST['ProductReturn']['return_type'] == $model::PURCHASE_RETURN) {
+                    if ($qty > $_POST['ProductReturn']['qty']) {
+                        $qty = $qty - $_POST['ProductReturn']['qty'];
+                        Inventory::updateAll(['qty' => $qty], ['product_id' => $_POST['ProductReturn']['product_id']]);
+                        $model->save();
+                    } else {
+
+                        Yii::$app->session->setFlash('warning', 'Stock available is less than quantity');
+                    }
+                } elseif ($_POST['ProductReturn']['return_type'] == $model::SALES_RETURN) {
+                    $qty = $qty + $_POST['ProductReturn']['qty'];
                     Inventory::updateAll(['qty' => $qty], ['product_id' => $_POST['ProductReturn']['product_id']]);
                     $model->save();
-                } else {
-
-                    Yii::$app->session->setFlash('warning', 'Stock available is less than quantity');
                 }
+                return $this->redirect(['view', 'id' => $model->id]);
             }
-            elseif($_POST['ProductReturn']['return_type']==$model::SALES_RETURN)
-            {
-                $qty = $qty + $_POST['ProductReturn']['qty'];
-                Inventory::updateAll(['qty' => $qty], ['product_id' => $_POST['ProductReturn']['product_id']]);
-                $model->save();
+            else{
+                Yii::$app->session->setFlash('warning','No such product in stock');
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
             }
-            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

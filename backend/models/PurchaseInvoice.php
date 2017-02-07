@@ -111,4 +111,34 @@ class PurchaseInvoice extends \yii\db\ActiveRecord
         }
     }
 
+    public static function getTotalSales($id)
+    {
+
+        $countinvoices = PurchaseInvoice::find()->where(['purchase_master_id' => $id])->count();
+        if ($countinvoices > 0) {
+            $invoices = PurchaseInvoice::find()->where(['purchase_master_id' => $id])->all();
+            $total = 0;
+            foreach ($invoices as $invoice) {
+                $entries = Purchase::find()->where(['purchase_invoice_id' => $invoice->id])->all();
+                if ($entries != null)
+                {
+                    foreach ($entries as $entry){
+                        $sum = $entry->selling_price * $entry->qty;
+                        $total = $total + $sum;
+                    }
+                }
+                else{
+                    return;
+                }
+
+            }
+            return $total;
+        }
+        else{
+            return '-';
+        }
+    }
+
+
+
 }

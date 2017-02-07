@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Supplier */
+/* @var $model backend\models\SystemModule */
 
-$this->title = Yii::t('app', 'Create Supplier');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Suppliers'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Create System Module');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'System Modules'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="supplier-create">
+<div class="system-module-create">
 
     <h1><?php // Html::encode($this->title) ?></h1>
 

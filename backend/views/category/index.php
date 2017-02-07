@@ -64,32 +64,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
         ],
-        'clientOptions' => [
-            "lengthMenu"=> [[20,-1], [20,Yii::t('app',"All")]],
-            "info"=>false,
-            "responsive"=>true,
-            "dom"=> 'lfTrtip',
-            "tableTools"=>[
-                "aButtons"=> [
-                    [
-                        "sExtends"=> "copy",
-                        "sButtonText"=> Yii::t('app',"Copy to clipboard")
-                    ],[
-                        "sExtends"=> "csv",
-                        "sButtonText"=> Yii::t('app',"Save to CSV")
-                    ],[
-                        "sExtends"=> "xls",
-                        "oSelectorOpts"=> ["page"=> 'current']
-                    ],[
-                        "sExtends"=> "pdf",
-                        "sButtonText"=> Yii::t('app',"Save to PDF")
-                    ],[
-                        "sExtends"=> "print",
-                        "sButtonText"=> Yii::t('app',"Print")
-                    ],
-                ]
-            ]
-        ],
     ]);?>
 
 

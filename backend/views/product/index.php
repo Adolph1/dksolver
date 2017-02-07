@@ -56,8 +56,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'product_code',
-            'barcode',
+            //'product_code',
+            //'barcode',
             'product_name',
             'description:ntext',
             [
@@ -65,40 +65,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>'category0.title'
             ],
             // 'image',
-            'status',
-            'maker_id',
-            'maker_time',
-            'auth_status',
-            'checker_id',
-            'checker_time',
 
             ['class' => 'yii\grid\ActionColumn','header'=>Yii::t('app',"Actions")],
-        ],
-        'clientOptions' => [
-            "lengthMenu"=> [[20,-1], [20,Yii::t('app',"All")]],
-            "info"=>false,
-            "responsive"=>true,
-            "dom"=> 'lfTrtip',
-            "tableTools"=>[
-                "aButtons"=> [
-                    [
-                        "sExtends"=> "copy",
-                        "sButtonText"=> Yii::t('app',"Copy to clipboard")
-                    ],[
-                        "sExtends"=> "csv",
-                        "sButtonText"=> Yii::t('app',"Save to CSV")
-                    ],[
-                        "sExtends"=> "xls",
-                        "oSelectorOpts"=> ["page"=> 'current']
-                    ],[
-                        "sExtends"=> "pdf",
-                        "sButtonText"=> Yii::t('app',"Save to PDF")
-                    ],[
-                        "sExtends"=> "print",
-                        "sButtonText"=> Yii::t('app',"Print")
-                    ],
-                ]
-            ]
         ],
     ]);?>
 

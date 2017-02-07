@@ -1,12 +1,13 @@
 <?php
-
+use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
-use dosamigos\datepicker\DatePicker;
 use backend\models\Supplier;
 use backend\models\PurchaseMaster;
 use backend\models\Product;
+
+
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Purchase */
@@ -83,9 +84,9 @@ use backend\models\Product;
                                     }
                                     ?>
                                     <div class="col-md-4"><?= $form->field($purchase, "[{$i}]product_id")->dropDownList(Product::getAll(),['prompt'=>Yii::t('app','--Select--')]) ?></div>
-                                    <div class="col-md-1"><?= $form->field($purchase, "[{$i}]price")->textInput(['maxlength' => true]) ?></div>
+                                    <div class="col-md-2"><?= $form->field($purchase, "[{$i}]price")->textInput(['maxlength' => true]) ?></div>
                                     <div class="col-md-1"><?= $form->field($purchase, "[{$i}]qty")->textInput(['maxlength' => true]) ?></div>
-                                    <div class="col-md-1"><?= $form->field($purchase, "[{$i}]selling_price")->textInput(['maxlength' => true]) ?></div>
+                                    <div class="col-md-2"><?= $form->field($purchase, "[{$i}]selling_price")->textInput(['maxlength' => true]) ?></div>
                                 </div>
 
                             <?php endforeach; ?>
@@ -98,7 +99,7 @@ use backend\models\Product;
             <div class="form-group">
                 <?php
                 if($model->isNewRecord){
-                    echo Html::submitButton(Yii::t('app','Create'),['create'], ['class' => 'btn btn-success']);
+                    echo Html::submitButton(Yii::t('app','Save'),['create'], ['class' => 'btn btn-success']);
                 }
                 if(!$model->isNewRecord && $model->status=\backend\models\Purchase::PENDING){
                     echo Html::submitButton(Yii::t('app','Update'),['update'], ['class' => 'btn btn-primary']);

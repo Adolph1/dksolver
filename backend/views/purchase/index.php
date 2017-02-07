@@ -32,16 +32,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
+                'attribute'=>'purchase_invoice_id',
+                'value'=>'purchaseInvoice.invoice_number',
+            ],
+            [
                 'attribute'=>'product_id',
                 'value'=>'product.product_name',
             ],
             'price',
             'qty',
             'total',
-            [
-                'attribute'=>'purchase_invoice_id',
-                'value'=>'purchaseInvoice.invoice_number',
-            ],
+
             [
                 'attribute'=>'Stock Status',
                 'value'=>function ($searchModel)
@@ -55,40 +56,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }
             ],
-            'maker_id',
-            'maker_time',
+            //'maker_id',
+           // 'maker_time',
             'auth_status',
-            'checker_id',
-            'checker_time',
+           // 'checker_id',
+            //'checker_time',
 
 
            // ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
-        ],
-        'clientOptions' => [
-            "lengthMenu"=> [[20,-1], [20,Yii::t('app',"All")]],
-            "info"=>false,
-            "responsive"=>true,
-            "dom"=> 'lfTrtip',
-            "tableTools"=>[
-                "aButtons"=> [
-                    [
-                        "sExtends"=> "copy",
-                        "sButtonText"=> Yii::t('app',"Copy to clipboard")
-                    ],[
-                        "sExtends"=> "csv",
-                        "sButtonText"=> Yii::t('app',"Save to CSV")
-                    ],[
-                        "sExtends"=> "xls",
-                        "oSelectorOpts"=> ["page"=> 'current']
-                    ],[
-                        "sExtends"=> "pdf",
-                        "sButtonText"=> Yii::t('app',"Save to PDF")
-                    ],[
-                        "sExtends"=> "print",
-                        "sButtonText"=> Yii::t('app',"Print")
-                    ],
-                ]
-            ]
         ],
     ]);?>
 

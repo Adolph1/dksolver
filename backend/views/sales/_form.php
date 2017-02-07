@@ -180,7 +180,7 @@ use kartik\editable\Editable;
                 <?= $form->field($model, 'paid_amount')->textInput(['maxlength' => true,'value'=>Cart::getCartTotal()])->label(false) ?>
                     </div>
                     <div class="col-md-3">
-                <?= Html::submitButton(Yii::t('app', 'Complete Sale'), ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton(Yii::t('app', 'Sale'), ['class' => 'btn btn-primary']) ?>
                     </div>
                     </div>
                     <div class="row">

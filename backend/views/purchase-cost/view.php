@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Supplier */
+/* @var $model backend\models\PurchaseCost */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Suppliers'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Purchase Costs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="supplier-view">
+<div class="purchase-cost-view">
 
     <h1><?php // Html::encode($this->title) ?></h1>
 
@@ -29,10 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'supplier_name',
-            'email:email',
-            'phone_number',
-            'location',
+            'purchase_master_id',
+            'amount',
+            'description',
+            'maker_id',
+            'maker_time',
         ],
     ]) ?>
 

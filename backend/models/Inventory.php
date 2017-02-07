@@ -83,7 +83,12 @@ class Inventory extends \yii\db\ActiveRecord
     public static function getQty($pid)
     {
         $product=Inventory::find()->where(['product_id'=>$pid])->one();
-        return $product->qty;
+        if($product!=null){
+            return $product->qty;
+        }
+        else{
+            return;
+        }
     }
 
     /**
@@ -92,6 +97,12 @@ class Inventory extends \yii\db\ActiveRecord
     public static function getPrice($pid)
     {
         $product=Inventory::find()->where(['product_id'=>$pid])->one();
-        return $product->selling_price;
+        if($product!=null){
+            return $product->selling_price;
+        }
+        else{
+            return;
+        }
+
     }
 }

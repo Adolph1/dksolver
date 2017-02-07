@@ -82,8 +82,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             }
         ],
-        'maker_id',
-        'maker_time',
+        //'maker_id',
+        //'maker_time',
 
         ['class'=>'kartik\grid\ActionColumn'],
 
