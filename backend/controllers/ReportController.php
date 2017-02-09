@@ -121,4 +121,13 @@ class ReportController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * gets today sales report
+     */
+
+    public function actionTodaysales()
+    {
+        return $this->render('today_sales');
+    }
 }

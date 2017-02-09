@@ -601,27 +601,6 @@ desired effect
 </script>
 
 <script>
-    $(".ui-autocomplete-input").change(function(){
-        alert("yes");
-        //window.location.reload(true);
-    });
-    $("#product_id").click(function(){
-        var id =$("#prod-id").html();
-        $.get("<?php echo Yii::$app->urlManager->createUrl(['inventory/search','id'=>'']);?>"+id,function(data){
-            if(data==" ")
-            {
-                alert("No yet purchased");
-            }
-            else if(data=="outOfStock"){
-                alert("Out of stock");
-            }
-            else{
-                window.location.reload(true);
-            }
-
-        });
-    });
-
 
     $("#refresh-form").click(function(){
 
@@ -634,7 +613,7 @@ desired effect
 
     $(".kv-editable-submit").click(function(){
 
-        //(true);
+        window.location.reload(true);
     });
 
 

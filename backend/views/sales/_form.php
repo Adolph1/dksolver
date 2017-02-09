@@ -46,14 +46,27 @@ use kartik\editable\Editable;
                     $('#memberssearch-family_name_id').val(ui.item.id);
                     var id=ui.item.id;
                     //alert(ui.item.id);
-                    $('#prod-id').html(id);
+                   // $('#prod-id').html(id);
+                      $.get('".Yii::$app->urlManager->createUrl(['inventory/search','id'=>''])."'+id,function(data) {
+                      if(data==\" \")
+                        {
+                            alert(\"No yet purchased\");
+                        }
+                        else if(data==\"outOfStock\"){
+                            alert(\"Out of stock\");
+                        }
+                    else{
+                        window.location.reload(true);
+                        }
+
+                     });
      
                  }")],
             ]);
-            ?><span style="padding: 10px"><?= Html::button(Yii::t('app', '<i class="fa fa-search"></i>'), ['class' => 'btn btn-warning','id'=>'product_id']) ?></span>
+            ?>
             <?= Html::activeHiddenInput($model, 'product_name',['id'=>'prd-id'])?>
             <div style="float: right" id="refresh-form"><?= Html::button(Yii::t('app', '<i class="fa fa-refresh"></i>'), ['class' => 'btn btn-primary','data-toggle'=>'tooltip','data-original-title'=>'Refresh Form']) ?></div>
-            <div id="prod-id" style="visibility:hidden"></div>
+
 
             <div>
 

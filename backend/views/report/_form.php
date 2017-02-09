@@ -20,6 +20,7 @@ use backend\models\SystemModule;
             <?= $form->field($model, 'module')->dropDownList(SystemModule::getAll(),['prompt'=>Yii::t('app','--Select--')]) ?>
 
             <?= $form->field($model, 'status')->dropDownList(['1'=>'Active','0'=>'Disable'],['prompt'=>'--Select--']) ?>
+            <?= $form->field($model, 'path')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

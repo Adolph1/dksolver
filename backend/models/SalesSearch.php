@@ -77,4 +77,30 @@ class SalesSearch extends Sales
 
         return $dataProvider;
     }
+
+/**
+ * Searches today's sales
+ */
+
+    public function searchTodaySales()
+    {
+        $query = Sales::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'trn_dt' => date('Y-m-d'),
+
+        ]);
+
+        return $dataProvider;
+    }
+
 }

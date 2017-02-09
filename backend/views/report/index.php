@@ -29,15 +29,26 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'report_name',
                 'format' => 'raw',
                 'value'=>function ($data) {
-                    return Html::a(Html::encode($data->report_name),['sales','id'=> $data->id]);
+                    return Html::a(Html::encode($data->report_name),[$data->path]);
                 },
             ],
             [
                     'attribute'=>'module',
                     'value'=>'moduleName.module_name'
             ],
-            //'path',
-            'status',
+            [
+                'attribute'=>'status',
+                'value'=>function ($data){
+                if($data->status==1){
+                    return "Active";
+                }
+                elseif ($data->status==0){
+
+                    return "Disabled";
+                }
+                }
+            ],
+
 
             ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
         ],
