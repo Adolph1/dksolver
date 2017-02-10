@@ -17,6 +17,7 @@ class m170113_160151_create_tbl_sales_table extends Migration
             'trn_dt'=>$this->date()->notNull(),
             'total_qty'=>$this->decimal()->notNull(),
             'total_amount'=>$this->decimal()->notNull(),
+            'discount'=>$this->decimal(),
             'paid_amount'=>$this->decimal()->notNull(),
             'due_amount'=>$this->decimal()->notNull(),
             'payment_method'=>$this->integer()->notNull(),

@@ -44,7 +44,7 @@ class Sales extends \yii\db\ActiveRecord
     {
         return [
             [['trn_dt', 'maker_time'], 'safe'],
-            [['total_qty', 'total_amount', 'paid_amount','due_amount'], 'number'],
+            [['total_qty', 'total_amount', 'paid_amount','due_amount','discount'], 'number'],
             [['payment_method'], 'integer'],
             [['source_ref_number', 'notes', 'customer_name', 'maker_id'], 'string', 'max' => 200],
             [['status'], 'string', 'max' => 1],
@@ -60,6 +60,7 @@ class Sales extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'Sales No'),
             'trn_dt' => Yii::t('app', 'Date'),
             'total_qty' => Yii::t('app', 'Total Qty'),
+            'discount'=> Yii::t('app', 'Discount'),
             'total_amount' => Yii::t('app', 'Total Amount'),
             'paid_amount' => Yii::t('app', 'Paid Amount'),
             'due_amount' => Yii::t('app', 'Due Amount'),

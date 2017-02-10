@@ -613,7 +613,7 @@ desired effect
 
     $(".kv-editable-submit").click(function(){
 
-        window.location.reload(true);
+        //window.location.reload(true);
     });
 
 

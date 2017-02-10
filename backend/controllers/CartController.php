@@ -140,6 +140,7 @@ class CartController extends Controller
                         $this->redirect(['sales/create']);
                        return $fmt->asDecimal($value, 2);       // return formatted value if desired
 
+
                     } elseif ($attribute === 'qty') {   // selective validation by attribute
                         $inventory=Inventory::find()->where(['id'=>$model->product_id])->one();
                         if($inventory->qty<$model->qty)

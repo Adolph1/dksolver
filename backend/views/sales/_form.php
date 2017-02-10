@@ -83,6 +83,7 @@ use kartik\editable\Editable;
                         [
                             'class'=>'kartik\grid\EditableColumn',
                             'attribute'=>'price',
+                            'refreshGrid' => true,
                             'format'=>['decimal', 2],
                             'editableOptions'=> [
                                 'header'=>'Name',
@@ -99,7 +100,7 @@ use kartik\editable\Editable;
                         [
                             'class'=>'kartik\grid\EditableColumn',
                             'attribute'=>'qty',
-
+                            'refreshGrid' => true,
 
                             'editableOptions'=> [
                                 'header'=>'Name',
@@ -168,7 +169,11 @@ use kartik\editable\Editable;
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6">Discount</div>
-                        <div class="col-md-6 text text-center">  <span class="text-danger">Test</span></div>
+                        <div class="col-md-6 text text-center">
+                            <span class="text-danger">
+                    <?= $form->field($model, 'discount')->textarea(['maxlength' => true,'placeholder'=>'Enter any comment'])->label(false) ?>
+                            </span>
+                        </div>
                     </div>
                     <div class="row" style="padding: 10px">
                         <div class="col-md-6" style="border: dashed 1px #ccc;">
