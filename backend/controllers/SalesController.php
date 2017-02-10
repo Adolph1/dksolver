@@ -83,23 +83,43 @@ class SalesController extends Controller
                 $model->maker_time = date('Y-m-d:H:i:s');
                 $model->total_amount = Cart::getCartTotal();
                 $model->total_qty = Cart::getCartTotalQty();
-                if($model->total_amount==$_POST['Sales']['paid_amount']){
-                    $model->status=Sales::PAID;
-                    $model->due_amount=0;
-                }
-                elseif($model->total_amount>$_POST['Sales']['paid_amount']){
-                    $model->status=Sales::CREDIT;
-                    $model->due_amount=$model->total_amount-($_POST['Sales']['paid_amount']);
-                }
-                elseif($model->total_amount<$_POST['Sales']['paid_amount']){
 
-                    Yii::$app->session->setFlash('danger', 'Payment can not be greater than total amount.');
+                if($_POST['Sales']['payment_method']==Sales::CASH) {
 
-                    return $this->render('create', [
-                        'model' => $model, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider
-                    ]);
+                    if ($model->total_amount == ($_POST['Sales']['paid_amount']+$_POST['Sales']['discount'])) {
+                        $model->status = Sales::PAID;
+                        $model->due_amount = 0;
+                    } elseif ($model->total_amount > ($_POST['Sales']['paid_amount']+$_POST['Sales']['discount'])) {
+                        $model->status = Sales::CREDIT;
+                        $model->due_amount = $model->total_amount - ($_POST['Sales']['paid_amount']+$_POST['Sales']['discount']);
+                    } elseif ($model->total_amount < $_POST['Sales']['paid_amount']) {
 
+                        Yii::$app->session->setFlash('danger', 'Payment can not be greater than total amount.');
+
+                        return $this->render('create', [
+                            'model' => $model, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider
+                        ]);
+
+                    }
+                }elseif($_POST['Sales']['payment_method']==Sales::ONCREDIT) {
+                    if ($model->total_amount == ($_POST['Sales']['paid_amount']+$_POST['Sales']['discount'])) {
+                        $model->status = Sales::CREDIT;
+                        $model->paid_amount=0;
+                        $model->due_amount = $model->total_amount;
+                    } elseif ($model->total_amount > ($_POST['Sales']['paid_amount']+$_POST['Sales']['discount'])) {
+                        $model->status = Sales::CREDIT;
+                        $model->due_amount = $model->total_amount - ($_POST['Sales']['paid_amount']+$_POST['Sales']['discount']);
+                    } elseif ($model->total_amount < $_POST['Sales']['paid_amount']) {
+
+                        Yii::$app->session->setFlash('danger', 'Payment can not be greater than total amount.');
+
+                        return $this->render('create', [
+                            'model' => $model, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider
+                        ]);
+
+                    }
                 }
+
 
                     if ($model->save()) {
                         foreach ($carts as $cart) {

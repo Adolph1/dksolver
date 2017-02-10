@@ -31,6 +31,13 @@ class Sales extends \yii\db\ActiveRecord
     const CREDIT='C';
     const DELETED='D';
 
+    const CASH=1;
+    const ONCREDIT=2;
+    const TPESA=3;
+    const MPESA=4;
+
+
+
     public $product_name;
     public static function tableName()
     {

@@ -27,6 +27,10 @@ class StockAdjustment extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    const INCREASE=1;
+    const DECREASE=0;
+
     public static function tableName()
     {
         return 'tbl_stock_adjustment';

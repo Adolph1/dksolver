@@ -11,6 +11,7 @@ use backend\models\Product;
 <?php
 $sales=SalesItem::getAll($model->id);
 $product=new Product();
+$fmt=Yii::$app->formatter;
 ?>
 <div class="row">
 <div class="col-md-2"></div>
@@ -33,6 +34,11 @@ $product=new Product();
             echo '<tr><td class="text-center">'.$sale->product_id.'</td><td class="text-left">'.Product::getProductName($sale->product_id).'</td><td>'.\backend\models\Category::getName(Product::getCategoryID($sale->product_id)).'</td><td>'.$sale->selling_price.'</td><td class="text-right">'.$sale->qty.'</td><td class="text-right">'.$sale->total.'</td></tr>';
         }
         ?>
+        <tr class="danger">
+            <th></th><th></th><th></th><th></th><th>Discount</th><th class="text-right">
+                <?= $model->discount?>
+            </th>
+        </tr>
         <tr class="warning">
             <th></th><th><th></th><th></th><th>Total</th><th class="text-right">
                 <?php
@@ -40,7 +46,7 @@ $product=new Product();
                 foreach ($sales as $sale){
                    $sum=$sum+$sale->total;
                 }
-                echo $sum;
+                echo $fmt->asDecimal($sum-$model->discount,2);
                 ?>
             </th>
         </tr>

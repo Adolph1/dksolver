@@ -105,4 +105,36 @@ class Inventory extends \yii\db\ActiveRecord
         }
 
     }
+
+    /**
+     * gets minimal level products count
+     */
+    public static function getMinLevelCounts()
+    {
+        $products = Inventory::find()->all();
+        if($products !=null) {
+            $i = 0;
+
+            foreach ($products as $product) {
+                $count = Inventory::find()->where(['>', 'min_level', $product->qty])->one();
+                if($count!=null) {
+                    $i = $i + 1;
+                }
+            }
+            return $i;
+        }
+    }
+
+    /**
+     * gets minimal level products
+     */
+    public static function getMinLevelProducts()
+    {
+        $products = Inventory::find()->all();
+        if($products !=null) {
+
+
+            return $products;
+        }
+    }
 }

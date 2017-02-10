@@ -31,6 +31,11 @@ $fmt=Yii::$app->formatter;
             echo '<tr><td class="text-left">'.Product::getProductName($sale->product_id).'</td><td>'.$sale->selling_price.'</td><td class="text-right">'.$sale->qty.'</td><td class="text-right">'.$sale->total.'</td></tr>';
         }
         ?>
+        <tr class="danger">
+            <th></th><th></th><th>Discount</th><th class="text-right">
+                <?= $model->discount?>
+            </th>
+        </tr>
         <tr class="warning">
      <th></th><th></th><th>Total</th><th class="text-right">
                 <?php
@@ -38,7 +43,7 @@ $fmt=Yii::$app->formatter;
                 foreach ($sales as $sale){
                    $sum=$sum+$sale->total;
                 }
-                echo $fmt->asDecimal($sum,2);
+                echo $fmt->asDecimal($sum-$model->discount,2);
                 ?>
             </th>
         </tr>

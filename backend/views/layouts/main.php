@@ -7,6 +7,7 @@
 use yii\helpers\Html;
 use common\widgets\Alert;
 use backend\models\Cart;
+use backend\models\Inventory;
 
 yiister\adminlte\assets\Asset::register($this);
 Yii::$app->language=\backend\models\Language::getDefaultLang();
@@ -141,22 +142,20 @@ desired effect
                     <li class="dropdown notifications-menu">
                         <!-- Menu toggle button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
+                            <i class="fa fa-bell"></i>
+                            <?php
+                            $less=Inventory::getMinLevelCounts();
+                            ?>
+                            <span class="label label-warning"><?= $less;?></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
-                            <li>
-                                <!-- Inner Menu: contains the notifications -->
-                                <ul class="menu">
-                                    <li><!-- start notification -->
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li><!-- end notification -->
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">View all</a></li>
+                            <li class="header">You have <?= $less;?> products with minimal level stock</li>
+                            <?php
+                            if($less>0){
+                                echo  '<li><div class="col-sm-12 text-center" style="padding: 10px">'.Html::a(Yii::t('app', 'View'), ['inventory/minlevel'], ['class' => 'btn btn-primary']).'</div></li>';
+                            }
+                            ?>
+
                         </ul>
                     </li>
                     <!-- Tasks Menu -->
@@ -607,14 +606,6 @@ desired effect
             window.location.reload(true);
     });
 
-
-
-
-
-    $(".kv-editable-submit").click(function(){
-
-        //window.location.reload(true);
-    });
 
 
 

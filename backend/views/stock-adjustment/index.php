@@ -20,17 +20,29 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'product_id',
-            'adjust_type',
+            //'id',
+            [
+                    'attribute'=>'product_id',
+                    'value'=>'product.product_name'
+            ],
+            [
+                'attribute'=>'adjust_type',
+                'value'=>function ($model){
+                    if($model->adjust_type==\backend\models\StockAdjustment::DECREASE){
+                        return "Decreased";
+                    }elseif($model->adjust_type==\backend\models\StockAdjustment::INCREASE){
+                        return "Increased";
+                    }
+                }
+            ],
             'qty',
-            'amount',
+            //'amount',
             // 'total_amount',
-            // 'description',
+             'description',
             // 'maker_id',
             // 'maker_time',
             // 'auth_status',

@@ -188,4 +188,11 @@ class InventoryController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionMinlevel()
+    {
+
+            return $this->render('min_level');
+
+    }
 }

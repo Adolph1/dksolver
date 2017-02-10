@@ -169,18 +169,17 @@ use kartik\editable\Editable;
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6">Discount</div>
-                        <div class="col-md-6 text text-center">
-                            <span class="text-danger">
-                    <?= $form->field($model, 'discount')->textarea(['maxlength' => true,'placeholder'=>'Enter any comment'])->label(false) ?>
-                            </span>
+                        <div class="col-md-6 text-right">
+                    <?= $form->field($model, 'discount')->textInput(['maxlength' => true,'value'=>0,'onblur'=>'jsDispalyTotal(this)','onkeyup'=>'jsDispalyTotal(this)'])->label(false) ?>
                         </div>
                     </div>
+                    <div style="visibility:hidden" id="total-amount"><?= Cart::getCartTotal()?></div>
                     <div class="row" style="padding: 10px">
                         <div class="col-md-6" style="border: dashed 1px #ccc;">
                             <div class="side-heading">
                                 Total </div>
                             <div class="text text-center">
-                                <span class="text-success"><b><?= $fmt->asDecimal(Cart::getCartTotal(),2)?></b></span> </div>
+                                <span class="text-success" ><b><?= $fmt->asDecimal(Cart::getCartTotal(),2)?></b></span> </div>
                         </div>
                         <div class="col-md-6" style="border: dashed 1px #ccc;">
                             <div class="side-heading">
@@ -218,6 +217,16 @@ use kartik\editable\Editable;
 
         </div>
     </div>
+<script>
+    function jsDispalyTotal(data)
+    {
+        var discount=document.getElementById('sales-discount').value;
+        var paidamount=document.getElementById('total-amount').innerHTML;
+       // alert(paidamount);
 
+        document.getElementById("sales-paid_amount").value = paidamount-discount;
+
+    }
+</script>
 </div>
 

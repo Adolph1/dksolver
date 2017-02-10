@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'trn_dt',
         'total_qty',
         'total_amount',
+        'discount',
         'paid_amount',
         [
                 'attribute'=>'payment_method',
