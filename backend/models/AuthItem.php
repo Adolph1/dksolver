@@ -81,4 +81,15 @@ class AuthItem extends \yii\db\ActiveRecord
     {
         return $this->hasMany(AuthItemChild::className(), ['child' => 'name']);
     }
+    /**
+     *gets Role Name
+     */
+
+    public static function getRoleName($rolename)
+    {
+        $role=AuthItem::find()->where(['name'=>$rolename])->one();
+        if($role!=null){
+            return $role->description;
+        }
+    }
 }

@@ -216,10 +216,11 @@ desired effect
                                    if (!Yii::$app->user->isGuest) {
 
                                        echo Yii::$app->user->identity->username;
+                                         $user_id=Yii::$app->user->identity->id;
                                    }
 
                                     ?>
-                                    <small>Member since Nov. 2012</small>
+                                    <small><?=  \backend\models\AuthItem::getRoleName(\backend\models\AuthAssignment::getRoleByUserId($user_id));?> </small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
