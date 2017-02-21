@@ -14,6 +14,7 @@ class LoginForm extends Model
     public $rememberMe = true;
 
     private $_user;
+    private $_disabled = false;
 
 
     /**
@@ -38,12 +39,35 @@ class LoginForm extends Model
      * @param string $attribute the attribute currently being validated
      * @param array $params the additional name-value pairs given in the rule
      */
-    public function validatePassword($attribute, $params)
+    /*public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Incorrect username or password.');
+            }
+        }
+    }*/
+
+    public function validatePassword($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            $user = $this->getUser();
+            $disabled = $this->getDisabled();
+
+            if(!$disabled)
+            {
+                if ($user && !$user->validatePassword($this->password)) {
+                    $this->addError($attribute, Yii::t('app', 'Wrong password..'));
+                }
+
+                if (!$user) {
+                    $this->addError($attribute, Yii::t('app', 'Incorrect username'));
+                }
+            }
+            else
+            {
+                $this->addError($attribute, Yii::t('app', 'User Disabled,Contact your system administrator'));
             }
         }
     }
@@ -74,5 +98,14 @@ class LoginForm extends Model
         }
 
         return $this->_user;
+    }
+
+    public function getDisabled()
+    {
+        if ($this->_disabled === false) {
+            $this->_disabled = User::findDisabledStatus($this->username);
+        }
+
+        return $this->_disabled;
     }
 }

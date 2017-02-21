@@ -23,9 +23,11 @@ class m170113_160359_create_tbl_stock_adjustment_table extends Migration
             'description'=>$this->string(200)->notNull(),
             'maker_id'=>$this->string(200)->notNull(),
             'maker_time'=>$this->dateTime()->notNull(),
+            'delete_status'=>$this->char(1),
             'auth_status'=>$this->char(1),
             'checker_id'=>$this->string(200)->notNull(),
             'checker_time'=>$this->dateTime()->notNull(),
+
         ]);
 
         // creates index for column `product_id`

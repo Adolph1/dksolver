@@ -19,8 +19,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php // Html::a(Yii::t('app', 'Create Purchase'), ['create'], ['class' => 'btn btn-success']) ?>
-        <span style="float: right;padding-bottom: 10px"><?= Html::a(Yii::t('app', '<i class="fa fa-check"></i>  Update Stock'), ['purchase/updatestock'], ['class' => 'btn btn-warning']) ?></span>
+
+        <span style="float: right;padding-bottom: 10px">
+            <?php if(Purchase::getUnauthorised($invoice_number)>0){?><?= Html::a(Yii::t('app', '<i class="fa fa-check"></i>  Update Stock'), ['purchase-invoice/updatestock'], ['class' => 'btn btn-warning']) ?>
+            <?php }?>
+ <?= Html::a(Yii::t('app', '<i class="fa fa-reply"></i> '), ['index'], ['class' => 'btn btn-default','data-toggle'=>'tooltip','data-original-title'=>'Back']) ?>
+            </span>
     </p>
     <?php
    $searchModel = new PurchaseSearch();
@@ -65,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
            // ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
         ],
-        'clientOptions' => [
+        /*'clientOptions' => [
             "lengthMenu"=> [[20,-1], [20,Yii::t('app',"All")]],
             "info"=>false,
             "responsive"=>true,
@@ -91,6 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ]
         ],
+        */
     ]);?>
 
 </div>

@@ -7,14 +7,14 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
     'modelClass' => 'Product',
-]) . $model->id;
+]) . $model->product_name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="product-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4><?php // Html::encode($this->title) ?></h4>
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -98,4 +98,19 @@ class Purchase extends \yii\db\ActiveRecord
     {
         return Purchase::find()->where(['purchase_invoice_id'=>$id])->sum('total');
     }
+
+    /**
+     * gets all un-authorised purchases
+     */
+
+    public static function getUnauthorised($id)
+    {
+        $count= Purchase::find()->where(['auth_status'=>'U','purchase_invoice_id'=>$id])->count();
+        if($count!=null){
+            return $count;
+        }
+        else{
+            return;
+        }
+    }
 }

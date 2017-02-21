@@ -77,4 +77,17 @@ class PurchaseCost extends \yii\db\ActiveRecord
                 }
 
     }
+
+    public static function getCosts($id)
+    {
+
+        $costs = PurchaseCost::find()->where(['purchase_master_id' => $id])->all();
+        if($costs!=null){
+            return $costs;
+        }
+        else{
+            return;
+        }
+
+    }
 }

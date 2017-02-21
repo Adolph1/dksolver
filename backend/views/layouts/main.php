@@ -325,6 +325,7 @@ desired effect
                             ],
                         ],
                         [
+                            'visible' => yii::$app->User->can('SalesPerson')||yii::$app->User->can('admin'),
                             "label" => Yii::t('app','Sales'),
                             "url" => "#",
                             "icon" => "fa fa-cart-arrow-down",
@@ -347,6 +348,7 @@ desired effect
                             ],
                         ],
                         [
+                            'visible' => yii::$app->User->can('PurchasePerson')||yii::$app->User->can('admin'),
                             "label" =>Yii::t('app','Purchases'),
                             "url" => "#",
                             "icon" => "fa fa-cart-plus",
@@ -381,6 +383,7 @@ desired effect
                         ["label" =>Yii::t('app','Returns'), "url" =>  ["/product-return/index"], "icon" => "fa fa-refresh",],
 
                         [
+                            'visible' => yii::$app->User->can('StockPerson')||yii::$app->User->can('admin'),
                             "label" =>Yii::t('app','Inventory'),
                             "url" => "#",
                             "icon" => "fa fa-cart-plus",
@@ -410,24 +413,46 @@ desired effect
                             "icon" => "fa fa-gears",
                             "items" => [
                                 [
+                                    'visible' => (Yii::$app->user->identity->username == 'admin'),
                                     "label" => Yii::t('app','Language'),
                                     "url" => ["/language/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
+                                    'visible' => (Yii::$app->user->identity->username == 'admin'),
                                     "label" => "Payment Method",
                                     "url" =>["/payment-method/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
+                                    'visible' => (Yii::$app->user->identity->username == 'admin'),
                                     "label" => "Modules",
                                     "url" => ["/system-module/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
+                                    'visible' => (Yii::$app->user->identity->username == 'admin'),
                                     "label" => "Backup",
                                     "url" => ["/backup"],
                                     "icon" => "fa fa-angle-double-right",
+                                ],
+                                [
+                                    'visible' => (Yii::$app->user->identity->username == 'admin'),
+                                    "label" => "Users",
+                                    "url" => ["/user"],
+                                    "icon" => "fa fa-user",
+                                ],
+
+                                [
+                                    'visible' => (Yii::$app->user->identity->username == 'admin'),
+                                    'label' => Yii::t('app', 'Manager Permissions'),
+                                    'url' => ['/auth-item/index'],
+                                    'icon' => 'fa fa-lock',
+                                ],
+                                [
+                                    'label' => Yii::t('app', 'Manage User Roles'),
+                                    'url' => ['/role/index'],
+                                    'icon' => 'fa fa-lock',
                                 ],
 
                             ],

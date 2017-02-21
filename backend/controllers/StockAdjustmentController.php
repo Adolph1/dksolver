@@ -75,10 +75,10 @@ class StockAdjustmentController extends Controller
 
             if($model->save()) {
 
-                if ($model->adjust_type == "1") {
+                if ($model->adjust_type ==StockAdjustment::INCREASE) {
 
                     $newInventory = $model->qty + $model->stock_change;
-                } elseif ($model->adjust_type == "0") {
+                } elseif ($model->adjust_type == StockAdjustment::DECREASE) {
 
                     $newInventory = $model->qty - $model->stock_change;
                     if ($newInventory < 0) {
@@ -89,7 +89,7 @@ class StockAdjustmentController extends Controller
                 Inventory::updateAll(['qty' => $newInventory], ['product_id' => $model->product_id]);
 
                 Yii::$app->session->setFlash('success', 'Successfully changed');
-                return $this->redirect(['create']);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             return $this->render('create', [
@@ -107,7 +107,6 @@ class StockAdjustmentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -125,7 +124,27 @@ class StockAdjustmentController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model=$this->findModel($id);
+        if($model->delete_status==null) {
+            $model->delete_status = 'D';
+            if ($model->save()) {
+                $cqty = Inventory::getQty($model->product_id);
+
+                if ($model->adjust_type == StockAdjustment::DECREASE) {
+                    $nqty = $cqty + $model->stock_change;
+                    Inventory::updateAll(['qty' => $nqty],['product_id' => $model->product_id]);
+                    $model->qty=$model->qty+$model->stock_change;
+                    $model->save();
+                    return $this->redirect(['index']);
+                } elseif ($model->adjust_type == StockAdjustment::INCREASE) {
+                    $nqty = $cqty - $model->stock_change;
+                    Inventory::updateAll(['qty' => $nqty],['product_id' => $model->product_id]);
+                    $model->qty=$model->qty-$model->stock_change;
+                    $model->save();
+                    return $this->redirect(['index']);
+                }
+            }
+        }
 
         return $this->redirect(['index']);
     }

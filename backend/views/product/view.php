@@ -6,15 +6,15 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Product */
 
-$this->title = $model->id;
+$this->title = $model->product_name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4><?= Html::encode($this->title) ?></h4>
 
-    <p>
+    <p style="float: right">
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -28,19 +28,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'product_code',
             'barcode',
             'product_name',
             'description:ntext',
             'category',
-            'image',
+            //'image',
             'status',
             'maker_id',
             'maker_time',
-            'auth_status',
-            'checker_id',
-            'checker_time',
+            //'auth_status',
+           // 'checker_id',
+           // 'checker_time',
         ],
     ]) ?>
 

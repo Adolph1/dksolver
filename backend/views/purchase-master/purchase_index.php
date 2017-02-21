@@ -52,20 +52,17 @@ use fedemotta\datatables\DataTables;
             <th>Description</th>
             <th class="text-right">Amount</th>
         </tr>
-        <tr>
-            <td class="text-center">1</td><td>Transport</td><td class="text-right">30.60 </td>
-        </tr>
-        <tr>
-            <td class="text-center">2</td><td>Couriers</td><td class="text-right">2.04</td>
-        </tr>
-        <tr>
-            <td class="text-center">3</td><td>Storage</td><td class="text-right">1.36</td>
-        </tr>
-        <tr>
-            <td class="text-center">3</td><td>TRA</td><td class="text-right">1.36</td>
-        </tr>
+        <?php
+        $costs=PurchaseCost::getCosts($model->id);
+        if($costs!=null) {
+            $i=1;
+            foreach ($costs as $cost) {
+                echo '<tr><td class="text-center">'.$i++.'</td><td>' . $cost->description . '</td><td class="text-right">' . $cost->amount . '</td></tr>';
+            }
+        }
+        ?>
         <tr class="warning">
-            <th></th><th>Total</th><th class="text-right">34.00</th>
+            <th></th><th>Total</th><th class="text-right"><?= $tc;?></th>
         </tr>
         </tbody></table>
 </div>

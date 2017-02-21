@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Stock Adjustment'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'New adjustment'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -39,17 +39,35 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }
             ],
-            'qty',
+            [
+                'attribute'=>'qty',
+            ],
+            'stock_change',
+
+            [
+                'attribute'=>'stock_after_change',
+                'value'=>function ($model){
+                        if($model->adjust_type==\backend\models\StockAdjustment::DECREASE) {
+
+                            return $model->qty - $model->stock_change;
+                        }
+                        elseif($model->adjust_type==\backend\models\StockAdjustment::INCREASE){
+                            return $model->qty + $model->stock_change;
+                        }
+                }
+            ],
+
             //'amount',
             // 'total_amount',
              'description',
+            'delete_status',
             // 'maker_id',
             // 'maker_time',
             // 'auth_status',
             // 'checker_id',
             // 'checker_time',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

@@ -32,6 +32,7 @@ class m130524_201442_init extends Migration
             'password_reset_token' => '',
             'email' => 'adolph.cm@gmail.com',
             'status' => '10',
+            'role'=>'1',
             'created_at'=>date('Y').date('m').date('d'),
             'updated_at' =>date('Y').date('m').date('d'),
         ));

@@ -31,6 +31,8 @@ class StockAdjustment extends \yii\db\ActiveRecord
     const INCREASE=1;
     const DECREASE=0;
 
+    public $stock_after_change;
+
     public static function tableName()
     {
         return 'tbl_stock_adjustment';
@@ -61,8 +63,8 @@ class StockAdjustment extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'product_id' => Yii::t('app', 'Product Name'),
             'adjust_type' => Yii::t('app', 'Adjust Type'),
-            'qty' => Yii::t('app', 'Current Stock'),
-            'stock_change' => Yii::t('app', 'Stock to change'),
+            'qty' => Yii::t('app', 'Stock before change'),
+            'stock_change' => Yii::t('app', 'Stock to change/changed'),
             'amount' => Yii::t('app', 'Selling Price'),
             'total_amount' => Yii::t('app', 'Total Amount'),
             'description' => Yii::t('app', 'Description'),

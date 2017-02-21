@@ -48,7 +48,7 @@ use backend\models\Category;
 
     <?= $form->field($model, 'status')->dropDownList(['-1'=>Yii::t('app','--Select--'),'0'=>'Active','1'=>'Disable']) ?>
 
-    <?= $form->field($model, 'auth_status')->textInput(['maxlength' => true,'visible'=>!$model->isNewRecord]) ?>
+    <?php // $form->field($model, 'auth_status')->textInput(['maxlength' => true,'visible'=>!$model->isNewRecord]) ?>
 
 
 

@@ -50,30 +50,13 @@ class StockAdjustmentSearch extends StockAdjustment
             'query' => $query,
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'product_id' => $this->product_id,
-            'adjust_type' => $this->adjust_type,
-            'qty' => $this->qty,
-            'amount' => $this->amount,
-            'total_amount' => $this->total_amount,
-            'maker_time' => $this->maker_time,
-            'checker_time' => $this->checker_time,
+        $query->andWhere([
+
+            'delete_status'=>'',
         ]);
 
-        $query->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'maker_id', $this->maker_id])
-            ->andFilterWhere(['like', 'auth_status', $this->auth_status])
-            ->andFilterWhere(['like', 'checker_id', $this->checker_id]);
 
         return $dataProvider;
     }
