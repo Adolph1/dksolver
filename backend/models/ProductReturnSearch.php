@@ -60,19 +60,9 @@ class ProductReturnSearch extends ProductReturn
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'trn_dt' => $this->trn_dt,
-            'return_type' => $this->return_type,
-            'product_id' => $this->product_id,
-            'price' => $this->price,
-            'qty' => $this->qty,
-            'total' => $this->total,
-            'maker_time' => $this->maker_time,
+            '!=','status','D'
         ]);
 
-        $query->andFilterWhere(['like', 'source_ref_no', $this->source_ref_no])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'maker_id', $this->maker_id]);
 
         return $dataProvider;
     }

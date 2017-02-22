@@ -20,7 +20,7 @@ use kartik\editable\Editable;
 
 <div class="sales-form">
     <div class="panel panel-default">
-        <div class="panel-heading"><h4><i class="fa fa-bars bg-success"></i> Sale Form</h4></div>
+        <div class="panel-heading"><h4><i class="fa fa-bars bg-success"></i> Sales Register</h4></div>
         <div class="panel-body">
 
     <div class="row">

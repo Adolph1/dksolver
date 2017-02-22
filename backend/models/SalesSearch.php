@@ -60,20 +60,8 @@ class SalesSearch extends Sales
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'trn_dt' => $this->trn_dt,
-            'total_qty' => $this->total_qty,
-            'total_amount' => $this->total_amount,
-            'paid_amount' => $this->paid_amount,
-            'payment_method' => $this->payment_method,
-            'maker_time' => $this->maker_time,
+            '!=','status','D'
         ]);
-
-        $query->andFilterWhere(['like', 'source_ref_number', $this->source_ref_number])
-            ->andFilterWhere(['like', 'notes', $this->notes])
-            ->andFilterWhere(['like', 'customer_name', $this->customer_name])
-            ->andFilterWhere(['like', 'maker_id', $this->maker_id])
-            ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }

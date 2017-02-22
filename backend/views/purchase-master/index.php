@@ -85,7 +85,40 @@ $this->params['breadcrumbs'][] = $this->title;
         //'maker_id',
         //'maker_time',
 
-        ['class'=>'kartik\grid\ActionColumn'],
+        [
+            'class'=>'yii\grid\ActionColumn',
+            'header'=>'Actions',
+            'template'=>'{view} {delete}',
+            'buttons'=>[
+                'view' => function ($url, $model) {
+                    $url=['view','id' => $model->id];
+                    return Html::a('<span class="fa fa-eye"></span>', $url, [
+                        'title' => 'View',
+                        'data-toggle'=>'tooltip','data-original-title'=>'Save',
+                        'class'=>'btn btn-info',
+
+                    ]);
+
+
+                },
+
+                'delete' => function ($url, $model) {
+                    $url=['delete','id' => $model->id];
+                    return Html::a('<span class="fa fa-times"></span>', $url, [
+                        'title' => 'Delete',
+                        'data-toggle'=>'tooltip','data-original-title'=>'Save',
+                        'class'=>'btn btn-danger',
+                        'data' => [
+                            'confirm' => Yii::t('app', 'Are you sure you want to delete this batch?'),
+                            'method' => 'post',
+                        ],
+
+                    ]);
+
+
+                }
+            ]
+        ],
 
     ];
     ?>

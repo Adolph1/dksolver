@@ -47,14 +47,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'total',
             'source_ref_no',
             'description',
-            'status',
-            'maker_id',
-            'maker_time',
+            //'status',
+           // 'maker_id',
+            //'maker_time',
 
             [
                 'class'=>'yii\grid\ActionColumn',
                 'header'=>'Actions',
-                'template'=>'{view}',
+                'template'=>'{view} {block}',
                 'buttons'=>[
                     'view' => function ($url, $model) {
                         $url=['view','id' => $model->id];
@@ -62,6 +62,22 @@ $this->params['breadcrumbs'][] = $this->title;
                             'title' => 'View',
                             'data-toggle'=>'tooltip','data-original-title'=>'Save',
                             'class'=>'btn btn-info',
+
+                        ]);
+
+
+                    },
+
+                    'block' => function ($url, $model) {
+                        $url=['reverse','id' => $model->id];
+                        return Html::a('<span class="fa fa-retweet"></span>', $url, [
+                            'title' => 'Reverse',
+                            'data-toggle'=>'tooltip','data-original-title'=>'Save',
+                            'class'=>'btn btn-primary',
+                            'data' => [
+                                'confirm' => Yii::t('app', 'Are you sure you want to reverse this product?'),
+                                'method' => 'post',
+                            ],
 
                         ]);
 
