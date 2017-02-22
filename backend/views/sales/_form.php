@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use backend\models\PaymentMethod;
 use backend\models\Cart;
+use backend\models\Inventory;
 use yii\bootstrap\ActiveForm;
 use yii\jui\AutoComplete;
 use yii\web\JsExpression;
@@ -65,7 +66,6 @@ use kartik\editable\Editable;
             ]);
             ?>
             <?= Html::activeHiddenInput($model, 'product_name',['id'=>'prd-id'])?>
-            <div style="float: right" id="refresh-form"><?= Html::button(Yii::t('app', '<i class="fa fa-refresh"></i>'), ['class' => 'btn btn-primary','data-toggle'=>'tooltip','data-original-title'=>'Refresh Form']) ?></div>
 
 
             <div>
@@ -79,6 +79,14 @@ use kartik\editable\Editable;
                         [
                                 'attribute'=>'product_id',
                                 'value'=>'product.product_name',
+                        ],
+                        [
+                            'header'=>'In Stock',
+                            'value'=>function ($model){
+
+                                return Inventory::getQty($model->product_id);
+
+                            }
                         ],
                         [
                             'class'=>'kartik\grid\EditableColumn',

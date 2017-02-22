@@ -26,7 +26,7 @@ use backend\models\Category;
             ],
         ]) ?>
         <div class="form-group text-right">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '<i class="fa fa-save"></i> ') : Yii::t('app', 'Update'), ['data-toggle'=>'tooltip','data-original-title'=>'Save','class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>  <?= Html::a(Yii::t('app', '<i class="fa fa-reply"></i> '), ['index'], ['class' => 'btn btn-default','data-toggle'=>'tooltip','data-original-title'=>'Back']) ?>
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', '<i class="fa fa-save"></i> ') : Yii::t('app', '<i class="fa fa-save"></i> '), ['data-toggle'=>'tooltip','data-original-title'=>'Save','class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>  <?= Html::a(Yii::t('app', '<i class="fa fa-reply"></i> '), ['index'], ['class' => 'btn btn-default','data-toggle'=>'tooltip','data-original-title'=>'Back']) ?>
         </div>
         <div class="panel panel-success">
             <div class="panel-heading"><?= Yii::t('app','Product Form');?></div>

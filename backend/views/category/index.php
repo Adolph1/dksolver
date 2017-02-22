@@ -59,10 +59,47 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
             ],
             'description',
-            'maker_id',
-            'maker_time',
 
-            ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
+            [
+                'class'=>'yii\grid\ActionColumn',
+                'header'=>'Actions',
+                'template'=>'{view} {edit} {block}',
+                'buttons'=>[
+                    'view' => function ($url, $model) {
+                        $url=['view','id' => $model->id];
+                        return Html::a('<span class="fa fa-eye"></span>', $url, [
+                            'title' => 'View',
+                            'data-toggle'=>'tooltip','data-original-title'=>'Save',
+                            'class'=>'btn btn-info',
+
+                        ]);
+
+
+                    },
+                    'edit' => function ($url, $model) {
+                        $url=['update','id' => $model->id];
+                        return Html::a('<span class="fa fa-edit"></span>', $url, [
+                            'title' => 'Edit',
+                            'data-toggle'=>'tooltip','data-original-title'=>'Save',
+                            'class'=>'btn btn-warning',
+
+                        ]);
+
+
+                    },
+                    'block' => function ($url, $model) {
+                        $url=['block','id' => $model->id];
+                        return Html::a('<span class="fa fa-minus-square"></span>', $url, [
+                            'title' => 'Block',
+                            'data-toggle'=>'tooltip','data-original-title'=>'Save',
+                            'class'=>'btn btn-danger',
+
+                        ]);
+
+
+                    }
+                ]
+            ],
         ],
     ]);?>
 

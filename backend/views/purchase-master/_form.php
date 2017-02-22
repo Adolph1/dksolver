@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="container-fluid">
     <div class="col-md-12">
         <div class="panel panel-success">
-            <div class="panel-heading">Purchase Period Form</div>
+            <div class="panel-heading">Batch Form</div>
             <div class="panel-body">
 
     <?php $form = ActiveForm::begin(); ?>

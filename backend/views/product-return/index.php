@@ -51,7 +51,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'maker_id',
             'maker_time',
 
-            ['class' => 'yii\grid\ActionColumn','header'=>'Actions'],
+            [
+                'class'=>'yii\grid\ActionColumn',
+                'header'=>'Actions',
+                'template'=>'{view}',
+                'buttons'=>[
+                    'view' => function ($url, $model) {
+                        $url=['view','id' => $model->id];
+                        return Html::a('<span class="fa fa-eye"></span>', $url, [
+                            'title' => 'View',
+                            'data-toggle'=>'tooltip','data-original-title'=>'Save',
+                            'class'=>'btn btn-info',
+
+                        ]);
+
+
+                    }
+                ]
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

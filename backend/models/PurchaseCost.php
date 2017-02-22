@@ -48,7 +48,7 @@ class PurchaseCost extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'purchase_master_id' => Yii::t('app', 'Purchase Master'),
+            'purchase_master_id' => Yii::t('app', 'Purchase Batch'),
             'amount' => Yii::t('app', 'Amount'),
             'description' => Yii::t('app', 'Description'),
             'maker_id' => Yii::t('app', 'Maker ID'),

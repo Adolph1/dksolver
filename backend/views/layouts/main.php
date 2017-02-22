@@ -220,7 +220,7 @@ desired effect
                                    }
 
                                     ?>
-                                    <small><?=  \backend\models\AuthItem::getRoleName(\backend\models\AuthAssignment::getRoleByUserId($user_id));?> </small>
+
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -278,7 +278,10 @@ desired effect
                     <p><?php
                         if (!Yii::$app->user->isGuest) {
                             echo Yii::$app->user->identity->username;
-                        }?></p>
+                        ?>
+                        [<small style="color: green"><?=  \backend\models\AuthItem::getRoleName(\backend\models\AuthAssignment::getRoleByUserId($user_id));?> </small>]
+                        <?php }?>
+                    </p>
                     <!-- Status -->
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
@@ -355,7 +358,7 @@ desired effect
                             "icon" => "fa fa-cart-plus",
                             "items" => [
                                 [
-                                    "label" => "Purchase Periods",
+                                    "label" => "Batches",
                                     "url" => ["/purchase-master/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
@@ -365,7 +368,7 @@ desired effect
                                     "icon" => "fa fa-angle-double-right",
                                 ],
                                 [
-                                    "label" => "Purchase Entries",
+                                    "label" => "Entries",
                                     "url" => ["/purchase/index"],
                                     "icon" => "fa fa-angle-double-right",
                                 ],
