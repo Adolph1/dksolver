@@ -4,7 +4,7 @@ namespace backend\models;
 
 use Yii;
 use backend\models\SystemModule;
-
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "tbl_report".
@@ -20,6 +20,11 @@ class Report extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+    public $from;
+    public $to;
+    public $report;
+
     public static function tableName()
     {
         return 'tbl_report';
@@ -28,6 +33,8 @@ class Report extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
+
     public function rules()
     {
         return [
@@ -38,6 +45,13 @@ class Report extends \yii\db\ActiveRecord
     }
 
 
+
+    //gets all Reports
+
+    public static function getAll()
+    {
+        return ArrayHelper::map(Report::find()->all(),'id','report_name');
+    }
 
     /**
      * @inheritdoc

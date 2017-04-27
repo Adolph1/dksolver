@@ -35,13 +35,35 @@ class ReportController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ReportSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = new Report();
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if(isset($_GET['ReportSearch'])){
+        $searchModel = new ReportSearch();
+        $reportid = $_GET['ReportSearch']['report'];
+        $from = $_GET['ReportSearch']['from'];
+        $to = $_GET['ReportSearch']['to'];
+
+
+
+        if ($reportid == 1) {
+            $dataProvider = $searchModel->search($reportid,date('Y-m-d'), date('Y-m-d'));
+            return $this->render('today_sales', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model,
+            ]);
+        }
+
+
+    } else{
+            $searchModel = new ReportSearch();
+            $dataProvider = $searchModel->search('', '', '');
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

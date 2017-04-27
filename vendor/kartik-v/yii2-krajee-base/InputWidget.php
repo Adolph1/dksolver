@@ -3,8 +3,8 @@
 /**
  * @package   yii2-krajee-base
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
- * @version   1.8.7
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2017
+ * @version   1.8.8
  */
 
 namespace kartik\base;
@@ -43,7 +43,7 @@ class InputWidget extends YiiInputWidget
     const LOAD_PROGRESS = '<div class="kv-plugin-loading">&nbsp;</div>';
 
     /**
-     * @var string the language configuration (e.g. 'fr-FR', 'sw'). The format for the language/locale is
+     * @var string the language configuration (e.g. 'fr-FR', 'zh-CN'). The format for the language/locale is
      * ll-CC where ll is a two or three letter lowercase code for a language according to ISO-639 and
      * CC is the country code according to ISO-3166.
      * If this property not set, then the current application language will be used.
@@ -186,9 +186,8 @@ class InputWidget extends YiiInputWidget
             $this->_loadIndicator = self::LOAD_PROGRESS;
         }
         if ($this->hasModel()) {
-            $this->name = empty($this->options['name']) ? Html::getInputName($this->model, $this->attribute) :
-                $this->options['name'];
-            $this->value = Html::getAttributeValue($this->model, $this->attribute);
+            $this->name = !isset($this->options['name']) ? Html::getInputName($this->model, $this->attribute) : $this->options['name'];
+            $this->value = !isset($this->options['value'])? Html::getAttributeValue($this->model, $this->attribute) : $this->options['value'];
         }
         $this->initDisability($this->options);
     }

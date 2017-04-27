@@ -9,7 +9,7 @@ Bootstrap DatePicker Widget for Yii2
 [![Total Downloads](https://img.shields.io/packagist/dt/2amigos/yii2-date-picker-widget.svg?style=flat-square)](https://packagist.org/packages/2amigos/yii2-date-picker-widget)
 
 
-Renders a [Bootstrap DatePicker plugin](http://bootstrap-datepicker.readthedocs.org/en/release/).
+Renders a [Bootstrap DatePicker plugin](http://bootstrapformhelpers.com/datepicker/).
 
 Installation
 ------------
@@ -17,8 +17,8 @@ The preferred way to install this extension is through [composer](http://getcomp
 
 Either run
 
-```
-composer require 2amigos/yii2-date-picker-widget:~1.0
+```bash
+$ composer require 2amigos/yii2-date-picker-widget:~1.0
 ```
 or add
 
@@ -42,7 +42,7 @@ This widget renders a Bootstrap DatePicker input control. Best suitable for mode
 ***Example of use with a form***  
 There are two ways of using it, with an `ActiveForm` instance or as a widget setting up its `model` and `attribute`.
 
-```
+```php
 <?php
 use dosamigos\datepicker\DatePicker;
 
@@ -76,7 +76,7 @@ use dosamigos\datepicker\DatePicker;
 ```  
 ***Example of use without a model***
 
-```  
+```php
 <?php
 use dosamigos\datepicker\DatePicker;
 ?>
@@ -97,7 +97,7 @@ This widget renders a Bootstrap DateRangePicker Input control.
 ***Example of use with a form***  
 The following example works with a model that has two attributes named `date_from` and `date_to`.
 
-```
+```php
 <?php
 use dosamigos\datepicker\DateRangePicker;
 ?>
@@ -114,7 +114,7 @@ use dosamigos\datepicker\DateRangePicker;
 ```  
 ***Example of use without a model***
 
-```  
+```php  
 <?php
 use dosamigos\datepicker\DateRangePicker;
 ?>
@@ -145,7 +145,7 @@ I would recommend to have `phpunit` globally installed together with `xdebug` so
 
 Further Information
 -------------------
-Please, check the [Bootstrap DatePicker site](http://bootstrap-datepicker.readthedocs.org/en/release/) documentation for further information about its configuration options. 
+Please, check the [Bootstrap DatePicker site](http://bootstrap-datepicker.readthedocs.io/en/latest/) documentation for further information about its configuration options. 
 
 Contributing
 ------------

@@ -22,5 +22,6 @@ class ThemeAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapPluginAsset',
         'rmrevin\yii\fontawesome\AssetBundle',
+        'yiister\gentelella\assets\BootstrapProgressbar',
     ];
 }

@@ -39,7 +39,7 @@ class ReportSearch extends Report
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    /*public function search($params)
     {
         $query = Report::find();
 
@@ -68,5 +68,20 @@ class ReportSearch extends Report
             ->andFilterWhere(['like', 'path', $this->path]);
 
         return $dataProvider;
+    }*/
+
+    public function search($id,$from,$to)
+    {
+        if($id==1) {
+
+            $query = Sales::find();
+
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+            ]);
+            $query->andFilterWhere(['between', 'trn_dt', $from, $to]);
+
+            return $dataProvider;
+        }
     }
 }

@@ -607,19 +607,19 @@ desired effect
 </script>
 
 <script>
-    $(document).ready(function(){
-        var id =document.getElementById("purchasemaster-country").value;
+    $("#reportsearch-report").change(function(){
+        var id =document.getElementById("reportsearch-report").value;
         if(id==1){
-            $( "#rates" ).hide( "slow", function() {
+            $( "#dates" ).hide( "slow", function() {
                 //alert( "Animation complete." );
             });
         }
         else if(id==2){
-            $( "#rates" ).show( "slow", function() {
+            $( "#dates" ).hide( "slow", function() {
             });
         }
-        else if(id==0){
-            $( "#rates" ).show( "slow", function() {
+        else{
+            $( "#dates" ).show( "slow", function() {
             });
         }
 
@@ -677,6 +677,5 @@ desired effect
 
     });
 
-
-
 </script>
+

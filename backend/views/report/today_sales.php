@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php
-    $searchModel = new SalesSearch();
-    $dataProvider = $searchModel->searchTodaySales();
+    //$searchModel = new SalesSearch();
+    //$dataProvider = $searchModel->searchTodaySales();
     ?>
     <?= DataTables::widget([
         'dataProvider' => $dataProvider,

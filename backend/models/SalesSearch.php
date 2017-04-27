@@ -87,6 +87,9 @@ class SalesSearch extends Sales
             'trn_dt' => date('Y-m-d'),
 
         ]);
+        $query->andFilterWhere([
+            '!=','status','D'
+        ]);
 
         return $dataProvider;
     }
