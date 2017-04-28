@@ -38,7 +38,7 @@ class SalesItem extends \yii\db\ActiveRecord
         return [
             [['sales_id', 'product_id'], 'integer'],
             [['selling_price', 'qty', 'total'], 'number'],
-            [['maker_time'], 'safe'],
+            [['maker_time','trn_dt'], 'safe'],
             [['maker_id'], 'string', 'max' => 200],
             [['delete_stat'], 'string', 'max' => 1],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
@@ -53,13 +53,14 @@ class SalesItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'sales_id' => Yii::t('app', 'Sales ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'trn_dt'=>Yii::t('app', 'Date'),
+            'sales_id' => Yii::t('app', 'Sales No'),
+            'product_id' => Yii::t('app', 'Product Name'),
             'selling_price' => Yii::t('app', 'Selling Price'),
             'qty' => Yii::t('app', 'Qty'),
             'total' => Yii::t('app', 'Total'),
-            'maker_id' => Yii::t('app', 'Maker ID'),
-            'maker_time' => Yii::t('app', 'Maker Time'),
+            'maker_id' => Yii::t('app', 'Salesperson'),
+            'maker_time' => Yii::t('app', 'Selling time'),
             'delete_stat' => Yii::t('app', 'Delete Stat'),
         ];
     }

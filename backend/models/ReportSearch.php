@@ -83,5 +83,28 @@ class ReportSearch extends Report
 
             return $dataProvider;
         }
+
+        elseif($id==2) {
+
+            $query = SalesItem::find();
+
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+            ]);
+            $query->andFilterWhere(['between', 'trn_dt', $from, $to]);
+
+            return $dataProvider;
+        }
+        elseif($id==3) {
+
+            $query = Purchase::find();
+
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+            ]);
+            $query->andFilterWhere(['between', 'prchs_dt', $from, $to]);
+
+            return $dataProvider;
+        }
     }
 }

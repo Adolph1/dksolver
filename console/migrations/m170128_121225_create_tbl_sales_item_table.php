@@ -14,6 +14,7 @@ class m170128_121225_create_tbl_sales_item_table extends Migration
     {
         $this->createTable('tbl_sales_item', [
             'id' => $this->primaryKey(),
+            'trn_dt'=>$this->date()->notNull(),
             'sales_id'=>$this->integer()->notNull(),
             'product_id'=>$this->integer()->notNull(),
             'selling_price'=>$this->decimal(),

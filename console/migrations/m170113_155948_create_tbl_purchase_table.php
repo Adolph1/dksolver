@@ -14,6 +14,7 @@ class m170113_155948_create_tbl_purchase_table extends Migration
     {
         $this->createTable('tbl_purchase', [
             'id' => $this->primaryKey(),
+            'prchs_dt'=>$this->date()->notNull(),
             'product_id'=>$this->integer()->notNull(),
             'price'=>$this->decimal()->notNull(),
             'qty'=>$this->decimal()->notNull(),

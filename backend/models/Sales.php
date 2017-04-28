@@ -50,6 +50,7 @@ class Sales extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['payment_method'], 'required'],
             [['trn_dt', 'maker_time'], 'safe'],
             [['total_qty', 'total_amount', 'paid_amount','due_amount','discount'], 'number'],
             [['payment_method'], 'integer'],

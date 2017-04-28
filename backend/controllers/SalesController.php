@@ -125,6 +125,7 @@ class SalesController extends Controller
                         foreach ($carts as $cart) {
                             $entries = new SalesItem();
                             $entries->product_id = $cart->product_id;
+                            $entries->trn_dt = date('Y-m-d');
                             $entries->sales_id = $model->id;
                             $entries->selling_price = $cart->price;
                             $entries->qty = $cart->qty;

@@ -109,6 +109,7 @@ class PurchaseInvoiceController extends Controller
 
                 foreach ($purchases as $purchase) {
 
+                    $purchase->prchs_dt=date('Y-m-d');
                     $purchase->purchase_invoice_id=$model->id;
                     $purchase->maker_id=Yii::$app->user->identity->username;
                     $purchase->maker_time=date('Y-m-d:H:i:s');

@@ -53,7 +53,22 @@ class ReportController extends Controller
                 'model' => $model,
             ]);
         }
-
+        elseif ($reportid == 2) {
+                $dataProvider = $searchModel->search($reportid,date('Y-m-d'), date('Y-m-d'));
+                return $this->render('today_detailed', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                    'model' => $model,
+                ]);
+            }
+        elseif ($reportid == 3) {
+            $dataProvider = $searchModel->search($reportid,$from, $to);
+            return $this->render('inventory_in', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model,
+            ]);
+        }
 
     } else{
             $searchModel = new ReportSearch();

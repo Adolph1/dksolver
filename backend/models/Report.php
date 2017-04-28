@@ -64,6 +64,7 @@ class Report extends \yii\db\ActiveRecord
             'module' => Yii::t('app', 'Module'),
             'path' => Yii::t('app', 'Path'),
             'status' => Yii::t('app', 'Status'),
+
         ];
     }
 

@@ -61,6 +61,7 @@ class Purchase extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'product_id' => Yii::t('app', 'Product Name'),
+            'prchs_dt' => Yii::t('app', 'Purchase Date'),
             'price' => Yii::t('app', 'Price'),
             'qty' => Yii::t('app', 'Qty'),
             'selling_price'=>Yii::t('app', 'Selling Price'),
