@@ -20,6 +20,8 @@ class m170128_121225_create_tbl_sales_item_table extends Migration
             'selling_price'=>$this->decimal(),
             'qty'=>$this->decimal(),
             'total'=>$this->decimal(),
+            'previous_balance'=>$this->decimal(),
+            'balance'=>$this->decimal(),
             'maker_id'=>$this->string(200)->notNull(),
             'maker_time'=>$this->dateTime()->notNull(),
             'delete_stat'=>$this->char(1),

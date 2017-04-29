@@ -44,7 +44,7 @@ class Purchase extends \yii\db\ActiveRecord
         return [
             [['product_id', 'price', 'qty'], 'required'],
             [['product_id', 'purchase_invoice_id'], 'integer'],
-            [['price', 'qty', 'total','selling_price'], 'number'],
+            [['price', 'qty', 'total','selling_price','balance','previous_balance'], 'number'],
             [['maker_time', 'checker_time'], 'safe'],
             [['maker_id', 'checker_id'], 'string', 'max' => 200],
             [['auth_status'], 'string', 'max' => 1],
@@ -65,6 +65,8 @@ class Purchase extends \yii\db\ActiveRecord
             'price' => Yii::t('app', 'Price'),
             'qty' => Yii::t('app', 'Qty'),
             'selling_price'=>Yii::t('app', 'Selling Price'),
+            'previous_balance'=>Yii::t('app', 'Previous balance'),
+            'balance'=>Yii::t('app', 'Balance'),
             'total' => Yii::t('app', 'Total'),
             'purchase_invoice_id' => Yii::t('app', 'Invoice Number'),
             'maker_id' => Yii::t('app', 'Maker ID'),
@@ -113,5 +115,13 @@ class Purchase extends \yii\db\ActiveRecord
         else{
             return;
         }
+    }
+
+
+    public static function getTotalPurchases()
+    {
+        $fmt = Yii::$app->formatter;
+        $sum=Purchase::find()->where(['delete_stat'=>NULL])->sum('total');
+        return $fmt->asDecimal($sum,2);
     }
 }

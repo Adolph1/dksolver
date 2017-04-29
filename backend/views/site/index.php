@@ -2,8 +2,11 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'TangoPos';
+$this->title ='BS';
 use yii\bootstrap\Html;
+use backend\models\SalesItem;
+use backend\models\Purchase;
+use backend\models\Inventory;
 ?>
 <div class="site-index" align="center">
 
@@ -13,7 +16,7 @@ use yii\bootstrap\Html;
                 <div class="col-md-12 text-center" style="background: orange;margin-left: 0px;color: white"><h3>Total Sales</h3></div>
             </div>
             <div class="row">
-                <div class="col-md-12 text-center"><h3 style="color: orange"><i class="fa fa-credit-card"></i> 455</h3></div>
+                <div class="col-md-12 text-center"><h3 style="color: orange"><i class="fa fa-credit-card"></i> <?= SalesItem::getTotalSales();?></h3></div>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6" style="border-bottom: cornflowerblue 2px solid;margin-left: 5px">
@@ -21,7 +24,7 @@ use yii\bootstrap\Html;
                 <div class="col-md-12 text-center" style="background: cornflowerblue;margin-left: 0px;color: white"><h3>Total Purchases</h3></div>
             </div>
             <div class="row">
-                <div class="col-md-12 text-center"><h3 style="color: cornflowerblue"><i class="fa fa-shopping-cart"></i> 455</h3></div>
+                <div class="col-md-12 text-center"><h3 style="color: cornflowerblue"><i class="fa fa-shopping-cart"></i> <?= Purchase::getTotalPurchases();?></h3></div>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6" style="border-bottom: seagreen 2px solid;margin-left: 5px">
@@ -29,7 +32,7 @@ use yii\bootstrap\Html;
                 <div class="col-md-12 text-center" style="background: seagreen;margin-left: 0px;color: white"><h3>Total Products</h3></div>
             </div>
             <div class="row">
-                <div class="col-md-12 text-center"><h3 style="color: seagreen"><i class="fa fa-th-large"></i> 455</h3></div>
+                <div class="col-md-12 text-center"><h3 style="color: seagreen"><i class="fa fa-th-large"></i> <?= Inventory::getTotalProducts();?></h3></div>
             </div>
         </div>
     </div>

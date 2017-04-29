@@ -21,6 +21,8 @@ class m170113_155948_create_tbl_purchase_table extends Migration
             'total'=>$this->decimal()->notNull(),
             'purchase_invoice_id'=>$this->integer()->notNull(),
             'selling_price'=>$this->decimal(),
+            'previous_balance'=>$this->decimal(),
+            'balance'=>$this->decimal(),
             'maker_id'=>$this->string(200)->notNull(),
             'maker_time'=>$this->dateTime()->notNull(),
             'auth_status'=>$this->char(1),

@@ -137,4 +137,11 @@ class Inventory extends \yii\db\ActiveRecord
             return $products;
         }
     }
+
+    public static function getTotalProducts()
+    {
+        $fmt = Yii::$app->formatter;
+        $totalproducts=Inventory::find()->sum('qty');
+        return $fmt->asDecimal($totalproducts,0);
+    }
 }

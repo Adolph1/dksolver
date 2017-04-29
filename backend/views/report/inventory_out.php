@@ -8,7 +8,7 @@ use backend\models\SalesSearch;
 /* @var $searchModel backend\models\SalesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Inventory In report');
+$this->title = Yii::t('app', 'Inventory Out report');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sales-index">
@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'prchs_dt',
+            'trn_dt',
             [
                     'attribute'=>'product_id',
                     'value'=>'product.product_name',
@@ -32,10 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'qty',
             'previous_balance',
             'balance',
-            [
-                'attribute'=>'purchase_invoice_id',
-                'value'=>'purchaseInvoice.invoice_number',
-            ],
+            'sales_id'
 
         ],
         'clientOptions' => [

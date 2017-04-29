@@ -59,6 +59,8 @@ class SalesItem extends \yii\db\ActiveRecord
             'selling_price' => Yii::t('app', 'Selling Price'),
             'qty' => Yii::t('app', 'Qty'),
             'total' => Yii::t('app', 'Total'),
+            'previous_balance'=>Yii::t('app', 'Previous Balance'),
+            'balance'=>Yii::t('app', 'Balance'),
             'maker_id' => Yii::t('app', 'Salesperson'),
             'maker_time' => Yii::t('app', 'Selling time'),
             'delete_stat' => Yii::t('app', 'Delete Stat'),
@@ -89,5 +91,12 @@ class SalesItem extends \yii\db\ActiveRecord
     public static function getAllActive($id)
     {
         return SalesItem::find()->where(['sales_id'=>$id,'delete_stat'=>null])->all();
+    }
+
+    public static function getTotalSales()
+    {
+        $fmt = Yii::$app->formatter;
+        $totalsales=SalesItem::find()->where(['delete_stat'=>NULL])->sum('total');
+        return $fmt->asDecimal($totalsales,2);
     }
 }

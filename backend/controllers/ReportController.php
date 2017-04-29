@@ -69,6 +69,14 @@ class ReportController extends Controller
                 'model' => $model,
             ]);
         }
+        elseif ($reportid == 4) {
+            $dataProvider = $searchModel->search($reportid,$from, $to);
+            return $this->render('inventory_out', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model,
+            ]);
+        }
 
     } else{
             $searchModel = new ReportSearch();

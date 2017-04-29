@@ -134,8 +134,11 @@ class SalesController extends Controller
                             $entries->maker_time = $model->maker_time;
                             if ($entries->save()) {
                                 $inqty=Inventory::getQty($cart->product_id);
+                                $prevbalance=$inqty;
                                 $inqty=$inqty-$cart->qty;
                                 Inventory::updateAll(['qty'=>$inqty],['product_id'=>$cart->product_id]);
+                                SalesItem::updateAll(['previous_balance'=>$prevbalance,'balance'=>$inqty],['sales_id'=>$entries->sales_id,'product_id'=>$cart->product_id]);
+
                                 Cart::deleteAll(['id' => $cart->id]);
                             } else {
 

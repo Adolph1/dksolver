@@ -103,4 +103,6 @@ class Sales extends \yii\db\ActiveRecord
     {
         return Sales::findOne($id);
     }
+
+
 }

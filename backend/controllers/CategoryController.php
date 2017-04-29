@@ -64,6 +64,8 @@ class CategoryController extends Controller
      */
     public function actionCreate()
     {
+        if(yii::$app->User->can('createProduct'))
+        {
         $model = new Category();
         $model->maker_id=Yii::$app->user->identity->username;
         $model->maker_time=date('Y-m-d:H:i:s');
@@ -79,6 +81,13 @@ class CategoryController extends Controller
                 'model' => $model,
             ]);
         }
+        }
+        else
+        {
+
+            Yii::$app->session->setFlash('danger', 'You dont have permition to add product.');
+            return $this->redirect(['site/index']);
+        }
     }
 
     /**
@@ -89,6 +98,8 @@ class CategoryController extends Controller
      */
     public function actionUpdate($id)
     {
+        if(yii::$app->User->can('createProduct'))
+        {
         $model = $this->findModel($id);
         $model->maker_id=Yii::$app->user->identity->username;
         $model->maker_time=date('Y-m-d:H:i:s');
@@ -100,6 +111,13 @@ class CategoryController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+    else
+    {
+
+    Yii::$app->session->setFlash('danger', 'You dont have permition to add product.');
+    return $this->redirect(['site/index']);
+    }
     }
 
     /**

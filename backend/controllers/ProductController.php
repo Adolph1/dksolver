@@ -65,6 +65,8 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
+        if(yii::$app->User->can('createProduct'))
+        {
         $model = new Product();
         $model->maker_id=Yii::$app->user->identity->username;
         $model->maker_time=date('Y-m-d:H:i:s');
@@ -81,6 +83,13 @@ class ProductController extends Controller
                 'model' => $model,
             ]);
         }
+        }
+        else
+        {
+
+            Yii::$app->session->setFlash('danger', 'You dont have permition to add product.');
+            return $this->redirect(['site/index']);
+        }
     }
 
     /**
@@ -91,17 +100,25 @@ class ProductController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $model->maker_id=Yii::$app->user->identity->username;
-        $model->maker_time=date('Y-m-d:H:i:s');
+        if(yii::$app->User->can('createProduct')) {
+            $model = $this->findModel($id);
+            $model->maker_id = Yii::$app->user->identity->username;
+            $model->maker_time = date('Y-m-d:H:i:s');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         }
+        else
+            {
+
+                Yii::$app->session->setFlash('danger', 'You dont have permition to add product.');
+                return $this->redirect(['site/index']);
+            }
     }
 
     /**

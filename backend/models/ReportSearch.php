@@ -80,7 +80,7 @@ class ReportSearch extends Report
                 'query' => $query,
             ]);
             $query->andFilterWhere(['between', 'trn_dt', $from, $to]);
-
+            $query->andWhere(['!=','status','D']);
             return $dataProvider;
         }
 
@@ -91,6 +91,7 @@ class ReportSearch extends Report
             $dataProvider = new ActiveDataProvider([
                 'query' => $query,
             ]);
+            $query->andWhere(['delete_stat'=>NULL]);
             $query->andFilterWhere(['between', 'trn_dt', $from, $to]);
 
             return $dataProvider;
@@ -103,7 +104,18 @@ class ReportSearch extends Report
                 'query' => $query,
             ]);
             $query->andFilterWhere(['between', 'prchs_dt', $from, $to]);
+            $query->andWhere(['delete_stat'=>NULL]);
+            return $dataProvider;
+        }
+        elseif($id==4) {
 
+            $query = SalesItem::find();
+
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+            ]);
+            $query->andWhere(['delete_stat'=>NULL]);
+            $query->andFilterWhere(['between', 'trn_dt', $from, $to]);
             return $dataProvider;
         }
     }

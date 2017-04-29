@@ -114,6 +114,7 @@ class PurchaseController extends Controller
                     $productcount = Inventory::find()->where(['product_id' => $pending->product_id])->count();
                     if ($productcount == 1) {
                         $product = Inventory::find()->where(['product_id' => $pending->product_id])->one();
+                        $prevbalance=$product->qty;
                         $product->qty = $product->qty + $pending->qty;
                         $product->maker_id = $pending->maker_id;
                         $product->maker_time = $pending->maker_time;
@@ -121,7 +122,7 @@ class PurchaseController extends Controller
                         $product->checker_time = date('Y-m-d:H:i:s');
                         $product->auth_status = 'A';
                         $product->save();
-                        Purchase::updateAll(['status' => Purchase::UPDATED,'checker_id'=>Yii::$app->user->identity->username,'checker_time'=>date('Y-m-d:H:i:s'),'auth_status'=>'A'], ['id' => $pending->id]);
+                        Purchase::updateAll(['status' => Purchase::UPDATED,'previous_balance'=>$prevbalance,'balance'=>$product->qty,'checker_id'=>Yii::$app->user->identity->username,'checker_time'=>date('Y-m-d:H:i:s'),'auth_status'=>'A'], ['id' => $pending->id]);
 
                     } else {
                         $product = new Inventory();
